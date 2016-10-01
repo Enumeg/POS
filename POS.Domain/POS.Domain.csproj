@@ -58,13 +58,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\ApplicationUser.cs" />
+    <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\Point.cs" />
     <Compile Include="Entities\Product.cs" />
-    <Compile Include="Entities\SalesBack.cs" />
-    <Compile Include="Entities\Sales.cs" />
-    <Compile Include="Entities\SalesBackDetail.cs" />
-    <Compile Include="Entities\SalesDetail.cs" />
+    <Compile Include="Entities\ProductProperty.cs" />
+    <Compile Include="Entities\Property.cs" />
+    <Compile Include="Entities\Transfare.cs" />
+    <Compile Include="Entities\PurchaseBack.cs" />
+    <Compile Include="Entities\Purchase.cs" />
+    <Compile Include="Entities\PurchaseBackDetail.cs" />
+    <Compile Include="Entities\TransfareDetail.cs" />
+    <Compile Include="Entities\SaleBack.cs" />
+    <Compile Include="Entities\Sale.cs" />
+    <Compile Include="Entities\SaleBackDetail.cs" />
+    <Compile Include="Entities\PurchaseDetail.cs" />
+    <Compile Include="Entities\SaleDetail.cs" />
     <Compile Include="Entities\Supplier.cs" />
     <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\Machine.cs" />
@@ -72,6 +81,7 @@
     <Compile Include="Entities\Setting.cs" />
     <Compile Include="Entities\Transaction.cs" />
     <Compile Include="Entities\TransactionDetail.cs" />
+    <Compile Include="Entities\Unit.cs" />
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Enums\LocalizationEnumAttribute.cs" />
     <Compile Include="Infrastructure\CRUDService.cs" />

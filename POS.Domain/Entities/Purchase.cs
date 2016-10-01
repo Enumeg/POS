@@ -9,16 +9,16 @@ using POS.Domain.Enums;
 
 namespace POS.Domain.Entities
 {
-    public class Sales : Transaction
+    public class Purchase : Transaction
     {
-        public Sales()
+        public Purchase()
         {
-            SalesDetails = new List<SalesDetail>();
+            PurchaseDetails = new List<PurchaseDetail>();
         }
 
-        public int CustomerId { get; set; }
+        public int SupplierId { get; set; }
 
-        public virtual Customer Customer { get; set; }
+        public virtual Supplier Supplier { get; set; }
 
         public int PointId { get; set; }
 
@@ -32,10 +32,10 @@ namespace POS.Domain.Entities
         public decimal Discount { get; set; }
 
 
-        public virtual ICollection<SalesDetail> SalesDetails { get; set; }
+        public virtual ICollection<PurchaseDetail> PurchaseDetails { get; set; }
 
         [NotMapped]
-        public decimal Total => SalesDetails.Sum(s=>s.Total);
+        public decimal Total => PurchaseDetails.Sum(s=>s.Total);
 
 
 

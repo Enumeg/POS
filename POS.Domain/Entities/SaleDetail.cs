@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace POS.Domain.Entities
 {
-    public class SalesDetail : TransactionDetail
+    public class SaleDetail : TransactionDetail
     {
-        public int SalesId { get; set; }
-        public virtual Sales Sales { get; set; }
+        public int SaleId { get; set; }
+        public virtual Sale Sale { get; set; }
     }
 }

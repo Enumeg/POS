@@ -9,18 +9,12 @@ using POS.Domain.Enums;
 
 namespace POS.Domain.Entities
 {
-    public class SalesBack : Transaction
+    public class Sale : Transaction
     {
-        public SalesBack()
+        public Sale()
         {
-            SalesDetails = new List<SalesDetail>();
+            Details = new List<SaleDetail>();
         }
-
-
-        public int SalesId { get; set; }
-
-        public virtual Sales Sales { get; set; }
-
 
         public int CustomerId { get; set; }
 
@@ -38,10 +32,10 @@ namespace POS.Domain.Entities
         public decimal Discount { get; set; }
 
 
-        public virtual ICollection<SalesDetail> SalesDetails { get; set; }
+        public virtual ICollection<SaleDetail> Details { get; set; }
 
         [NotMapped]
-        public decimal Total => SalesDetails.Sum(s=>s.Total);
+        public decimal Total => Details.Sum(s=>s.Total);
 
 
 
