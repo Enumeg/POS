@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace POS.Domain
-{
 
+namespace POS.Domain.Enums
+{
     //[LocalizationEnum(typeof(Enums))]
     //public enum DepartmentType
     //{
@@ -15,9 +15,10 @@ namespace POS.Domain
     //    Section = 3,
     //    Unit = 4
     //}
-}
 
-namespace POS.Domain.Enums
-{
-        
+    public enum PaymentMethod
+    {
+        Cash=1,
+        Later=2
+    };
 }
