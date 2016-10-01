@@ -16,3 +16,8 @@ namespace POS.Domain
     //    Unit = 4
     //}
 }
+
+namespace POS.Domain.Enums
+{
+        
+}

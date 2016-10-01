@@ -7,16 +7,17 @@ using POS.Domain.Infrastructure;
 
 namespace POS.Domain.Infrastructure
 {
-    public class ServicesBase : IDisposable
+    public class ServicesBase : IDisposable 
     {
         protected PosContext context;
         protected CRUDService crudService;
-        public ServicesBase(PosContext _context)
+        #region Implementation of IInitializer
+        public void Initialize(PosContext _context)
         {
             context = _context;
             crudService = new CRUDService(context);
         }
-      
+        #endregion
         public void SaveChanges()
         {
             context.SaveChanges();

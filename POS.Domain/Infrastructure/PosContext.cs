@@ -1,26 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using POS.Domain.Entities;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 namespace POS.Domain.Infrastructure
 {
 
-   public class PosContext : DbContext
+    public class PosContext : IdentityDbContext<ApplicationUser>
     {
         public PosContext()
-            : base("Con")
+            : base("con", throwIfV1Schema: false)
         {
             this.Configuration.LazyLoadingEnabled = false;
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {            
+        {
             base.OnModelCreating(modelBuilder);
         }
-        public virtual void SetStatus(object entity,EntityState state)
+        public virtual void SetStatus(object entity, EntityState state)
         {
             Entry(entity).State = state;
-        }    
+        }
+        public virtual DbSet<Shift> Shifts { get; set; }
+        public virtual DbSet<Setting> Settings { get; set; }
     }
 }
