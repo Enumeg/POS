@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Configuration;
 
 namespace POS.Domain.Entities
 {
@@ -11,6 +8,9 @@ namespace POS.Domain.Entities
         public Product()
         {
             Properties = new List<ProductProperty>();
+            Barcodes = new List<BarCode>();
+            TransactionDetails = new List<TransactionDetail>();
+            TransfareDetails = new List<TransfareDetail>();
         }
         public int Id { get; set; }
         public string Name { get; set; }
@@ -20,7 +20,10 @@ namespace POS.Domain.Entities
         public virtual Category Category { get; set; }
         public int? UnitId { get; set; }
         public virtual Unit Unit { get; set; }
-        public ICollection<ProductProperty> Properties { get; set; }
+        public virtual ICollection<ProductProperty> Properties { get; set; }
+        public virtual ICollection<BarCode> Barcodes { get; set; }
+        public virtual ICollection<TransactionDetail> TransactionDetails { get; set; }
+        public virtual ICollection<TransfareDetail> TransfareDetails { get; set; }
 
 
     }

@@ -1,7 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using POS.Portal;
 
-[assembly: OwinStartupAttribute(typeof(POS.Portal.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
 namespace POS.Portal
 {
     public partial class Startup

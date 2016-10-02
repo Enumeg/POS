@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.Migrations.Model;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using POS.Domain.Enums;
 
 namespace POS.Domain.Entities

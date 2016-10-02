@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-namespace POS.Domain.Enums
+﻿namespace POS.Domain.Enums
 {
     //[LocalizationEnum(typeof(Enums))]
     //public enum DepartmentType

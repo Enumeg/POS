@@ -1,8 +1,8 @@
-﻿using Moq;
-using POS.Domain.Infrastructure;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using Moq;
+using POS.Domain.Infrastructure;
 
 namespace POS.Domain.Test
 {

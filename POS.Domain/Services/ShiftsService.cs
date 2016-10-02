@@ -1,10 +1,9 @@
 ﻿using System;
-using POS.Domain.Infrastructure;
-using System.Linq;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using POS.Domain.Entities;
+using POS.Domain.Infrastructure;
 using POS.Domain.Models;
 
 namespace POS.Domain.Services
