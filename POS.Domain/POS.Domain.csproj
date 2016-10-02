@@ -59,7 +59,10 @@
   <ItemGroup>
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\SupplierInstallment.cs" />
+    <Compile Include="Entities\CustomerInstallment.cs" />
     <Compile Include="Entities\Employee.cs" />
+    <Compile Include="Entities\Installment.cs" />
     <Compile Include="Entities\Point.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ProductProperty.cs" />
