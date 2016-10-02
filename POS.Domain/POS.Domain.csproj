@@ -69,7 +69,7 @@
     <Compile Include="Entities\ProductProperty.cs" />
     <Compile Include="Entities\Property.cs" />
     <Compile Include="Entities\Damaged.cs" />
-    <Compile Include="Entities\Transfare.cs" />
+    <Compile Include="Entities\Transfer.cs" />
     <Compile Include="Entities\PurchaseBack.cs" />
     <Compile Include="Entities\Purchase.cs" />
     <Compile Include="Entities\PurchaseBackDetail.cs" />
@@ -85,7 +85,7 @@
     <Compile Include="Entities\Setting.cs" />
     <Compile Include="Entities\Transaction.cs" />
     <Compile Include="Entities\TransactionDetail.cs" />
-    <Compile Include="Entities\TransfareDetail.cs" />
+    <Compile Include="Entities\TransferDetail.cs" />
     <Compile Include="Entities\Unit.cs" />
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Enums\LocalizationEnumAttribute.cs" />
@@ -94,6 +94,7 @@
     <Compile Include="Infrastructure\DbContextFactory.cs" />
     <Compile Include="Infrastructure\IInitializer.cs" />
     <Compile Include="Infrastructure\PosContext.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\Shift.cs" />

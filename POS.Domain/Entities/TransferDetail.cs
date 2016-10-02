@@ -1,6 +1,6 @@
 ﻿namespace POS.Domain.Entities
 {
-    public class TransfareDetail
+    public class TransferDetail
     {
         public int Id { get; set; }
         public int ProductId { get; set; }

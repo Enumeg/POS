@@ -4,17 +4,18 @@ using POS.Domain.Enums;
 namespace POS.Domain.Entities
 {
 
-   public class Transfare 
+   public class Transfer 
     {
-        public Transfare()
+        public Transfer()
         {
-            TransfareDetails = new List<TransfareDetail>();
-        }      
+            TransfareDetails = new List<TransferDetail>();
+        }
+        public int Id { get; set; }
         public int FromPointId { get; set; }
         public virtual Point FromPoint { get; set; }
         public int ToPointId { get; set; }
         public virtual Point ToPoint { get; set; }
-        public virtual ICollection<TransfareDetail> TransfareDetails { get; set; }
+        public virtual ICollection<TransferDetail> TransfareDetails { get; set; }
     }
 
 }

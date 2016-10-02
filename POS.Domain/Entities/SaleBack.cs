@@ -9,35 +9,17 @@ namespace POS.Domain.Entities
     {
         public SaleBack()
         {
-            Details = new List<SaleBackDetail>();
-        }
-        
-
+            SaleBackDetails = new List<SaleBackDetail>();
+        }        
         public int SaleId { get; set; }
-
         public virtual Sale Sale { get; set; }
-
-
         public int CustomerId { get; set; }
-
         public virtual Customer Customer { get; set; }
-
         public int PointId { get; set; }
-
-        public virtual Point Point { get; set; }
-
-        public PaymentMethod PaymentMethod { get; set; }
-
-
-        public decimal Paid { get; set; }
-
-        public decimal Discount { get; set; }
-
-
-        public virtual ICollection<SaleBackDetail> Details { get; set; }
-
+        public virtual Point Point { get; set; }       
+        public virtual ICollection<SaleBackDetail> SaleBackDetails { get; set; }
         [NotMapped]
-        public decimal Total => Details.Sum(s=>s.Total);
+        public decimal Total => SaleBackDetails.Sum(s=>s.Total);
 
 
 

@@ -10,7 +10,7 @@ namespace POS.Domain.Entities
             Properties = new List<ProductProperty>();
             Barcodes = new List<BarCode>();
             TransactionDetails = new List<TransactionDetail>();
-            TransfareDetails = new List<TransfareDetail>();
+            TransfareDetails = new List<TransferDetail>();
         }
         public int Id { get; set; }
         public string Name { get; set; }
@@ -23,7 +23,7 @@ namespace POS.Domain.Entities
         public virtual ICollection<ProductProperty> Properties { get; set; }
         public virtual ICollection<BarCode> Barcodes { get; set; }
         public virtual ICollection<TransactionDetail> TransactionDetails { get; set; }
-        public virtual ICollection<TransfareDetail> TransfareDetails { get; set; }
+        public virtual ICollection<TransferDetail> TransfareDetails { get; set; }
 
 
     }
