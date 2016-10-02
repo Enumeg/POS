@@ -101,12 +101,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\Customers\Customers.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Customers.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\Shifts\LoginShifts.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LoginShifts.feature</DependentUpon>
     </Compile>
     <Compile Include="Helpers\TestHelper.cs" />
+    <Compile Include="Steps\Customers\CustomersSteps.cs" />
     <Compile Include="Steps\LoginShifts\LoginShiftsSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -118,6 +124,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Features\Customers\Customers.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Customers.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\Shifts\LoginShifts.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>LoginShifts.feature.cs</LastGenOutput>
