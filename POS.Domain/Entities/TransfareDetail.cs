@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace POS.Domain.Entities
+﻿namespace POS.Domain.Entities
 {
-    public class PurchaseDetail : TransactionDetail
+    public class TransfareDetail
     {
-        public int PurchaseId { get; set; }
-        public virtual Purchase Purchase { get; set; }
+        public int Id { get; set; }
+        public int ProductId { get; set; }
+        public Product Product { get; set; }
+        public decimal Amount { get; set; }
     }
 }

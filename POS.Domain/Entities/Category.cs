@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace POS.Domain.Entities
 {
@@ -12,10 +8,14 @@ namespace POS.Domain.Entities
         {
             Products = new List<Product>();
             Units = new List<Unit>();
+            Properties = new List<Property>();
         }
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<Product> Products { get; set; }
-        public ICollection<Unit> Units { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Unit> Units { get; set; }
+        public virtual ICollection<Property> Properties { get; set; }
+
+
     }
 }

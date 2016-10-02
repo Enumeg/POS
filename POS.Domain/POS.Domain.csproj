@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\ApplicationUser.cs" />
+    <Compile Include="Entities\BarCode.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\SupplierInstallment.cs" />
     <Compile Include="Entities\CustomerInstallment.cs" />
@@ -67,6 +68,8 @@
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ProductProperty.cs" />
     <Compile Include="Entities\Property.cs" />
+    <Compile Include="Entities\Damaged.cs" />
+    <Compile Include="Entities\Transfare.cs" />
     <Compile Include="Entities\PurchaseBack.cs" />
     <Compile Include="Entities\Purchase.cs" />
     <Compile Include="Entities\PurchaseBackDetail.cs" />
@@ -82,6 +85,7 @@
     <Compile Include="Entities\Setting.cs" />
     <Compile Include="Entities\Transaction.cs" />
     <Compile Include="Entities\TransactionDetail.cs" />
+    <Compile Include="Entities\TransfareDetail.cs" />
     <Compile Include="Entities\Unit.cs" />
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Enums\LocalizationEnumAttribute.cs" />

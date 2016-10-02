@@ -1,15 +1,13 @@
-﻿using Microsoft.AspNet.Identity.Owin;
+﻿using System.Data.Entity;
+using System.Linq;
 using Moq;
 using NUnit.Framework;
 using POS.Domain.Entities;
 using POS.Domain.Infrastructure;
-using System;
-using System.Data.Entity;
+using POS.Domain.Models;
+using POS.Domain.Services;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
-using System.Linq;
-using POS.Domain.Services;
-using POS.Domain.Models;
 
 namespace POS.Domain.Test
 {
