@@ -67,11 +67,9 @@
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ProductProperty.cs" />
     <Compile Include="Entities\Property.cs" />
-    <Compile Include="Entities\Transfare.cs" />
     <Compile Include="Entities\PurchaseBack.cs" />
     <Compile Include="Entities\Purchase.cs" />
     <Compile Include="Entities\PurchaseBackDetail.cs" />
-    <Compile Include="Entities\TransfareDetail.cs" />
     <Compile Include="Entities\SaleBack.cs" />
     <Compile Include="Entities\Sale.cs" />
     <Compile Include="Entities\SaleBackDetail.cs" />
