@@ -14,4 +14,10 @@
         Cash=1,
         Later=2
     };
+
+    public enum LoanType
+    {
+        Check = 1,
+        Loan = 2
+    };
 }
