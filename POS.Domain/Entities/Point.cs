@@ -10,8 +10,8 @@ namespace POS.Domain.Entities
             SaleBacks = new List<SaleBack>();
             Purchases = new List<Purchase>();
             PurchaseBacks = new List<PurchaseBack>();
-            OutTransfares = new List<Transfare>();
-            InTransfares = new List<Transfare>();
+            OutTransfares = new List<Transfer>();
+            InTransfares = new List<Transfer>();
             Damageds = new List<Damaged>();
         }
         public int Id { get; set; }
@@ -21,8 +21,8 @@ namespace POS.Domain.Entities
         public virtual ICollection<SaleBack> SaleBacks { get; set; }
         public virtual ICollection<Purchase> Purchases { get; set; }
         public virtual ICollection<PurchaseBack> PurchaseBacks { get; set; }
-        public virtual ICollection<Transfare> InTransfares { get; set; }
-        public virtual ICollection<Transfare> OutTransfares { get; set; }
+        public virtual ICollection<Transfer> InTransfares { get; set; }
+        public virtual ICollection<Transfer> OutTransfares { get; set; }
         public virtual ICollection<Damaged> Damageds { get; set; }
 
     }
