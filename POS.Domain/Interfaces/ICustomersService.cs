@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using POS.Domain.Entities;
 using POS.Domain.Infrastructure;
 
@@ -11,5 +12,14 @@ namespace POS.Domain.Interfaces
         void Dispose();
 
         Customer FindCustomerById(int customerId);
+
+        bool? UpdateCustomer(Customer customer);
+
+
+        bool DeleteCustomer(Customer customer);
+
+        List<Customer> GetCustomers();
+
+
     }
 }

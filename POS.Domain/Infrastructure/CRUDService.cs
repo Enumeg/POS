@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -26,12 +28,31 @@ namespace POS.Domain.Infrastructure
                 context.SaveChanges();
             return true;
         }
-        public void Update<TEntity>(TEntity entityToUpdate, bool saveChanges = true) where TEntity : class
+        public bool? Update<TEntity>(TEntity entityToUpdate, int key,Expression<Func<TEntity, bool>> filter = null, bool saveChanges = true) where TEntity : class
         {
-            context.Set<TEntity>().Attach(entityToUpdate);
-            context.SetStatus(entityToUpdate, EntityState.Modified);
-            if (saveChanges)
-                context.SaveChanges();
+            if (context.Set<TEntity>().Find(key) != null)
+            {
+                if (filter != null)
+                {
+                    if (context.Set<TEntity>().Any(filter))
+                    {
+                        return false;
+                    }
+                }
+                context.Set<TEntity>().AddOrUpdate(entityToUpdate);
+                if (saveChanges)
+                    context.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return null;
+            }
+
+            
+
+            
+            
         }
         public void Remove<TEntity>(TEntity entityToDelete, bool saveChanges = true) where TEntity : class
         {         
@@ -64,5 +85,7 @@ namespace POS.Domain.Infrastructure
             }
             return query;
         }
+
+      
     }
 }

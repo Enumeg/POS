@@ -78,7 +78,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Address",
                         "Balance"});
             table1.AddRow(new string[] {
-                        "Mohamed",
+                        "M.hamed",
                         "01144",
                         "it.m.atef",
                         "16 farid",
@@ -89,6 +89,214 @@ this.ScenarioSetup(scenarioInfo);
     testRunner.When("I Add Customer with the previous data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 10
     testRunner.Then("I should Get the iserted id", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Add New Customer to the Application with  the previous Name")]
+        public virtual void AddNewCustomerToTheApplicationWithThePreviousName()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add New Customer to the Application with  the previous Name", ((string[])(null)));
+#line 13
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Name",
+                        "Phone",
+                        "Email",
+                        "Address",
+                        "Balance"});
+            table2.AddRow(new string[] {
+                        "M.hamed",
+                        "01144",
+                        "it.m.atef",
+                        "16 farid",
+                        "1000"});
+#line 14
+ testRunner.Given("That I have the following Customer Data with  the previous Name", ((string)(null)), table2, "Given ");
+#line 17
+    testRunner.When("I Add Customer with the Same data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 18
+    testRunner.Then("I should Get NULL", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Update Existing Customer")]
+        public virtual void UpdateExistingCustomer()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update Existing Customer", ((string[])(null)));
+#line 21
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "Name",
+                        "Phone",
+                        "Email",
+                        "Address",
+                        "Balance"});
+            table3.AddRow(new string[] {
+                        "1",
+                        "M.Atef",
+                        "0121233",
+                        "m.hamed@ebc.net",
+                        "11 farid",
+                        "20"});
+#line 22
+ testRunner.Given("That I have the New Customer Data with  Existing CustomerId", ((string)(null)), table3, "Given ");
+#line 25
+    testRunner.When("I Update Customer with this New Data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 26
+    testRunner.Then("I should Get Success With The New Data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Update Existing Customer with another existing user name")]
+        public virtual void UpdateExistingCustomerWithAnotherExistingUserName()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update Existing Customer with another existing user name", ((string[])(null)));
+#line 29
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "Name",
+                        "Phone",
+                        "Email",
+                        "Address",
+                        "Balance"});
+            table4.AddRow(new string[] {
+                        "3",
+                        "M.Atef",
+                        "0121233",
+                        "m.hamed@ebc.net",
+                        "11 farid",
+                        "20"});
+#line 30
+ testRunner.Given("That I have the New Customer Data with  Existing CustomerId andd existing user na" +
+                    "me", ((string)(null)), table4, "Given ");
+#line 33
+    testRunner.When("I Update Customer with this New Data and user name exist", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 34
+    testRunner.Then("I should Get Failed With The New Data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Update Not Existing Customer")]
+        public virtual void UpdateNotExistingCustomer()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Update Not Existing Customer", ((string[])(null)));
+#line 37
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "Name",
+                        "Phone",
+                        "Email",
+                        "Address",
+                        "Balance"});
+            table5.AddRow(new string[] {
+                        "54335",
+                        "M.Atef",
+                        "0121233",
+                        "m.hamed@ebc.net",
+                        "11 farid",
+                        "20"});
+#line 38
+ testRunner.Given("That I have Not Existing Customer", ((string)(null)), table5, "Given ");
+#line 41
+    testRunner.When("I Update Not Existing Customer with this New Data", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 42
+    testRunner.Then("I should Get Null Response", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Delete Existing Customer")]
+        public virtual void DeleteExistingCustomer()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete Existing Customer", ((string[])(null)));
+#line 45
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "Name",
+                        "Phone",
+                        "Email",
+                        "Address",
+                        "Balance"});
+            table6.AddRow(new string[] {
+                        "2",
+                        "M.Atef",
+                        "0121233",
+                        "m.hamed@ebc.net",
+                        "11 farid",
+                        "20"});
+#line 46
+ testRunner.Given("That I have Customer with  Existing CustomerId", ((string)(null)), table6, "Given ");
+#line 49
+    testRunner.When("I Delete this Customer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 50
+    testRunner.Then("I should Get Success Delete", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Delete Not Existing Customer")]
+        public virtual void DeleteNotExistingCustomer()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete Not Existing Customer", ((string[])(null)));
+#line 53
+this.ScenarioSetup(scenarioInfo);
+#line hidden
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "Name",
+                        "Phone",
+                        "Email",
+                        "Address",
+                        "Balance"});
+            table7.AddRow(new string[] {
+                        "6799",
+                        "M.Atef",
+                        "0121233",
+                        "m.hamed@ebc.net",
+                        "11 farid",
+                        "20"});
+#line 54
+ testRunner.Given("That I have Customer with  Not Existing CustomerId", ((string)(null)), table7, "Given ");
+#line 57
+    testRunner.When("I Delete this Not Customer", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 58
+    testRunner.Then("I should Get Failed Delete", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Get All Existing Customer")]
+        public virtual void GetAllExistingCustomer()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get All Existing Customer", ((string[])(null)));
+#line 61
+this.ScenarioSetup(scenarioInfo);
+#line 62
+ testRunner.Given("That I Want All  Customers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 63
+    testRunner.When("I Call this Method Get All Customers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 64
+    testRunner.Then("I should Get List Of All Customers", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -9,7 +9,7 @@ namespace POS.Domain.Infrastructure
     public class PosContext : IdentityDbContext<ApplicationUser>
     {
         public PosContext()
-            : base("con", throwIfV1Schema: false)
+            : base("pos", throwIfV1Schema: false)
         {
             this.Configuration.LazyLoadingEnabled = false;
         }
