@@ -11,14 +11,13 @@ namespace POS.Domain.Test
         public static Mock<PosContext> GetPosContext()
         {
             var context = new Mock<PosContext>();
-            DbContextFactory.SetContext(context.Object);
+            //DbContextFactory.SetContext(context.Object);
             return context;
         }
         public static Mock<DbSet<T>> GetSet<T>(Mock<PosContext> context = null) where T : class
         {
             var dbset = new Mock<DbSet<T>>();
-            if (context != null)
-                context.Setup(c => c.Set<T>()).Returns(dbset.Object);
+            context?.Setup(c => c.Set<T>()).Returns(dbset.Object);
             return dbset;
         }
         public static Mock<DbSet<T>> GetQueryableSet<T>(IQueryable<T> data, Mock<PosContext> context = null) where T : class

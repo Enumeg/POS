@@ -10,6 +10,6 @@ namespace POS.Domain.Entities
         public decimal Price { get; set; }
         public decimal Amount { get; set; }
         [NotMapped]
-        public decimal Total => Amount*Price;
+        public decimal Total => Amount * Price;
     }
 }

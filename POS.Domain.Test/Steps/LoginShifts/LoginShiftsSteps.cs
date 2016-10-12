@@ -64,7 +64,6 @@ namespace POS.Domain.Test
         public void ThenTheOpenedShiftIsClosed()
         {
             context.Verify(c => c.SaveChanges(), Times.Once);
-            context.Verify(c => c.SetStatus(It.IsAny<Shift>(), EntityState.Modified), Times.Once);
             shiftsSet.Verify(d => d.Attach(It.IsAny<Shift>()), Times.Once);
 
         }

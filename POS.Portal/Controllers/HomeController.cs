@@ -1,4 +1,8 @@
-﻿using System.Web.Mvc;
+﻿using System.Web;
+using System.Web.Mvc;
+using Microsoft.AspNet.Identity.Owin;
+using POS.Domain.Infrastructure;
+using POS.Portal.Helpers;
 
 namespace POS.Portal.Controllers
 {
@@ -6,13 +10,14 @@ namespace POS.Portal.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            CookieHelper.TenantId = 4;
+            return View();          
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
+            HttpContext.GetOwinContext().Get<PosContext>();
             return View();
         }
 

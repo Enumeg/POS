@@ -130,7 +130,7 @@ this.ScenarioSetup(scenarioInfo);
                         "500",
                         "True"});
 #line 12
- testRunner.Given("That I have the following shifts", ((string)(null)), table2, "Given ");
+    testRunner.Given("That I have the following shifts", ((string)(null)), table2, "Given ");
 #line 15
     testRunner.When("I login as mostafa with Id \"asdasd\" on Machine with id \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 16
@@ -168,7 +168,7 @@ this.ScenarioSetup(scenarioInfo);
                         "500",
                         "False"});
 #line 19
- testRunner.Given("That I have the following shifts", ((string)(null)), table3, "Given ");
+    testRunner.Given("That I have the following shifts", ((string)(null)), table3, "Given ");
 #line 22
     testRunner.When("I login as mostafa with Id \"asdasd\" on Machine with id \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 23
@@ -208,7 +208,7 @@ this.ScenarioSetup(scenarioInfo);
                         "500",
                         "False"});
 #line 27
- testRunner.Given("That I have the following shifts", ((string)(null)), table4, "Given ");
+    testRunner.Given("That I have the following shifts", ((string)(null)), table4, "Given ");
 #line 30
     testRunner.When("I login as mostafa with Id \"asdasd\" on Machine with id \"1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 31
