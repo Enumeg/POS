@@ -15,7 +15,7 @@ namespace POS.Domain.Services
        
         int ICustomersService.AddCustomer(Customer customer)
         {
-            var insert = crudService.Add(customer,c=>c.Name==customer.Name);
+            var insert = CrudService.Add(customer,c=>c.Name==customer.Name).Result;
             if (insert) return customer.Id;
             return 0;
 
@@ -28,7 +28,7 @@ namespace POS.Domain.Services
        
         Customer ICustomersService.FindCustomerById(int customerId)
         {
-            return crudService.Find<Customer>(customerId);   
+            return CrudService.Find<Customer>(customerId);   
         }
 
         #endregion
@@ -38,7 +38,7 @@ namespace POS.Domain.Services
 
         bool? ICustomersService.UpdateCustomer(Customer customer)
         {
-            return crudService.Update(customer, customer.Id, c => c.Name == customer.Name);
+            return CrudService.Update(customer, customer.Id, c => c.Name == customer.Name).Result;
             
         }
 
@@ -49,7 +49,7 @@ namespace POS.Domain.Services
 
         bool ICustomersService.DeleteCustomer(Customer customer)
         {
-            return crudService.Remove<Customer>(customer.Id);
+            return CrudService.Remove<Customer>(customer.Id).Result;
 
         }
 
@@ -61,7 +61,7 @@ namespace POS.Domain.Services
 
         List<Customer> ICustomersService.GetCustomers()
         {
-            return context.Customers.ToList();
+            return Context.Customers.ToList();
         }
 
 

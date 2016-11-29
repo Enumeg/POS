@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = Pages.Categories;
+}
+<h3>@ViewBag.Title</h3>
+<hr />
+<a class="btn btn-primary" ng-click="new()">@Common.New &nbsp; <b class="glyphicon glyphicon-plus"></b></a>
+<br /><br />
+
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>@Common.Name </th>
+        <th>@Pages.Units </th>
+        <th>@Pages.Properties </th>
+        <th></th>
+    </tr>
+    <tbody>
+        <tr ng-animate="'animate'" ng-repeat="category in categories" ng-init="editable=category.Name == ''">
+            <td contenteditable="{{editable}}" ng-model="category.Name">{{category.Name}}</td>
+            <td class="dropdownlist">
+                @*<span ng-repeat="unit in category.Units" ng-hide="editable">{{unit.Name}}{{$last ? '' : ', '}} </span>*@
+                <div isteven-multi-select is-disabled="!editable" input-model="category.allUnits" output-model="category.Units" button-label="Name" item-label="Name" tick-property="selected"></div>
+            </td>
+            <td class="dropdownlist">
+                @*<span ng-repeat="property in category.Properties" ng-hide="editable">{{property.Name}}{{$last ? '' : ', '}} </span>*@
+                <div isteven-multi-select is-disabled="!editable" input-model="category.allProperties" output-model="category.Properties" button-label="Name" item-label="Name" tick-property="selected"></div>
+            </td>
+            <td>
+                <div class="btn-group" ng-hide="editable">
+                    <a class="btn btn-xs btn-info" ng-click="edit()">@Common.Edit &nbsp;<b class="glyphicon glyphicon-edit"></b></a>
+                    <a class="btn btn-xs btn-danger" ng-click="delete()">@Common.Delete  &nbsp;<b class="glyphicon glyphicon-remove"></b></a>
+                </div>
+                <div class="btn-group" ng-show="editable">
+                    <a class="btn btn-xs btn-success" ng-click="save();">@Common.Save  &nbsp;<b class="glyphicon glyphicon-ok"></b></a>
+                    <a class="btn btn-xs btn-warning" ng-click="cancel()">@Common.Cancel  &nbsp;<b class="glyphicon glyphicon-remove"></b></a>
+                </div>
+            </td>
+
+        </tr>
+    </tbody>
+</table>

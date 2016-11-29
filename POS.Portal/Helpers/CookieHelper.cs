@@ -15,15 +15,53 @@ namespace POS.Portal.Helpers
         {
             return string.IsNullOrEmpty(text) ? null : Encoding.UTF8.GetString(MachineKey.Unprotect(HttpServerUtility.UrlTokenDecode(text), purpose));
         }
+        private static object Get(string property)
+        {
+            return HttpContext.Current.Request.Cookies[property] != null ? Unprotect(HttpContext.Current.Request.Cookies[property].Value, property) : null;
+        }
+        private static void Set(string property, object value)
+        {
+            HttpContext.Current.Response.Cookies.Remove(property);
+            HttpContext.Current.Response.Cookies.Add(new HttpCookie(property, Protect(value.ToString(), property))
+            {
+                Expires = DateTime.Now.AddDays(360)
+            });
+        }
         public static int TenantId
         {
-            get { return HttpContext.Current.Request.Cookies["TenantId"] != null ? int.Parse(Unprotect(HttpContext.Current.Request.Cookies["TenantId"].Value, "TenantId")) : 0; }
+            get
+            {
+                var value = Get("TenantId");
+                return value != null ? int.Parse(value.ToString()) : 0;
+            }
             set
             {
-                HttpContext.Current.Response.Cookies.Remove("TenantId");
-                HttpContext.Current.Response.Cookies.Add(new HttpCookie("TenantId", Protect(value.ToString(), "TenantId")) { Expires = DateTime.Now.AddDays(360) });
+                Set("TenantId", value);
             }
         }
-
+        public static int ShiftId
+        {
+            get
+            {
+                var value = Get("ShiftId");
+                return value != null ? int.Parse(value.ToString()) : 0;
+            }
+            set
+            {
+                Set("ShiftId", value);
+            }
+        }
+        public static int MachineId
+        {
+            get
+            {
+                var value = Get("MachineId");
+                return value != null ? int.Parse(value.ToString()) : 0;
+            }
+            set
+            {
+                Set("MachineId", value);
+            }
+        }
     }
 }

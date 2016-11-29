@@ -1,83 +1,74 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace POS.Domain.Infrastructure
 {
-    public class CRUDService
+    public class CrudService
     {
-        PosContext context;
-        public CRUDService(PosContext dbContext)
+        private readonly PosContext _context;
+        public CrudService(PosContext context)
         {
-            this.context = dbContext;
+            _context = context;
         }
-        public bool Add<TEntity>(TEntity entity, Expression<Func<TEntity, bool>> filter = null, bool saveChanges = true) where TEntity : class
+        public async Task<bool> Add<TEntity>(TEntity entity, Expression<Func<TEntity, bool>> filter = null, bool saveChanges = true) where TEntity : class
         {
             if (filter != null)
             {
-                if (context.Set<TEntity>().Any(filter))
+                if (await _context.Set<TEntity>().AnyAsync(filter))
                 {
                     return false;
                 }
             }
-            context.Set<TEntity>().Add(entity);
+            _context.Set<TEntity>().Add(entity);
             if (saveChanges)
-                context.SaveChanges();
+                return await _context.SaveChangesAsync() > 0;
             return true;
         }
-        public bool? Update<TEntity>(TEntity entityToUpdate, int key,Expression<Func<TEntity, bool>> filter = null, bool saveChanges = true) where TEntity : class
+        public async Task<bool?> Update<TEntity>(TEntity entityToUpdate, int key, Expression<Func<TEntity, bool>> filter = null, bool saveChanges = true) where TEntity : class
         {
-            if (context.Set<TEntity>().Find(key) != null)
+            var oldEntity = await _context.Set<TEntity>().FindAsync(key);
+            if (oldEntity == null) return null;
+            if (filter != null)
             {
-                if (filter != null)
+                if (await _context.Set<TEntity>().AnyAsync(filter))
                 {
-                    if (context.Set<TEntity>().Any(filter))
-                    {
-                        return false;
-                    }
+                    return false;
                 }
-                context.Set<TEntity>().AddOrUpdate(entityToUpdate);
-                if (saveChanges)
-                    context.SaveChanges();
-                return true;
-            }
-            else
-            {
-                return null;
-            }
-
-            
-
-            
-            
+            }            
+            _context.Entry(oldEntity).State = EntityState.Detached;
+            _context.Entry(entityToUpdate).State = EntityState.Modified;
+            if (saveChanges)
+                 await _context.SaveChangesAsync();
+            return true;
         }
         public void Remove<TEntity>(TEntity entityToDelete, bool saveChanges = true) where TEntity : class
-        {         
-            context.Set<TEntity>().Remove(entityToDelete);
-            if (saveChanges)
-                context.SaveChanges();
-        }
-        public bool Remove<TEntity>(int Id, bool saveChanges = true) where TEntity : class
         {
-            var entityToDelete = context.Set<TEntity>().Find(Id);
+            _context.Set<TEntity>().Remove(entityToDelete);
+            if (saveChanges)
+                _context.SaveChanges();
+        }
+        public async Task<bool> Remove<TEntity>(int id, bool saveChanges = true) where TEntity : class
+        {
+            var entityToDelete = await _context.Set<TEntity>().FindAsync(id);
             if (entityToDelete == null)
                 return false;
 
-            context.Set<TEntity>().Remove(entityToDelete);
+            _context.Set<TEntity>().Remove(entityToDelete);
             if (saveChanges)
-                context.SaveChanges();
+                return await _context.SaveChangesAsync() > 0;
             return true;
         }
         public TEntity Find<TEntity>(object id) where TEntity : class
         {
-            return context.Set<TEntity>().Find(id);
+            return _context.Set<TEntity>().Find(id);
         }
         public IQueryable<TEntity> Get<TEntity>(Expression<Func<TEntity, bool>> filter = null) where TEntity : class
         {
-            IQueryable<TEntity> query = context.Set<TEntity>();
+            IQueryable<TEntity> query = _context.Set<TEntity>();
 
             if (filter != null)
             {
@@ -85,7 +76,41 @@ namespace POS.Domain.Infrastructure
             }
             return query;
         }
+        public void AddCollection<TEntity>(IEnumerable<TEntity> collection, string keyProperty, bool updateOld = false) where TEntity : class
+        {
+            foreach (var entity in collection.Where(entity => (int)typeof(TEntity).GetProperty(keyProperty).GetValue(entity) > 0))
+            {
+                _context.Entry(entity).State = updateOld ? EntityState.Modified : EntityState.Unchanged;
+            }
+        }
+        public List<TEntity> UpdateCollection<TEntity>(ICollection<TEntity> oldCollection, ICollection<TEntity> newCollection, string keyProperty, bool updateOld = false) where TEntity : class
+        {
+            var list = new List<TEntity>();
 
-      
+            foreach (var entity in oldCollection.Where(entity => !newCollection.Contains(entity)))
+            {
+                _context.Entry(entity).State = EntityState.Deleted;
+            }
+            foreach (var entity in newCollection)
+            {
+                if (oldCollection.Contains(entity))
+                {
+                    _context.Entry(entity).State = updateOld ? EntityState.Modified : EntityState.Unchanged;
+                    list.Add(entity);
+                }
+                else
+                {
+                    if ((int)typeof(TEntity).GetProperty(keyProperty).GetValue(entity) > 0)
+                        _context.Entry(entity).State = updateOld ? EntityState.Modified : EntityState.Unchanged;
+                    else
+                        _context.Entry(entity).State = EntityState.Added;
+                    list.Add(entity);
+
+                }
+            }
+            return list;
+        }
+
+
     }
 }

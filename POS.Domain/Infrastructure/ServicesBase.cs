@@ -4,18 +4,18 @@ namespace POS.Domain.Infrastructure
 {
     public class ServicesBase : IDisposable 
     {
-        protected PosContext context;
-        protected CRUDService crudService;
+        protected PosContext Context;
+        protected CrudService CrudService;
         #region Implementation of IInitializer
-        public void Initialize(PosContext _context)
+        public void Initialize(PosContext context)
         {
-            context = _context;
-            crudService = new CRUDService(context);
+            Context = context;
+            CrudService = new CrudService(Context);
         }
         #endregion
         public void SaveChanges()
         {
-            context.SaveChanges();
+            Context.SaveChanges();
         }
         // Public implementation of Dispose pattern callable by consumers. 
         public void Dispose()
@@ -24,19 +24,19 @@ namespace POS.Domain.Infrastructure
             GC.SuppressFinalize(this);
         }
         // Flag: Has Dispose already been called? 
-        private bool disposed = false;
+        private bool _disposed;
         // Protected implementation of Dispose pattern. 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposed)
+            if (_disposed)
                 return;
 
             if (disposing)
             {
-                context.Dispose();
+                Context.Dispose();
             }
 
-            disposed = true;
+            _disposed = true;
         }
     }
 }

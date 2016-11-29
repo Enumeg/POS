@@ -6,7 +6,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using POS.Domain.Entities;
+using POS.Domain.Infrastructure;
+using POS.Domain.Interfaces;
+using POS.Portal.Helpers;
 using POS.Portal.Models;
+using POS.Resources;
 
 namespace POS.Portal.Controllers
 {
@@ -15,15 +19,25 @@ namespace POS.Portal.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
-        public AccountController()
+        private readonly IShiftsService _shiftsService;
+        private readonly IMachinesService _machinesService;
+        private readonly ISettingsService _settingsService;
+        public AccountController(IShiftsService shiftsService, IMachinesService machinesService, ISettingsService settingsService)
         {
+            var context = ContextCache.GetPosContext();
+            _shiftsService = shiftsService;
+            _machinesService = machinesService;
+            _settingsService = settingsService;
+            _shiftsService.Initialize(context);
+            _machinesService.Initialize(context);
+            _settingsService.Initialize(context);
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+
         }
 
         public ApplicationSignInManager SignInManager
@@ -32,9 +46,9 @@ namespace POS.Portal.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -70,14 +84,46 @@ namespace POS.Portal.Controllers
             {
                 return View(model);
             }
-
+            var machineName = "";
+            var machineId = 0;
+            var settings = _settingsService.GetSettings();
+            if (settings.HasMachines)
+            {
+                machineName = NetworkHelper.GetMachineName(Request.UserHostName);
+                var machine = _machinesService.GetMachineByName(machineName);
+                if (machine == null && model.UserName != "admin")
+                {
+                    ModelState.AddModelError("", Identity.machinenotregistered);
+                    return View(model);
+                }
+                machineId = machine?.Id ?? 0;
+            }
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    var userId = User.Identity.GetUserId();
+                    if (settings.HasShifts)
+                    {
+                        if (settings.HasMachines)
+                        {
+                            if (machineId == 0)
+                                return Redirect(Url.Action("CreateMachine", "Account", new { machineName }));
+                        }
+                        CookieHelper.MachineId = machineId;
+                        var shiftResult = await _shiftsService.GetUserCurrentShift(userId, machineId);
+                        if (shiftResult.Id == 0)
+                            CookieHelper.ShiftId = _shiftsService.OpenShift(userId, machineId);
+                        else if (shiftResult.Message != "")
+                        {
+                            //todo: close shift
+                        }
+                        return RedirectToLocal(returnUrl);
+                    }
+                    else
+                        return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -118,7 +164,7 @@ namespace POS.Portal.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -153,8 +199,8 @@ namespace POS.Portal.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -478,6 +524,25 @@ namespace POS.Portal.Controllers
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
+
+        private async Task checkShift(string userId, int machineId)
+        {
+            var shiftResult = await _shiftsService.GetUserCurrentShift(userId, machineId);
+            if (shiftResult.Id == 0)
+            {
+                CookieHelper.ShiftId = _shiftsService.OpenShift(userId, machineId);
+            }
+            else if (shiftResult.Message != "")
+            {
+                //todo: close shift
+            }
+        }
         #endregion
+
+        public ActionResult CreateMachine(string machineName)
+        {
+            ViewBag.MachineName = machineName;
+            return View();
+        }
     }
 }
