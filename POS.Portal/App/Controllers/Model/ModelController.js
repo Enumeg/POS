@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 /* Controller that manage a list of Model of certain type */
 
-define(['app'], function (app) {
-    app.register.controller('ModelController', ['$scope', '$location', 'dataSource', 'uiHeaderService', 'resource', '$modal',
+define(["app"], function (app) {
+    app.register.controller("ModelController", ["$scope", "$location", "dataSource", "uiHeaderService", "resource", "$modal",
         function ($scope, $location, dataSource, ui, resource, $modal) {
 
             var apiBaseUrl = "/api/Model";
@@ -11,11 +11,11 @@ define(['app'], function (app) {
 
             //Create
             $scope.new = function () {
-                $location.path('/Model/Edit/0');
+                $location.path("/Model/Edit/0");
             };
             //Edit
             $scope.edit = function () {
-                $location.path('/Model/Edit/' + this.model.Id);
+                $location.path("/Model/Edit/" + this.model.Id);
             };
             //View
             $scope.view = function () {
@@ -45,7 +45,7 @@ define(['app'], function (app) {
             };
             //PrepareLookups
             $scope.prepareLookups = function () {
-                dataSource.getUrl('/api/Structure').success(function (data) { $scope.Structures = data; }).error(dataSource.error);
+                dataSource.getUrl("/api/Structure").success(function (data) { $scope.Structures = data; }).error(dataSource.error);
             }
 
             $scope.initialize();

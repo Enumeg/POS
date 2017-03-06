@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using POS.Domain.Enums;
 
 namespace POS.Domain.Entities
 {

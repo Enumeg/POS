@@ -113,13 +113,13 @@ namespace POS.Portal.Controllers
                                 return Redirect(Url.Action("CreateMachine", "Account", new { machineName }));
                         }
                         CookieHelper.MachineId = machineId;
-                        var shiftResult = await _shiftsService.GetUserCurrentShift(userId, machineId);
-                        if (shiftResult.Id == 0)
-                            CookieHelper.ShiftId = _shiftsService.OpenShift(userId, machineId);
-                        else if (shiftResult.Message != "")
-                        {
-                            //todo: close shift
-                        }
+                        //var shiftResult = await _shiftsService.GetUserCurrentShift(userId, machineId);
+                        //if (shiftResult.Id == 0)
+                        //    CookieHelper.ShiftId = _shiftsService.OpenShift(userId, machineId);
+                        //else if (shiftResult.Message != "")
+                        //{
+                        //    //todo: close shift
+                        //}
                         return RedirectToLocal(returnUrl);
                     }
                     else

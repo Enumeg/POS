@@ -159,4 +159,10 @@
   <data name="SaveSuccessfully" xml:space="preserve">
     <value>Saved Successfully</value>
   </data>
+  <data name="Choose" xml:space="preserve">
+    <value>Choose</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
 </root>

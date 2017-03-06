@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 /* Controller that manage a list of Component of certain type */
 
-define(['app'], function (app) {
-    app.register.controller('ComponentController', ['$scope', '$location', 'dataSource', 'uiHeaderService', 'resource', '$modal',
+define(["app"], function (app) {
+    app.register.controller("ComponentController", ["$scope", "$location", "dataSource", "uiHeaderService", "resource", "$modal",
         function ($scope, $location, dataSource, ui, resource, $modal) {
 
             var apiBaseUrl = "/api/Component";
@@ -16,9 +16,9 @@ define(['app'], function (app) {
                     return
                 }
                 var modalInstance = $modal.open({
-                    templateUrl: 'component.html',
+                    templateUrl: "component.html",
                     controller: ComponentEditController,
-                    size: 'lg',
+                    size: "lg",
                     resolve: {
                         component: function () {
                             return { ComponentTypeId: $scope.search.componentType.Id }
@@ -32,9 +32,9 @@ define(['app'], function (app) {
             //Edit
             $scope.edit = function (component) {
                 var modalInstance = $modal.open({
-                    templateUrl: 'component.html',
+                    templateUrl: "component.html",
                     controller: ComponentEditController,
-                    size: 'lg',
+                    size: "lg",
                     resolve: {
                         component: function () {
                             return component;
@@ -62,7 +62,7 @@ define(['app'], function (app) {
             $scope.initialize = function initialize() {
                 dataSource.initialize(apiBaseUrl);
                 $scope.list();
-                dataSource.getUrl('/api/ComponentType').success(function (data) {
+                dataSource.getUrl("/api/ComponentType").success(function (data) {
                     $scope.componentTypes = data;
                 }).error(dataSource.error);
             };
@@ -94,17 +94,17 @@ define(['app'], function (app) {
                 };
 
                 $scope.cancel = function () {
-                    $modalInstance.dismiss('cancel');
+                    $modalInstance.dismiss("cancel");
                 };
 
                 $scope.getProperties = function (Id) {
-                    return dataSource.getUrl('/api/Property/' + Id).error(dataSource.error);
+                    return dataSource.getUrl("/api/Property/" + Id).error(dataSource.error);
                 }
 
                 $scope.initialize = function initialize() {
                     $scope.$resource = resource.getAll();
                     $scope.component = component;
-                    dataSource.initialize('/api/Component');
+                    dataSource.initialize("/api/Component");
                     if (!component.Id) {
                         $scope.title = $scope.$resource.Add;
                         $scope.component.Properties = [];

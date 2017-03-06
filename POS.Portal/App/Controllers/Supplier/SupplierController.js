@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 /* Controller that manage a list of Supplier of certain type */
 
-define(['app'], function (app) {
-    app.register.controller('SupplierController', ['$scope', '$location', 'dataSource', 'uiHeaderService','resource',
+define(["app"], function (app) {
+    app.register.controller("SupplierController", ["$scope", "$location", "dataSource", "uiHeaderService","resource",
         function ($scope, $location, dataSource, ui, resource) {
 
             var apiBaseUrl = "/api/Supplier";
@@ -11,7 +11,7 @@ define(['app'], function (app) {
             $scope.supplier = {};
             //Create
             $scope.new = function () {
-                $scope.suppliers.push({ Name: '' });
+                $scope.suppliers.push({ Name: "" });
                 window.scrollTo(0, document.body.scrollHeight);
             }
             $scope.edit = function () {

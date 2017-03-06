@@ -11,11 +11,11 @@
 
 (function() {
 
-'use strict';
+"use strict";
 
 // Alias the loading bar for various backwards compatibilities since the project has matured:
-angular.module('angular-loading-bar', ['cfp.loadingBarInterceptor']);
-angular.module('chieffancypants.loadingBar', ['cfp.loadingBarInterceptor']);
+angular.module("angular-loading-bar", ["cfp.loadingBarInterceptor"]);
+angular.module("chieffancypants.loadingBar", ["cfp.loadingBarInterceptor"]);
 
 
 /**
@@ -23,10 +23,10 @@ angular.module('chieffancypants.loadingBar', ['cfp.loadingBarInterceptor']);
  *
  * Registers itself as an Angular interceptor and listens for XHR requests.
  */
-angular.module('cfp.loadingBarInterceptor', ['cfp.loadingBar'])
-  .config(['$httpProvider', function ($httpProvider) {
+angular.module("cfp.loadingBarInterceptor", ["cfp.loadingBar"])
+  .config(["$httpProvider", function ($httpProvider) {
 
-    var interceptor = ['$q', '$cacheFactory', '$timeout', '$rootScope', 'cfpLoadingBar', function ($q, $cacheFactory, $timeout, $rootScope, cfpLoadingBar) {
+    var interceptor = ["$q", "$cacheFactory", "$timeout", "$rootScope", "cfpLoadingBar", function ($q, $cacheFactory, $timeout, $rootScope, cfpLoadingBar) {
 
       /**
        * The total number of requests made
@@ -69,13 +69,13 @@ angular.module('cfp.loadingBarInterceptor', ['cfp.loadingBar'])
         var cache;
         var defaults = $httpProvider.defaults;
 
-        if (config.method !== 'GET' || config.cache === false) {
+        if (config.method !== "GET" || config.cache === false) {
           config.cached = false;
           return false;
         }
 
         if (config.cache === true && defaults.cache === undefined) {
-          cache = $cacheFactory.get('$http');
+          cache = $cacheFactory.get("$http");
         } else if (defaults.cache !== undefined) {
           cache = defaults.cache;
         } else {
@@ -98,7 +98,7 @@ angular.module('cfp.loadingBarInterceptor', ['cfp.loadingBar'])
           // Check to make sure this request hasn't already been cached and that
           // the requester didn't explicitly ask us to ignore this request:
           if (!config.ignoreLoadingBar && !isCached(config)) {
-            $rootScope.$broadcast('cfpLoadingBar:loading', {url: config.url});
+            $rootScope.$broadcast("cfpLoadingBar:loading", {url: config.url});
             if (reqsTotal === 0) {
               startTimeout = $timeout(function() {
                 cfpLoadingBar.start();
@@ -113,7 +113,7 @@ angular.module('cfp.loadingBarInterceptor', ['cfp.loadingBar'])
         'response': function(response) {
           if (!response.config.ignoreLoadingBar && !isCached(response.config)) {
             reqsCompleted++;
-            $rootScope.$broadcast('cfpLoadingBar:loaded', {url: response.config.url});
+            $rootScope.$broadcast("cfpLoadingBar:loaded", {url: response.config.url});
             if (reqsCompleted >= reqsTotal) {
               setComplete();
             } else {
@@ -126,7 +126,7 @@ angular.module('cfp.loadingBarInterceptor', ['cfp.loadingBar'])
         'responseError': function(rejection) {
           if (!rejection.config.ignoreLoadingBar && !isCached(rejection.config)) {
             reqsCompleted++;
-            $rootScope.$broadcast('cfpLoadingBar:loaded', {url: rejection.config.url});
+            $rootScope.$broadcast("cfpLoadingBar:loaded", {url: rejection.config.url});
             if (reqsCompleted >= reqsTotal) {
               setComplete();
             } else {
@@ -151,21 +151,21 @@ angular.module('cfp.loadingBarInterceptor', ['cfp.loadingBar'])
  * XHR requests, and it's likely needed on every view, the best option is to
  * use a service.
  */
-angular.module('cfp.loadingBar', [])
-  .provider('cfpLoadingBar', function() {
+angular.module("cfp.loadingBar", [])
+  .provider("cfpLoadingBar", function() {
 
     this.includeSpinner = true;
     this.includeBar = true;
     this.latencyThreshold = 100;
     this.startSize = 0.02;
-    this.parentSelector = 'body';
+    this.parentSelector = "body";
     this.spinnerTemplate = '<div id="loading-bar-spinner"><div class="spinner-icon"></div></div>';
 
-    this.$get = ['$document', '$timeout', '$animate', '$rootScope', function ($document, $timeout, $animate, $rootScope) {
+    this.$get = ["$document", "$timeout", "$animate", "$rootScope", function ($document, $timeout, $animate, $rootScope) {
 
       var $parentSelector = this.parentSelector,
         loadingBarContainer = angular.element('<div id="loading-bar"><div class="bar"><div class="peg"></div></div></div>'),
-        loadingBar = loadingBarContainer.find('div').eq(0),
+        loadingBar = loadingBarContainer.find("div").eq(0),
         spinner = angular.element(this.spinnerTemplate);
 
       var incTimeout,
@@ -189,7 +189,7 @@ angular.module('cfp.loadingBar', [])
           return;
         }
 
-        $rootScope.$broadcast('cfpLoadingBar:started');
+        $rootScope.$broadcast("cfpLoadingBar:started");
         started = true;
 
         if (includeBar) {
@@ -212,8 +212,8 @@ angular.module('cfp.loadingBar', [])
         if (!started) {
           return;
         }
-        var pct = (n * 100) + '%';
-        loadingBar.css('width', pct);
+        var pct = (n * 100) + "%";
+        loadingBar.css("width", pct);
         status = n;
 
         // increment loadingbar to give the illusion that there is always
@@ -265,7 +265,7 @@ angular.module('cfp.loadingBar', [])
       }
 
       function _complete() {
-        $rootScope.$broadcast('cfpLoadingBar:completed');
+        $rootScope.$broadcast("cfpLoadingBar:completed");
         _set(1);
 
         $timeout.cancel(completeTimeout);

@@ -1,29 +1,29 @@
 ﻿"use strict";
-/* Controller that manage a list of units of certain type */
+/* Controller that manage a list of products of certain type */
 
 define(["app"], function (app) {
-    app.register.controller("UnitsController", ["$scope", "dataSource",
-        function ($scope, dataSource) {
-
-            $scope.units = [];
-            $scope.unit = {};
+    app.register.controller("ProductsController", ["$scope", "dataSource", "$location",
+        function ($scope, dataSource, $location) {
+            $scope.products = [];
+            $scope.product = {};
             //Create
             $scope.new = function () {
-                $scope.units.splice(1, 0, { Id: 0, Name: "" });
+                $scope.product = (1, 0, { Id: 0, Name: "", BarCode: "" });
+                $("#productModal").modal("show");
             }
             //Edit
             $scope.edit = function () {
-                angular.extend($scope.unit, this.unit);
-                this.editable = true;
+                $scope.product = this.product;
+                $("#productModal").modal("show");
             }
             //Delete
             $scope.delete = function () {
-                dataSource.delete(this.unit.Name, this.unit.Id, $scope.units, this.unit);
+                dataSource.delete(this.unit.Name, this.unit.Id, $scope.products, this.unit);
             };
             //Cancel
             $scope.cancel = function () {
                 if (!this.unit.Id)
-                    $scope.units.shift();
+                    $scope.products.shift();
                 else {
                     angular.extend(this.unit, $scope.unit);
                     this.editable = false;
@@ -48,13 +48,14 @@ define(["app"], function (app) {
             function list() {
                 dataSource.getList()
                     .success(function (data) {
-                        $scope.units = data;
+                        $scope.products = data;
                     })
                     .error(dataSource.error);
             };
             //Initialize
             function initialize() {
-                dataSource.initialize("/api/Units");
+                dataSource.initialize("/api/Products");
+                $("#productModal").modal({ show: false });
                 list();
             };
 

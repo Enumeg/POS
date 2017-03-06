@@ -7,10 +7,10 @@ namespace POS.Domain.Entities
         public Supplier()
         {
             Purchases = new List<Purchase>();
-            PurchasecBacks = new List<PurchaseBack>();
+            PurchaseBacks = new List<PurchaseBack>();
         }    
         public virtual ICollection<Purchase> Purchases { get; set; }
-        public virtual ICollection<PurchaseBack> PurchasecBacks { get; set; }
+        public virtual ICollection<PurchaseBack> PurchaseBacks { get; set; }
 
     }
 }

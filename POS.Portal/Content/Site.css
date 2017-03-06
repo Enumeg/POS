@@ -95,16 +95,47 @@ td.dropdownlist {
     white-space: nowrap;
 }
 
-td > .btn-group > .btn {
-    float: none;
+td > .btn-group {
+    margin: 5px 10px;
 }
 
-    td > .btn-group > .btn:not(:first-child) {
-        margin-left: -4px;
+    td > .btn-group > .btn {
+        float: none;
+    }
+
+        td > .btn-group > .btn:not(:first-child) {
+            margin-left: -4px;
+        }
+
+tr.editable > td {
+    padding: 0 !important;
+}
+
+    tr.editable > td > .form-control {
+        width: 100%;
+        border: none;
+        border-radius: 0;
+        background-color: transparent;
+    }
+
+    tr.editable > td.ng-invalid {
+        border: 2px solid #ff0000 !important;
     }
 
 select {
     min-width: 200px;
+}
+
+.form-control[disabled] {
+    cursor: default !important;
+}
+
+select:disabled {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+
 }
 /*end*/
 .logo img {

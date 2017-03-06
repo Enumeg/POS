@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 /* Controller that manage a list of Model of certain type */
 
-define(['app'], function (app) {
-    app.register.controller('ModelEditController', ['$scope', '$location', 'dataSource', 'uiHeaderService', 'resource', '$modal', '$routeParams',
+define(["app"], function (app) {
+    app.register.controller("ModelEditController", ["$scope", "$location", "dataSource", "uiHeaderService", "resource", "$modal", "$routeParams",
         function ($scope, $location, dataSource, ui, resource, $modal, $routeParams) {
 
             var apiBaseUrl = "/api/Model";
@@ -14,11 +14,11 @@ define(['app'], function (app) {
             //Delete
             $scope.delete = function () {
                 if (confirm($scope.$resource.ConfirmDelete + $scope.model.Name + "?"))
-                    dataSource.delete($scope.model.Id, '/Models');
+                    dataSource.delete($scope.model.Id, "/Models");
             };
             //Cancel 
             $scope.cancel = function () {
-                $location.path('/Models');
+                $location.path("/Models");
             }
             //add
             $scope.add = function () {
@@ -68,18 +68,18 @@ define(['app'], function (app) {
                     if (!scope.model.Id)//New ComponentType
                         dataSource.insert(scope.model).success(function (data) {
                             dataSource.success(data.Name);
-                            $location.path('/Models');
+                            $location.path("/Models");
                         }).error(dataSource.error);
                     else
                         dataSource.update(scope.model).success(function (data) {
                             dataSource.success(scope.model.Name);
-                            $location.path('/Models');
+                            $location.path("/Models");
                         }).error(dataSource.error);
                 }
             }
             //PrepareLookups
             $scope.prepareLookups = function () {
-                dataSource.getUrl('/api/Structure').success(function (data) {
+                dataSource.getUrl("/api/Structure").success(function (data) {
                     $scope.Structures = data;
                     if (modelId != 0) {
                         dataSource.get(modelId).success(function (data) {
@@ -88,13 +88,13 @@ define(['app'], function (app) {
                         })
                     }
                 }).error(dataSource.error);
-                dataSource.getUrl('/api/Component/0').success(function (data) {
+                dataSource.getUrl("/api/Component/0").success(function (data) {
                     $scope.components = data;
                     data.forEach(function (component) {
                         component.Prices.forEach(function (price) {
                             $scope.Component = component;
                             $scope.$apply();
-                            var com = { Price: price, Component: component, Id: component.Id, ComponentTypeId: component.ComponentTypeId, details: $('#details')[0].outerHTML };
+                            var com = { Price: price, Component: component, Id: component.Id, ComponentTypeId: component.ComponentTypeId, details: $("#details")[0].outerHTML };
                             $scope.Components.push(com);
                         });
                     });

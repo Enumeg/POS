@@ -201,12 +201,18 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\CategoriesController.cs" />
+    <Compile Include="Controllers\API\CutomersController.cs" />
+    <Compile Include="Controllers\API\ProductsController.cs" />
+    <Compile Include="Controllers\API\SuppliersController.cs" />
+    <Compile Include="Controllers\API\PointsController.cs" />
     <Compile Include="Controllers\API\UnitsController.cs" />
     <Compile Include="Controllers\API\PropertiesController.cs" />
     <Compile Include="Controllers\API\ResourceController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CodingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\PropertiesController.cs" />
     <Compile Include="Controllers\UnitsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -227,7 +233,8 @@
     <Content Include="App\Controllers\Model\ModelController.js" />
     <Content Include="App\Controllers\Model\ModelEditController.js" />
     <Content Include="App\Controllers\Price\PriceController.js" />
-    <Content Include="App\Controllers\Units\UnitsController.js" />
+    <Content Include="App\Controllers\Coding\CodingController.js" />
+    <Content Include="App\Controllers\Products\ProductsController.js" />
     <Content Include="App\Controllers\Properties\PropertiesController.js" />
     <Content Include="App\Controllers\Categories\CategoriesController.js" />
     <Content Include="App\Controllers\Supplier\SupplierController.js" />
@@ -235,6 +242,7 @@
     <Content Include="App\Main.js" />
     <Content Include="App\Services\angucomplete.js" />
     <Content Include="App\Services\contenteditable.js" />
+    <Content Include="App\Services\ConvertToNumber.js" />
     <Content Include="App\Services\dataSource.js" />
     <Content Include="App\Services\isteven-multi-select.js" />
     <Content Include="App\Services\loading-bar.js" />
@@ -341,6 +349,10 @@
     <Content Include="Views\Manage\_ViewStart.cshtml" />
     <Content Include="Views\Units\Index.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Coding\Person.cshtml" />
+    <Content Include="Views\Coding\Object.cshtml" />
+    <Content Include="Views\Coding\Points.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

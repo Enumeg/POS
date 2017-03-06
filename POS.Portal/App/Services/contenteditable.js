@@ -1,24 +1,28 @@
-﻿'use strict';
+﻿"use strict";
 
-define(['app'], function (app) {
-    app.directive('contenteditable', function() {
+define(["app"], function (app) {
+    app.directive("contenteditable", function() {
         return {
-            require: 'ngModel',
+            require: "ngModel",
             link: function(scope, elm, attrs, ctrl) {
                 // view -> model
-                elm.bind('blur', function() {
-                    scope.$apply(function() {
+                //elm.bind('blur', function() {
+                //    scope.$apply(function() {
+                //        ctrl.$setViewValue(elm.html());
+                //    });
+                //});
+                elm.bind("keyup", function () {
+                    scope.$apply(function () {
                         ctrl.$setViewValue(elm.html());
                     });
                 });
-
                 // model -> view
                 ctrl.$render = function() {
                     elm.html(ctrl.$viewValue);
                 };
 
-                // load init value from DOM
-                //ctrl.$setViewValue(elm.html());
+                 //load init value from DOM
+                elm.html("");
             }
         };
     });

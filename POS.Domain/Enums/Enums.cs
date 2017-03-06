@@ -11,8 +11,8 @@
 
     public enum PaymentMethod
     {
-        Cash=1,
-        Later=2
+        Cash = 1,
+        Later = 2
     };
 
     public enum LoanType
@@ -20,4 +20,11 @@
         Check = 1,
         Loan = 2
     };
+    public enum PointType
+    {
+        Store = 1,
+        Market = 2
+    }
+
 }
+

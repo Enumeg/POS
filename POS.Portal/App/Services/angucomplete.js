@@ -4,10 +4,10 @@
  * By Daryl Rowland
  */
 
-angular.module('angucomplete', [])
-    .directive('angucomplete', function ($parse, $http, $sce, $timeout) {
+angular.module("angucomplete", [])
+    .directive("angucomplete", function ($parse, $http, $sce, $timeout) {
         return {
-            restrict: 'EA',
+            restrict: "EA",
             scope: {
                 "id": "@id",
                 "placeholder": "@placeholder",
@@ -42,7 +42,7 @@ angular.module('angucomplete', [])
                 $scope.pause = 500;
                 $scope.minLength = 3;
                 $scope.searchStr = $scope.initialvalue;
-                $scope.$watch('initialvalue', function () {
+                $scope.$watch("initialvalue", function () {
                     $scope.searchStr = $scope.initialvalue;
                 });
 
@@ -89,11 +89,11 @@ angular.module('angucomplete', [])
                                 image = imageUri + responseData[i][$scope.imageField];
                             }
 
-                            var text = titleCode.join(' ');
+                            var text = titleCode.join(" ");
                             if ($scope.matchClass) {
-                                var re = new RegExp(str, 'i');
+                                var re = new RegExp(str, "i");
                                 var strPart = text.match(re)[0];
-                                text = $sce.trustAsHtml(text.replace(re, '<span class="' + $scope.matchClass + '">' + strPart + '</span>'));
+                                text = $sce.trustAsHtml(text.replace(re, '<span class="' + $scope.matchClass + '">' + strPart + "</span>"));
                             }
 
                             var resultRow = {
@@ -123,7 +123,7 @@ angular.module('angucomplete', [])
                                 var match = false;
 
                                 for (var s = 0; s < searchFields.length; s++) {
-                                    match = match || (typeof $scope.localData[i][searchFields[s]] === 'string' && typeof str === 'string' && $scope.localData[i][searchFields[s]].toLowerCase().indexOf(str.toLowerCase()) >= 0);
+                                    match = match || (typeof $scope.localData[i][searchFields[s]] === "string" && typeof str === "string" && $scope.localData[i][searchFields[s]].toLowerCase().indexOf(str.toLowerCase()) >= 0);
                                 }
 
                                 if (match) {
@@ -188,7 +188,7 @@ angular.module('angucomplete', [])
                 };
                 $scope.selectResult = function (result) {
                     if ($scope.matchClass) {
-                        result.title = result.title.toString().replace(/(<([^>]+)>)/ig, '');
+                        result.title = result.title.toString().replace(/(<([^>]+)>)/ig, "");
                     }
                     $scope.searchStr = $scope.lastSearchTerm = result.title;
 
@@ -202,9 +202,9 @@ angular.module('angucomplete', [])
                     $scope.showDropdown = false;
                     $scope.results = [];
                 };
-                var inputField = elem.find('input');
+                var inputField = elem.find("input");
 
-                inputField.on('keyup', $scope.keyPressed);
+                inputField.on("keyup", $scope.keyPressed);
 
                 elem.on("keyup", function (event) {
                     if (event.which === 40) {

@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using POS.Domain.Entities;
 using POS.Domain.Infrastructure;
@@ -11,61 +10,51 @@ namespace POS.Domain.Services
 {
     public class CustomersService : ServicesBase, ICustomersService
     {
-        #region Add Customer
-       
-        int ICustomersService.AddCustomer(Customer customer)
+        async Task<bool> ICustomersService.AddCustomer(Customer customer)
         {
-            var insert = CrudService.Add(customer,c=>c.Name==customer.Name).Result;
-            if (insert) return customer.Id;
-            return 0;
-
+            return await CrudService.Add(customer, c => c.Name == customer.Name);
         }
 
-        #endregion
-
-
-        #region Find Customer By ID
-       
-        Customer ICustomersService.FindCustomerById(int customerId)
+        async Task<bool?> ICustomersService.UpdateCustomer(Customer customer)
         {
-            return CrudService.Find<Customer>(customerId);   
+            return await CrudService.Update(customer, customer.Id, c => c.Name == customer.Name && c.Id != customer.Id);
         }
 
-        #endregion
-
-
-        #region Update Customer
-
-        bool? ICustomersService.UpdateCustomer(Customer customer)
+        async Task<bool?> ICustomersService.DeleteCustomer(int customerId, bool removeRelatedEntities)
         {
-            return CrudService.Update(customer, customer.Id, c => c.Name == customer.Name).Result;
-            
+            var customer = Context.Customers.Include(u => u.Sales).Include(u => u.SaleBacks).FirstOrDefault(c => c.Id == customerId);
+            if (customer == null) return false;
+            if (removeRelatedEntities)
+            {
+                Context.SaleDetails.RemoveRange(
+                    Context.SaleDetails.Where(d => Context.Sales.Any(p => p.Id == d.SaleId)));
+                Context.Sales.RemoveRange(customer.Sales);
+                Context.SaleBackDetails.RemoveRange(
+                    Context.SaleBackDetails.Where(d => Context.SaleDetails.Any(p => p.Id == d.SaleBackId)));
+                Context.SaleBacks.RemoveRange(customer.SaleBacks);
+                Context.Customers.Remove(customer);
+                await Context.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                if (customer.Sales.Count > 0) return null;
+                if (customer.SaleBacks.Count > 0) return null;
+
+            }
+            Context.Customers.Remove(customer);
+            await Context.SaveChangesAsync();
+            return true;
         }
 
-
-        #endregion
-
-        #region Delete Customer
-
-        bool ICustomersService.DeleteCustomer(Customer customer)
+        async Task<Customer> ICustomersService.FindCustomer(int customerId)
         {
-            return CrudService.Remove<Customer>(customer.Id).Result;
-
+            return await Context.Customers.FindAsync(customerId);
         }
 
-
-        #endregion
-
-
-        #region Get All Customer
-
-        List<Customer> ICustomersService.GetCustomers()
+        async Task<List<Customer>> ICustomersService.GetAllCustomers()
         {
-            return Context.Customers.ToList();
+            return await Context.Customers.ToListAsync();
         }
-
-
-        #endregion
-
     }
 }

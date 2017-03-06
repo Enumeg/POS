@@ -10,6 +10,8 @@ define(["Services/routeResolver"], function () {
                 });
             });        
     });
+    
+
     app.config(["$routeProvider", "routeResolverProvider", "$controllerProvider", "$compileProvider", "$filterProvider", "$provide", 
         function ($routeProvider, routeResolverProvider, $controllerProvider, $compileProvider, $filterProvider, $provide) {
             app.register =
@@ -24,9 +26,13 @@ define(["Services/routeResolver"], function () {
             var route = routeResolverProvider.route;
 
             $routeProvider
-                .when("/Units", route.resolve("Units"))
                 .when("/Categories", route.resolve("Categories"))
-                .when("/Properties", route.resolve("Properties", "Index"))
+                .when("/Products", route.resolve("Products"))
+                .when("/Units", route.resolve("Coding", "Object"))
+                .when("/Properties", route.resolve("Coding", "Object"))
+                .when("/Customers", route.resolve("Coding", "Person"))
+                .when("/Suppliers", route.resolve("Coding", "Person"))
+                .when("/Points", route.resolve("Coding", "Points"))
                 .otherwise({ redirectTo: "/Properties" });
 
         }]);

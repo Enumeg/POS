@@ -1,10 +1,10 @@
-﻿'use strict';
+﻿"use strict";
 
-define(['app'], function (app) {
-    app.factory('uiHeaderService', ['$rootScope', function ($rootScope) {
+define(["app"], function (app) {
+    app.factory("uiHeaderService", ["$rootScope", function ($rootScope) {
         var self = {};
 
-        self.message = '';
+        self.message = "";
 
         self.showMessage = function (message,messageType) {
             self.message = message;
@@ -13,7 +13,7 @@ define(['app'], function (app) {
         };
 
         self.broadcastMessage = function () {
-            $rootScope.$broadcast('messageUpdated');
+            $rootScope.$broadcast("messageUpdated");
         };
 
         return self;

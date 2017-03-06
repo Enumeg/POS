@@ -1,8 +1,8 @@
-﻿'use strict';
+﻿"use strict";
 /* Controller that manage a list of componentTypes of certain type */
 
-define(['app'], function (app) {
-    app.register.controller('ComponentTypeController', ['$scope', '$location', 'dataSource', 'uiHeaderService', 'resource', '$modal',
+define(["app"], function (app) {
+    app.register.controller("ComponentTypeController", ["$scope", "$location", "dataSource", "uiHeaderService", "resource", "$modal",
         function ($scope, $location, dataSource, ui, resource, $modal) {
 
             var apiBaseUrl = "/api/ComponentType";
@@ -14,7 +14,7 @@ define(['app'], function (app) {
                 var componentType = this.componentType;
                 if (!$scope.opened) {
                     var modalInstance = $modal.open({
-                        templateUrl: 'properties.html',
+                        templateUrl: "properties.html",
                         controller: PropertiesController,
                         resolve: {
                             componentType: function () {
@@ -34,7 +34,7 @@ define(['app'], function (app) {
 
             //Create
             $scope.new = function () {
-                $scope.componentTypes.push({ Name: '' });
+                $scope.componentTypes.push({ Name: "" });
                 window.scrollTo(0, document.body.scrollHeight);
             }
             //Edit
@@ -90,7 +90,7 @@ define(['app'], function (app) {
             var PropertiesController = function ($scope, $modalInstance, dataSource, componentType, resource) {
                 $scope.$resource = resource.getAll();
 
-                dataSource.initialize('/api/Property');
+                dataSource.initialize("/api/Property");
 
                 dataSource.getList({ id: componentType.Id }).success(function (data) {
                     $scope.ctProperties = data;
@@ -108,7 +108,7 @@ define(['app'], function (app) {
                     else {
                         property.ComponentTypes = [];
                         property.ComponentTypes.push(componentType);
-                        property.Name = $('#properties_value').val();
+                        property.Name = $("#properties_value").val();
                         dataSource.insert(property).success(function (data) {
                             property = data;
                             $scope.ctProperties.push(property);
@@ -128,7 +128,7 @@ define(['app'], function (app) {
                 }
 
                 $scope.cancel = function () {
-                    $modalInstance.dismiss('cancel');
+                    $modalInstance.dismiss("cancel");
                 };
             };
 

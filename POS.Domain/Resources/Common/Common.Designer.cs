@@ -88,6 +88,24 @@ namespace POS.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose.
+        /// </summary>
+        public static string Choose {
+            get {
+                return ResourceManager.GetString("Choose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to delete .
         /// </summary>
         public static string ConfirmDelete {

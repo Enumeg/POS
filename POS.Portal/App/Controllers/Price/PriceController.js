@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 /* Controller that manage a list of Price of certain type */
 
-define(['app'], function (app) {
-    app.register.controller('PriceController', ['$scope', '$location', 'dataSource', 'uiHeaderService', 'resource',
+define(["app"], function (app) {
+    app.register.controller("PriceController", ["$scope", "$location", "dataSource", "uiHeaderService", "resource",
         function ($scope, $location, dataSource, ui, resource) {
 
             var apiBaseUrl = "/api/Price";
@@ -64,8 +64,8 @@ define(['app'], function (app) {
             };
             //PrepareLookups
             $scope.prepareLookups = function () {
-                dataSource.getUrl('/api/Component').success(function (data) { $scope.Components = data; }).error(dataSource.error);
-                dataSource.getUrl('/api/Supplier').success(function (data) { $scope.Suppliers = data; }).error(dataSource.error);
+                dataSource.getUrl("/api/Component").success(function (data) { $scope.Components = data; }).error(dataSource.error);
+                dataSource.getUrl("/api/Supplier").success(function (data) { $scope.Suppliers = data; }).error(dataSource.error);
             }
 
             $scope.initialize();

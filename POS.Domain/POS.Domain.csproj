@@ -95,6 +95,8 @@
     <Compile Include="Infrastructure\PosContext.cs" />
     <Compile Include="Interfaces\ICustomersService.cs" />
     <Compile Include="Interfaces\ISettingsService.cs" />
+    <Compile Include="Interfaces\ISuppliersService.cs" />
+    <Compile Include="Interfaces\IPointsService.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -114,6 +116,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Pages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Person\Person.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Person.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Point\Point.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Point.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Property\Property.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -126,11 +138,14 @@
     <Compile Include="Interfaces\ICategoriesService.cs" />
     <Compile Include="Interfaces\IPropertiesService.cs" />
     <Compile Include="Interfaces\IUnitsService.cs" />
+    <Compile Include="Interfaces\IProductsService.cs" />
     <Compile Include="Services\MachinesService.cs" />
     <Compile Include="Services\ProductsService.cs" />
     <Compile Include="Services\PropertiesService.cs" />
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Services\ShiftsService.cs" />
+    <Compile Include="Services\SuppliersService.cs" />
+    <Compile Include="Services\PointsService.cs" />
     <Compile Include="Services\UnitsService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +169,16 @@
     <EmbeddedResource Include="Resources\Pages\Pages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Pages.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>POS.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Person\Person.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Person.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>POS.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Point\Point.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Point.Designer.cs</LastGenOutput>
       <CustomToolNamespace>POS.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Property\Property.resx">

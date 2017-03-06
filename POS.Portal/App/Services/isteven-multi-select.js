@@ -31,49 +31,49 @@
  * --------------------------------------------------------------------------------
  */
 
-'use strict'
+"use strict"
 
-angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect' , [ '$sce', '$timeout', '$templateCache', function ( $sce, $timeout, $templateCache ) {
+angular.module( "isteven-multi-select", ["ng"] ).directive( "istevenMultiSelect" , [ "$sce", "$timeout", "$templateCache", function ( $sce, $timeout, $templateCache ) {
     return {
         restrict: 
-            'AE',
+            "AE",
 
         scope: 
         {   
             // models
-            inputModel      : '=',
-            outputModel     : '=',
+            inputModel      : "=",
+            outputModel     : "=",
 
             // settings based on attribute
-            buttonLabel     : '@',
-            directiveId     : '@',
-            helperElements  : '@',            
-            isDisabled      : '=',
-            itemLabel       : '@',
-            maxLabels       : '@',
-            orientation     : '@',
-            selectionMode   : '@',    
-            minSearchLength : '@',  // 3.0.0 - OK                 
+            buttonLabel     : "@",
+            directiveId     : "@",
+            helperElements  : "@",            
+            isDisabled      : "=",
+            itemLabel       : "@",
+            maxLabels       : "@",
+            orientation     : "@",
+            selectionMode   : "@",    
+            minSearchLength : "@",  // 3.0.0 - OK                 
                                                          
             // settings based on input model property 
-            tickProperty    : '@',
-            disableProperty : '@',
-            groupProperty   : '@',
-            searchProperty  : '@',  // 3.0.0 - OK
-            maxHeight       : '@',            
+            tickProperty    : "@",
+            disableProperty : "@",
+            groupProperty   : "@",
+            searchProperty  : "@",  // 3.0.0 - OK
+            maxHeight       : "@",            
 
             // callbacks
-            onClear         : '&',  // 3.0.0 - OK
-            onClose         : '&',
-            onSearchChange  : '&',  // 3.0.0 - OK
-            onItemClick     : '&',            
-            onOpen          : '&', 
-            onReset         : '&',  // 3.0.0 - OK
-            onSelectAll     : '&',  // 3.0.0 - OK
-            onSelectNone    : '&',  // 3.0.0 - OK                     
+            onClear         : "&",  // 3.0.0 - OK
+            onClose         : "&",
+            onSearchChange  : "&",  // 3.0.0 - OK
+            onItemClick     : "&",            
+            onOpen          : "&", 
+            onReset         : "&",  // 3.0.0 - OK
+            onSelectAll     : "&",  // 3.0.0 - OK
+            onSelectNone    : "&",  // 3.0.0 - OK                     
 
             // i18n
-            translation     : '='   // 3.0.0 - OK
+            translation     : "="   // 3.0.0 - OK
         },
 
         template: 
@@ -81,7 +81,7 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                 '<button type="button" ng-disabled="isDisabled"' +
                     'ng-click="toggleCheckboxes( $event ); refreshSelectedItems(); refreshButton(); prepareGrouping; prepareIndex();"' +
                     'ng-bind-html="varButtonLabel">' +
-                '</button>' +
+                "</button>" +
                 '<div class="checkboxLayer">' +
 
                     '<div class="helperContainer" ng-if="displayHelper( \'filter\' ) || displayHelper( \'all\' ) || displayHelper( \'none\' ) || displayHelper( \'reset\' )">' +
@@ -91,20 +91,20 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                                 'ng-if="!isDisabled && displayHelper( \'all\' )"' +
                                 'ng-click="select( \'all\', $event );"' +
                                 'ng-bind-html="lang.selectAll">' +
-                            '</button>'+
+                            "</button>"+
 
                             '<button type="button" class="helperButton"' +
                                 'ng-if="!isDisabled && displayHelper( \'none\' )"' +
                                 'ng-click="select( \'none\', $event );"' +
                                 'ng-bind-html="lang.selectNone">' +
-                            '</button>'+
+                            "</button>"+
 
                             '<button type="button" class="helperButton reset"' +
                                 'ng-if="!isDisabled && displayHelper( \'reset\' )"' +
                                 'ng-click="select( \'reset\', $event );"' +
                                 'ng-bind-html="lang.reset">'+
-                            '</button>' +
-                        '</div>' +
+                            "</button>" +
+                        "</div>" +
 
                         '<div class="line" style="position:relative" ng-if="displayHelper( \'filter\' )">'+
                                                     
@@ -112,14 +112,14 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                                 'ng-click="select( \'filter\', $event )" '+
                                 'ng-model="inputLabel.labelFilter" '+
                                 'ng-change="searchChanged()" class="inputFilter"'+
-                                '/>'+
+                                "/>"+
             
                             '<button type="button" class="clearButton" ng-click="clearClicked( $event )" >×</button> '+
-                        '</div> '+
-                    '</div> '+
+                        "</div> "+
+                    "</div> "+
             
                     '<div class="checkBoxContainer">'+
-                        '<div '+
+                        "<div "+
                             'ng-repeat="item in filteredModel | filter:removeGroupEndMarker" class="multiSelectItem"'+
                             'ng-class="{selected: item[ tickProperty ], horizontal: orientationH, vertical: orientationV, multiSelectGroup:item[ groupProperty ], disabled:itemIsDisabled( item )}"'+
                             'ng-click="syncItems( item, $event, $index );" '+
@@ -127,39 +127,39 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
             
                             '<div class="acol" ng-if="item[ spacingProperty ] > 0" ng-repeat="i in numberToArray( item[ spacingProperty ] ) track by $index">'+
                             
-                        '</div>  '+
+                        "</div>  "+
             
                         '<div class="acol">'+
 
-                            '<label>'+                                
+                            "<label>"+                                
                                 '<input class="checkbox focusable" type="checkbox" '+
                                     'ng-disabled="itemIsDisabled( item )" '+
                                     'ng-checked="item[ tickProperty ]" '+
                                     'ng-click="syncItems( item, $event, $index )" />'+
 
-                                '<span '+
+                                "<span "+
                                     'ng-class="{disabled:itemIsDisabled( item )}" '+
                                     'ng-bind-html="writeLabel( item, \'itemLabel\' )">'+
-                                '</span>'+
-                            '</label>'+
-                        '</div>'+
+                                "</span>"+
+                            "</label>"+
+                        "</div>"+
             
                         '<span class="tickMark" ng-if="item[ groupProperty ] !== true && item[ tickProperty ] === true">✔</span>'+
-                    '</div>'+
-                '</div>'+
-            '</div>'+
-        '</span>',                    
+                    "</div>"+
+                "</div>"+
+            "</div>"+
+        "</span>",                    
 
         link: function ( $scope, element, attrs ) {                       
 
             $scope.backUp           = [];
-            $scope.varButtonLabel   = '';               
-            $scope.spacingProperty  = '';
-            $scope.indexProperty    = '';                        
+            $scope.varButtonLabel   = "";               
+            $scope.spacingProperty  = "";
+            $scope.indexProperty    = "";                        
             $scope.orientationH     = false;
             $scope.orientationV     = true;
             $scope.filteredModel    = [];
-            $scope.inputLabel       = { labelFilter: '' };                        
+            $scope.inputLabel       = { labelFilter: "" };                        
             $scope.tabIndex         = 0;            
             $scope.lang             = {};
             $scope.localModel       = [];
@@ -168,7 +168,7 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                 prevTabIndex        = 0,
                 helperItems         = [],
                 helperItemsLength   = 0,
-                checkBoxLayer       = '',
+                checkBoxLayer       = "",
                 scrolled            = false,
                 selectedItems       = [],
                 formElements        = [],
@@ -178,9 +178,9 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
             // v3.0.0
             // clear button clicked
             $scope.clearClicked = function( e ) {                
-                $scope.inputLabel.labelFilter = '';
+                $scope.inputLabel.labelFilter = "";
                 $scope.updateFilter();
-                $scope.select( 'clear', e );                
+                $scope.select( "clear", e );                
             }
 
             // A little hack so that AngularJS ng-repeat can loop using start and end index like a normal loop
@@ -203,27 +203,27 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                 $scope.filteredModel = [];
                 var i = 0;
 
-                if ( typeof $scope.localModel === 'undefined' ) {
+                if ( typeof $scope.localModel === "undefined" ) {
                     return false;                   
                 }
 
                 for( i = $scope.localModel.length - 1; i >= 0; i-- ) {
 
                     // if it's group end, we push it to filteredModel[];
-                    if ( typeof $scope.localModel[ i ][ $scope.groupProperty ] !== 'undefined' && $scope.localModel[ i ][ $scope.groupProperty ] === false ) {
+                    if ( typeof $scope.localModel[ i ][ $scope.groupProperty ] !== "undefined" && $scope.localModel[ i ][ $scope.groupProperty ] === false ) {
                         $scope.filteredModel.push( $scope.localModel[ i ] );
                     }
                     
                     // if it's data 
                     var gotData = false;
-                    if ( typeof $scope.localModel[ i ][ $scope.groupProperty ] === 'undefined' ) {                        
+                    if ( typeof $scope.localModel[ i ][ $scope.groupProperty ] === "undefined" ) {                        
                         
                         // If we set the search-key attribute, we use this loop. 
-                        if ( typeof attrs.searchProperty !== 'undefined' && $scope.searchProperty !== '' ) {
+                        if ( typeof attrs.searchProperty !== "undefined" && $scope.searchProperty !== "" ) {
 
                             for (var key in $scope.localModel[ i ]  ) {
                                 if ( 
-                                    typeof $scope.localModel[ i ][ key ] !== 'boolean'
+                                    typeof $scope.localModel[ i ][ key ] !== "boolean"
                                     && String( $scope.localModel[ i ][ key ] ).toUpperCase().indexOf( $scope.inputLabel.labelFilter.toUpperCase() ) >= 0                                     
                                     && $scope.searchProperty.indexOf( key ) > -1
                                 ) {
@@ -236,7 +236,7 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                         else {
                             for ( var key in $scope.localModel[ i ]  ) {
                                 if ( 
-                                    typeof $scope.localModel[ i ][ key ] !== 'boolean'
+                                    typeof $scope.localModel[ i ][ key ] !== "boolean"
                                     && String( $scope.localModel[ i ][ key ] ).toUpperCase().indexOf( $scope.inputLabel.labelFilter.toUpperCase() ) >= 0                                     
                                 ) {
                                     gotData = true;
@@ -252,9 +252,9 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                     }
 
                     // if it's group start
-                    if ( typeof $scope.localModel[ i ][ $scope.groupProperty ] !== 'undefined' && $scope.localModel[ i ][ $scope.groupProperty ] === true ) {
+                    if ( typeof $scope.localModel[ i ][ $scope.groupProperty ] !== "undefined" && $scope.localModel[ i ][ $scope.groupProperty ] === true ) {
 
-                        if ( typeof $scope.filteredModel[ $scope.filteredModel.length - 1 ][ $scope.groupProperty ] !== 'undefined' 
+                        if ( typeof $scope.filteredModel[ $scope.filteredModel.length - 1 ][ $scope.groupProperty ] !== "undefined" 
                                 && $scope.filteredModel[ $scope.filteredModel.length - 1 ][ $scope.groupProperty ] === false ) {
                             $scope.filteredModel.pop();
                         }
@@ -276,8 +276,8 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                         var filterObj = [];
 
                         angular.forEach( $scope.filteredModel, function( value, key ) {
-                            if ( typeof value !== 'undefined' ) {                   
-                                if ( typeof value[ $scope.groupProperty ] === 'undefined' ) {                                                                    
+                            if ( typeof value !== "undefined" ) {                   
+                                if ( typeof value[ $scope.groupProperty ] === "undefined" ) {                                                                    
                                     var tempObj = angular.copy( value );
                                     var index = filterObj.push( tempObj );                                
                                     delete filterObj[ index - 1 ][ $scope.indexProperty ];
@@ -302,13 +302,13 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
             $scope.getFormElements = function() {                                     
                 formElements = [];
                 // Get helper - select & reset buttons
-                var selectButtons = element.children().children().next().children().children()[ 0 ].getElementsByTagName( 'button' );
+                var selectButtons = element.children().children().next().children().children()[ 0 ].getElementsByTagName( "button" );
                 // Get helper - search
-                var inputField = element.children().children().next().children().children().next()[ 0 ].getElementsByTagName( 'input' );
+                var inputField = element.children().children().next().children().children().next()[ 0 ].getElementsByTagName( "input" );
                 // Get helper - clear button
-                var clearButton = element.children().children().next().children().children().next()[ 0 ].getElementsByTagName( 'button' );
+                var clearButton = element.children().children().next().children().children().next()[ 0 ].getElementsByTagName( "button" );
                 // Get checkboxes
-                var checkboxes = element.children().children().next().children().next()[ 0 ].getElementsByTagName( 'input' );
+                var checkboxes = element.children().children().next().children().next()[ 0 ].getElementsByTagName( "input" );
                 // Push them into global array formElements[] 
                 for ( var i = 0; i < selectButtons.length ; i++ )   { formElements.push( selectButtons[ i ] ); }
                 for ( var i = 0; i < inputField.length ; i++ )      { formElements.push( inputField[ i ] ); }
@@ -319,12 +319,12 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
 
             // check if an item has $scope.groupProperty (be it true or false)
             $scope.isGroupMarker = function( item , type ) {
-                if ( typeof item[ $scope.groupProperty ] !== 'undefined' && item[ $scope.groupProperty ] === type ) return true; 
+                if ( typeof item[ $scope.groupProperty ] !== "undefined" && item[ $scope.groupProperty ] === type ) return true; 
                 return false;
             }
 
             $scope.removeGroupEndMarker = function( item ) {
-                if ( typeof item[ $scope.groupProperty ] !== 'undefined' && item[ $scope.groupProperty ] === false ) return false; 
+                if ( typeof item[ $scope.groupProperty ] !== "undefined" && item[ $scope.groupProperty ] === false ) return false; 
                 return true;
             }
             
@@ -332,28 +332,28 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
             // Show or hide a helper element 
             $scope.displayHelper = function( elementString ) {
 
-                if ( attrs.selectionMode && $scope.selectionMode.toUpperCase() === 'SINGLE' ) {
+                if ( attrs.selectionMode && $scope.selectionMode.toUpperCase() === "SINGLE" ) {
 
                     switch( elementString.toUpperCase() ) {
-                        case 'ALL':                                                        
+                        case "ALL":                                                        
                             return false;                    
                             break;
-                        case 'NONE':                            
+                        case "NONE":                            
                             return false;
                             break;
-                        case 'RESET':
-                            if ( typeof attrs.helperElements === 'undefined' ) {
+                        case "RESET":
+                            if ( typeof attrs.helperElements === "undefined" ) {
                                 return true;                    
                             }
-                            else if ( attrs.helperElements && $scope.helperElements.toUpperCase().indexOf( 'RESET' ) >= 0 ) {
+                            else if ( attrs.helperElements && $scope.helperElements.toUpperCase().indexOf( "RESET" ) >= 0 ) {
                                 return true;
                             }                            
                             break;
-                        case 'FILTER':
-                            if ( typeof attrs.helperElements === 'undefined' ) {
+                        case "FILTER":
+                            if ( typeof attrs.helperElements === "undefined" ) {
                                 return true;                    
                             }                            
-                            if ( attrs.helperElements && $scope.helperElements.toUpperCase().indexOf( 'FILTER' ) >= 0 ) {
+                            if ( attrs.helperElements && $scope.helperElements.toUpperCase().indexOf( "FILTER" ) >= 0 ) {
                                 return true;
                             }
                             break;                    
@@ -365,7 +365,7 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                 }
 
                 else {
-                    if ( typeof attrs.helperElements === 'undefined' ) {
+                    if ( typeof attrs.helperElements === "undefined" ) {
                         return true;                    
                     }
                     if ( attrs.helperElements && $scope.helperElements.toUpperCase().indexOf( elementString.toUpperCase() ) >= 0 ) {
@@ -382,17 +382,17 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                 e.stopPropagation();
 
                 // if the directive is globaly disabled, do nothing
-                if ( typeof attrs.disableProperty !== 'undefined' && item[ $scope.disableProperty ] === true ) {                                        
+                if ( typeof attrs.disableProperty !== "undefined" && item[ $scope.disableProperty ] === true ) {                                        
                     return false;
                 }
 
                 // if item is disabled, do nothing
-                if ( typeof attrs.isDisabled !== 'undefined' && $scope.isDisabled === true ) {                        
+                if ( typeof attrs.isDisabled !== "undefined" && $scope.isDisabled === true ) {                        
                     return false;
                 }                                
 
                 // if end group marker is clicked, do nothing
-                if ( typeof item[ $scope.groupProperty ] !== 'undefined' && item[ $scope.groupProperty ] === false ) {
+                if ( typeof item[ $scope.groupProperty ] !== "undefined" && item[ $scope.groupProperty ] === false ) {
                     return false;
                 }                
 
@@ -402,10 +402,10 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                 //      how it works:
                 //      - if, in a group, there are items which are not selected, then they all will be selected
                 //      - if, in a group, all items are selected, then they all will be de-selected                
-                if ( typeof item[ $scope.groupProperty ] !== 'undefined' && item[ $scope.groupProperty ] === true ) {                                  
+                if ( typeof item[ $scope.groupProperty ] !== "undefined" && item[ $scope.groupProperty ] === true ) {                                  
 
                     // this is only for multiple selection, so if selection mode is single, do nothing
-                    if ( attrs.selectionMode && $scope.selectionMode.toUpperCase() === 'SINGLE' ) {
+                    if ( attrs.selectionMode && $scope.selectionMode.toUpperCase() === "SINGLE" ) {
                         return false;
                     }
                     
@@ -428,7 +428,7 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                             break;
                         }
                     
-                        if ( typeof $scope.filteredModel[ i ][ $scope.groupProperty ] !== 'undefined' && $scope.filteredModel[ i ][ $scope.groupProperty ] === true ) {
+                        if ( typeof $scope.filteredModel[ i ][ $scope.groupProperty ] !== "undefined" && $scope.filteredModel[ i ][ $scope.groupProperty ] === true ) {
                             
                             // To cater multi level grouping
                             if ( tempArr.length === 0 ) {
@@ -438,7 +438,7 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                         }                                                
 
                         // if group end
-                        else if ( typeof $scope.filteredModel[ i ][ $scope.groupProperty ] !== 'undefined' && $scope.filteredModel[ i ][ $scope.groupProperty ] === false ) {
+                        else if ( typeof $scope.filteredModel[ i ][ $scope.groupProperty ] !== "undefined" && $scope.filteredModel[ i ][ $scope.groupProperty ] === false ) {
 
                             nestLevel = nestLevel - 1;                            
 
@@ -450,7 +450,7 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                                 endIndex = i;
 
                                 for ( j = 0; j < tempArr.length ; j++ ) {                                
-                                    if ( typeof tempArr[ j ][ $scope.tickProperty ] !== 'undefined' &&  tempArr[ j ][ $scope.tickProperty ] === false ) {
+                                    if ( typeof tempArr[ j ][ $scope.tickProperty ] !== "undefined" &&  tempArr[ j ][ $scope.tickProperty ] === false ) {
                                         allTicked = false;
                                         break;
                                     }
@@ -458,8 +458,8 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
 
                                 if ( allTicked === true ) {
                                     for ( j = startIndex; j <= endIndex ; j++ ) {
-                                        if ( typeof $scope.filteredModel[ j ][ $scope.groupProperty ] === 'undefined' ) {
-                                            if ( typeof attrs.disableProperty === 'undefined' ) {
+                                        if ( typeof $scope.filteredModel[ j ][ $scope.groupProperty ] === "undefined" ) {
+                                            if ( typeof attrs.disableProperty === "undefined" ) {
                                                 $scope.filteredModel[ j ][ $scope.tickProperty ] = false;
                                                 // we refresh input model as well
                                                 inputModelIndex = $scope.filteredModel[ j ][ $scope.indexProperty ];
@@ -477,8 +477,8 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
 
                                 else {
                                     for ( j = startIndex; j <= endIndex ; j++ ) {
-                                        if ( typeof $scope.filteredModel[ j ][ $scope.groupProperty ] === 'undefined' ) {
-                                            if ( typeof attrs.disableProperty === 'undefined' ) {
+                                        if ( typeof $scope.filteredModel[ j ][ $scope.groupProperty ] === "undefined" ) {
+                                            if ( typeof attrs.disableProperty === "undefined" ) {
                                                 $scope.filteredModel[ j ][ $scope.tickProperty ] = true;                                                
                                                 // we refresh input model as well
                                                 inputModelIndex = $scope.filteredModel[ j ][ $scope.indexProperty ];
@@ -508,7 +508,7 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                 else {
 
                     // If it's single selection mode
-                    if ( attrs.selectionMode && $scope.selectionMode.toUpperCase() === 'SINGLE' ) {
+                    if ( attrs.selectionMode && $scope.selectionMode.toUpperCase() === "SINGLE" ) {
                         
                         // first, set everything to false
                         for( i=0 ; i < $scope.filteredModel.length ; i++) {                            
@@ -567,8 +567,8 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                 $scope.outputModel = [];
 
                 angular.forEach( $scope.localModel, function( value, key ) {
-                    if ( typeof value !== 'undefined' ) {                   
-                        if ( typeof value[ $scope.groupProperty ] === 'undefined' ) {
+                    if ( typeof value !== "undefined" ) {                   
+                        if ( typeof value[ $scope.groupProperty ] === "undefined" ) {
                             if ( value[ $scope.tickProperty ] === true ) {
                                 // selectedItems.push( value );                               
                                 var temp = angular.copy( value );
@@ -584,7 +584,7 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
             // refresh button label
             $scope.refreshButton = function() {
 
-                $scope.varButtonLabel   = '';                
+                $scope.varButtonLabel   = "";                
                 var ctr                 = 0;                  
 
                 // refresh button label...
@@ -594,7 +594,7 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                 }
                 else {                
                     var tempMaxLabels = $scope.outputModel.length;
-                    if ( typeof $scope.maxLabels !== 'undefined' && $scope.maxLabels !== '' ) {
+                    if ( typeof $scope.maxLabels !== "undefined" && $scope.maxLabels !== "" ) {
                         tempMaxLabels = $scope.maxLabels;
                     }
 
@@ -607,9 +607,9 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                     }                
                 
                     angular.forEach( $scope.outputModel, function( value, key ) {
-                        if ( typeof value !== 'undefined' ) {                        
+                        if ( typeof value !== "undefined" ) {                        
                             if ( ctr < tempMaxLabels ) {                            
-                                $scope.varButtonLabel += ( $scope.varButtonLabel.length > 0 ? '</div>, <div class="buttonLabel">' : '<div class="buttonLabel">') + $scope.writeLabel( value, 'buttonLabel' );
+                                $scope.varButtonLabel += ( $scope.varButtonLabel.length > 0 ? '</div>, <div class="buttonLabel">' : '<div class="buttonLabel">') + $scope.writeLabel( value, "buttonLabel" );
                             }
                             ctr++;
                         }
@@ -618,9 +618,9 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                     if ( $scope.more === true ) {
                         // https://github.com/isteven/angular-multi-select/pull/16
                         if (tempMaxLabels > 0) {
-                            $scope.varButtonLabel += ', ... ';
+                            $scope.varButtonLabel += ", ... ";
                         }
-                        $scope.varButtonLabel += '(' + $scope.outputModel.length + ')';                        
+                        $scope.varButtonLabel += "(" + $scope.outputModel.length + ")";                        
                     }
                 }
                 $scope.varButtonLabel = $sce.trustAsHtml( $scope.varButtonLabel + '<span class="caret"></span>' );                
@@ -630,7 +630,7 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
             // Take note that the granular control has higher priority.
             $scope.itemIsDisabled = function( item ) {
                 
-                if ( typeof attrs.disableProperty !== 'undefined' && item[ $scope.disableProperty ] === true ) {                                        
+                if ( typeof attrs.disableProperty !== "undefined" && item[ $scope.disableProperty ] === true ) {                                        
                     return true;
                 }
                 else {             
@@ -648,15 +648,15 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
             $scope.writeLabel = function( item, type ) {
                                 
                 // type is either 'itemLabel' or 'buttonLabel'
-                var temp    = $scope[ type ].split( ' ' );                    
-                var label   = '';
+                var temp    = $scope[ type ].split( " " );                    
+                var label   = "";
 
                 angular.forEach( temp, function( value, key ) {                    
-                    item[ value ] && ( label += '&nbsp;' + value.split( '.' ).reduce( function( prev, current ) {
+                    item[ value ] && ( label += "&nbsp;" + value.split( "." ).reduce( function( prev, current ) {
                         return prev[ current ]; 
                     }, item ));        
                 });
-                if ( type.toUpperCase() === 'BUTTONLABEL' ) {
+                if ( type.toUpperCase() === "BUTTONLABEL" ) {
                     return label;
                 }
                 return $sce.trustAsHtml( label );
@@ -669,23 +669,23 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                 var clickedEl = element.children()[0];
 
                 // Just to make sure.. had a bug where key events were recorded twice
-                angular.element( document ).off( 'click', $scope.externalClickListener );
-                angular.element( document ).off( 'keydown', $scope.keyboardListener );                                    
+                angular.element( document ).off( "click", $scope.externalClickListener );
+                angular.element( document ).off( "keydown", $scope.keyboardListener );                                    
 
                 // clear filter
-                $scope.inputLabel.labelFilter = '';                
+                $scope.inputLabel.labelFilter = "";                
                 $scope.updateFilter();                                
 
                 // The idea below was taken from another multi-select directive - https://github.com/amitava82/angular-multiselect 
                 // His version is awesome if you need a more simple multi-select approach.                                
 
                 // close
-                if ( angular.element( checkBoxLayer ).hasClass( 'show' )) {                         
+                if ( angular.element( checkBoxLayer ).hasClass( "show" )) {                         
 
-                    angular.element( checkBoxLayer ).removeClass( 'show' );                    
-                    angular.element( clickedEl ).removeClass( 'buttonClicked' );                    
-                    angular.element( document ).off( 'click', $scope.externalClickListener );
-                    angular.element( document ).off( 'keydown', $scope.keyboardListener );                                    
+                    angular.element( checkBoxLayer ).removeClass( "show" );                    
+                    angular.element( clickedEl ).removeClass( "buttonClicked" );                    
+                    angular.element( document ).off( "click", $scope.externalClickListener );
+                    angular.element( document ).off( "keydown", $scope.keyboardListener );                                    
 
                     // clear the focused element;
                     $scope.removeFocusStyle( $scope.tabIndex );
@@ -704,31 +704,31 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                     helperItems = [];
                     helperItemsLength = 0;
 
-                    angular.element( checkBoxLayer ).addClass( 'show' );
-                    angular.element( clickedEl ).addClass( 'buttonClicked' );       
+                    angular.element( checkBoxLayer ).addClass( "show" );
+                    angular.element( clickedEl ).addClass( "buttonClicked" );       
 
                     // Attach change event listener on the input filter. 
                     // We need this because ng-change is apparently not an event listener.                    
-                    angular.element( document ).on( 'click', $scope.externalClickListener );
-                    angular.element( document ).on( 'keydown', $scope.keyboardListener );  
+                    angular.element( document ).on( "click", $scope.externalClickListener );
+                    angular.element( document ).on( "keydown", $scope.keyboardListener );  
 
                     // to get the initial tab index, depending on how many helper elements we have. 
                     // priority is to always focus it on the input filter 
                     $scope.getFormElements();
                     $scope.tabIndex = 0;
 
-                    var helperContainer = angular.element( element[ 0 ].querySelector( '.helperContainer' ) )[0];                
+                    var helperContainer = angular.element( element[ 0 ].querySelector( ".helperContainer" ) )[0];                
                     
-                    if ( typeof helperContainer !== 'undefined' ) {
-                        for ( var i = 0; i < helperContainer.getElementsByTagName( 'BUTTON' ).length ; i++ ) {
-                            helperItems[ i ] = helperContainer.getElementsByTagName( 'BUTTON' )[ i ];
+                    if ( typeof helperContainer !== "undefined" ) {
+                        for ( var i = 0; i < helperContainer.getElementsByTagName( "BUTTON" ).length ; i++ ) {
+                            helperItems[ i ] = helperContainer.getElementsByTagName( "BUTTON" )[ i ];
                         }
-                        helperItemsLength = helperItems.length + helperContainer.getElementsByTagName( 'INPUT' ).length;
+                        helperItemsLength = helperItems.length + helperContainer.getElementsByTagName( "INPUT" ).length;
                     }
                     
                     // focus on the filter element on open. 
-                    if ( element[ 0 ].querySelector( '.inputFilter' ) ) {                        
-                        element[ 0 ].querySelector( '.inputFilter' ).focus();    
+                    if ( element[ 0 ].querySelector( ".inputFilter" ) ) {                        
+                        element[ 0 ].querySelector( ".inputFilter" ).focus();    
                         $scope.tabIndex = $scope.tabIndex + helperItemsLength - 2;
                     }
                     // if there's no filter then just focus on the first checkbox item
@@ -751,10 +751,10 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                     }
                 }
 
-                angular.element( checkBoxLayer.previousSibling ).removeClass( 'buttonClicked' );                    
-                angular.element( checkBoxLayer ).removeClass( 'show' );
-                angular.element( document ).off( 'click', $scope.externalClickListener ); 
-                angular.element( document ).off( 'keydown', $scope.keyboardListener );                
+                angular.element( checkBoxLayer.previousSibling ).removeClass( "buttonClicked" );                    
+                angular.element( checkBoxLayer ).removeClass( "show" );
+                angular.element( document ).off( "click", $scope.externalClickListener ); 
+                angular.element( document ).off( "keydown", $scope.keyboardListener );                
                 
                 // close callback                
                 $timeout( function() {
@@ -772,10 +772,10 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                 $scope.tabIndex = helperIndex;
 
                 switch( type.toUpperCase() ) {
-                    case 'ALL':
+                    case "ALL":
                         angular.forEach( $scope.filteredModel, function( value, key ) {                            
-                            if ( typeof value !== 'undefined' && value[ $scope.disableProperty ] !== true ) {                                
-                                if ( typeof value[ $scope.groupProperty ] === 'undefined' ) {                                
+                            if ( typeof value !== "undefined" && value[ $scope.disableProperty ] !== true ) {                                
+                                if ( typeof value[ $scope.groupProperty ] === "undefined" ) {                                
                                     value[ $scope.tickProperty ] = true;
                                 }
                             }
@@ -784,10 +784,10 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                         $scope.refreshButton();                                                  
                         $scope.onSelectAll();                                                
                         break;
-                    case 'NONE':
+                    case "NONE":
                         angular.forEach( $scope.filteredModel, function( value, key ) {
-                            if ( typeof value !== 'undefined' && value[ $scope.disableProperty ] !== true ) {                        
-                                if ( typeof value[ $scope.groupProperty ] === 'undefined' ) {                                
+                            if ( typeof value !== "undefined" && value[ $scope.disableProperty ] !== true ) {                        
+                                if ( typeof value[ $scope.groupProperty ] === "undefined" ) {                                
                                     value[ $scope.tickProperty ] = false;
                                 }
                             }
@@ -796,9 +796,9 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                         $scope.refreshButton();                                                                          
                         $scope.onSelectNone();                        
                         break;
-                    case 'RESET':            
+                    case "RESET":            
                         angular.forEach( $scope.filteredModel, function( value, key ) {                            
-                            if ( typeof value[ $scope.groupProperty ] === 'undefined' && typeof value !== 'undefined' && value[ $scope.disableProperty ] !== true ) {                        
+                            if ( typeof value[ $scope.groupProperty ] === "undefined" && typeof value !== "undefined" && value[ $scope.disableProperty ] !== true ) {                        
                                 var temp = value[ $scope.indexProperty ];                                
                                 value[ $scope.tickProperty ] = $scope.backUp[ temp ][ $scope.tickProperty ];
                             }
@@ -807,11 +807,11 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                         $scope.refreshButton();                                                                          
                         $scope.onReset();                        
                         break;
-                    case 'CLEAR':
+                    case "CLEAR":
                         $scope.tabIndex = $scope.tabIndex + 1;
                         $scope.onClear();    
                         break;
-                    case 'FILTER':                        
+                    case "FILTER":                        
                         $scope.tabIndex = helperItems.length - 1;
                         break;
                     default:                        
@@ -820,8 +820,8 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
 
             // just to create a random variable name                
             function genRandomString( length ) {                
-                var possible    = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-                var temp        = '';
+                var possible    = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+                var temp        = "";
                 for( var i=0; i < length; i++ ) {
                      temp += possible.charAt( Math.floor( Math.random() * possible.length ));
                 }
@@ -907,7 +907,7 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                     formElements[ $scope.tabIndex ].focus();    
                     var actEl = document.activeElement;  
                     
-                    if ( actEl.type.toUpperCase() === 'CHECKBOX' ) {                                                   
+                    if ( actEl.type.toUpperCase() === "CHECKBOX" ) {                                                   
                         $scope.setFocusStyle( $scope.tabIndex );
                         $scope.removeFocusStyle( prevTabIndex );
                     }                    
@@ -923,12 +923,12 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
 
             // set (add) CSS style on selected row
             $scope.setFocusStyle = function( tabIndex ) {                                
-                angular.element( formElements[ tabIndex ] ).parent().parent().parent().addClass( 'multiSelectFocus' );                        
+                angular.element( formElements[ tabIndex ] ).parent().parent().parent().addClass( "multiSelectFocus" );                        
             }
 
             // remove CSS style on selected row
             $scope.removeFocusStyle = function( tabIndex ) {
-                angular.element( formElements[ tabIndex ] ).parent().parent().parent().removeClass( 'multiSelectFocus' );
+                angular.element( formElements[ tabIndex ] ).parent().parent().parent().removeClass( "multiSelectFocus" );
             }
 
             /*****************************************************
@@ -939,13 +939,13 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
             
             // Unfortunately I need to add these grouping properties
             var tempStr = genRandomString( 5 );
-            $scope.indexProperty = 'idx_' + tempStr;
-            $scope.spacingProperty = 'spc_' + tempStr;         
+            $scope.indexProperty = "idx_" + tempStr;
+            $scope.spacingProperty = "spc_" + tempStr;         
 
             // set orientation css            
-            if ( typeof attrs.orientation !== 'undefined' ) {
+            if ( typeof attrs.orientation !== "undefined" ) {
 
-                if ( attrs.orientation.toUpperCase() === 'HORIZONTAL' ) {                    
+                if ( attrs.orientation.toUpperCase() === "HORIZONTAL" ) {                    
                     $scope.orientationH = true;
                     $scope.orientationV = false;
                 }
@@ -960,35 +960,35 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
             checkBoxLayer = element.children().children().next()[0];
 
             // set max-height property if provided
-            if ( typeof attrs.maxHeight !== 'undefined' ) {                
+            if ( typeof attrs.maxHeight !== "undefined" ) {                
                 var layer = element.children().children().children()[0];
                 angular.element( layer ).attr( "style", "height:" + $scope.maxHeight + "; overflow-y:scroll;" );                                
             }
 
             // icons.. I guess you can use <img> tag here if you want to. 
             var icon        = {};
-            icon.selectAll  = '&#10003;'    // a tick icon
-            icon.selectNone = '&times;'     // x icon
-            icon.reset      = '&#8630;'     // undo icon
+            icon.selectAll  = "&#10003;"    // a tick icon
+            icon.selectNone = "&times;"     // x icon
+            icon.reset      = "&#8630;"     // undo icon
 
             // configurable button labels                       
-            if ( typeof attrs.translation !== 'undefined' ) {
-                $scope.lang.selectAll       = $sce.trustAsHtml( icon.selectAll  + '&nbsp;&nbsp;' + $scope.translation.selectAll );
-                $scope.lang.selectNone      = $sce.trustAsHtml( icon.selectNone + '&nbsp;&nbsp;' + $scope.translation.selectNone );
-                $scope.lang.reset           = $sce.trustAsHtml( icon.reset      + '&nbsp;&nbsp;' + $scope.translation.reset );
+            if ( typeof attrs.translation !== "undefined" ) {
+                $scope.lang.selectAll       = $sce.trustAsHtml( icon.selectAll  + "&nbsp;&nbsp;" + $scope.translation.selectAll );
+                $scope.lang.selectNone      = $sce.trustAsHtml( icon.selectNone + "&nbsp;&nbsp;" + $scope.translation.selectNone );
+                $scope.lang.reset           = $sce.trustAsHtml( icon.reset      + "&nbsp;&nbsp;" + $scope.translation.reset );
                 $scope.lang.search          = $scope.translation.search;                
                 $scope.lang.nothingSelected = $sce.trustAsHtml( $scope.translation.nothingSelected );                
             }
             else {
-                $scope.lang.selectAll       = $sce.trustAsHtml( icon.selectAll  + '&nbsp;&nbsp;Select All' );                
-                $scope.lang.selectNone      = $sce.trustAsHtml( icon.selectNone + '&nbsp;&nbsp;Select None' );
-                $scope.lang.reset           = $sce.trustAsHtml( icon.reset      + '&nbsp;&nbsp;Reset' );
-                $scope.lang.search          = 'Search...';
-                $scope.lang.nothingSelected = 'None Selected';                
+                $scope.lang.selectAll       = $sce.trustAsHtml( icon.selectAll  + "&nbsp;&nbsp;Select All" );                
+                $scope.lang.selectNone      = $sce.trustAsHtml( icon.selectNone + "&nbsp;&nbsp;Select None" );
+                $scope.lang.reset           = $sce.trustAsHtml( icon.reset      + "&nbsp;&nbsp;Reset" );
+                $scope.lang.search          = "Search...";
+                $scope.lang.nothingSelected = "None Selected";                
             }
                 
             // min length of keyword to trigger the filter function
-            if ( typeof attrs.MinSearchLength !== 'undefined' && parseInt( attrs.MinSearchLength ) > 0 ) {
+            if ( typeof attrs.MinSearchLength !== "undefined" && parseInt( attrs.MinSearchLength ) > 0 ) {
                 vMinSearchLength = Math.floor( parseInt( attrs.MinSearchLength ) );
             }
 
@@ -1001,7 +1001,7 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
             // watch1, for changes in input model property
             // updates multi-select when user select/deselect a single checkbox programatically
             // https://github.com/isteven/angular-multi-select/issues/8
-            $scope.$watch( 'inputModel' , function( newVal ) {                                 
+            $scope.$watch( "inputModel" , function( newVal ) {                                 
                 if ( newVal ) {                    
                     $scope.localModel = angular.copy( $scope.inputModel );                   
                     $scope.refreshOutputModel();                                    
@@ -1011,7 +1011,7 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
 
             // watch2 for changes in input model as a whole
             // this on updates the multi-select when a user load a whole new input-model. We also update the $scope.backUp variable
-            $scope.$watch( 'localModel' , function( newVal ) {  
+            $scope.$watch( "localModel" , function( newVal ) {  
                 if ( newVal ) {
                     $scope.backUp = angular.copy( $scope.localModel );    
                     $scope.updateFilter();
@@ -1023,19 +1023,19 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
             });            
 
             // watch for changes in directive state (disabled or enabled)
-            $scope.$watch( 'isDisabled' , function( newVal ) {         
+            $scope.$watch( "isDisabled" , function( newVal ) {         
                 $scope.isDisabled = newVal;                               
             });            
 
             // this is for touch enabled devices. We don't want to hide checkboxes on scroll. 
-            angular.element( document ).on( 'touchstart', function( e ) { 
+            angular.element( document ).on( "touchstart", function( e ) { 
                 $scope.$apply( function() {
                     scrolled = false;
                 }); 
             });
             
             // also for touch enabled devices
-            angular.element( document ).on( 'touchmove', function( e ) { 
+            angular.element( document ).on( "touchmove", function( e ) { 
                 $scope.$apply( function() {
                     scrolled = true;                
                 });

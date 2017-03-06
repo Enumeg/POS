@@ -10,7 +10,7 @@ namespace POS.Portal.Controllers
     {
         public ActionResult Index()
         {
-            CookieHelper.TenantId = 4;
+            //CookieHelper.TenantId = 4;
             return View();          
         }
 

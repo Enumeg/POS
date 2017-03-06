@@ -1,13 +1,13 @@
-﻿'use strict';
+﻿"use strict";
 /* Controllers */
 
-define(['app'], function (app) {
-    app.controller('uiHeaderController', ['$scope', 'uiHeaderService', '$timeout',
+define(["app"], function (app) {
+    app.controller("uiHeaderController", ["$scope", "uiHeaderService", "$timeout",
         function ($scope, uiHeaderService, $timeout) {
             var timer;
             $scope.updateStatus = false;
             $("#header-message").hide();
-            $scope.$on('messageUpdated', function () {
+            $scope.$on("messageUpdated", function () {
                 switch (uiHeaderService.messageType) {
                     case "success":
                         processMessage(uiHeaderService.message, "alert-success");
@@ -36,7 +36,7 @@ define(['app'], function (app) {
             function startTimer() {
                 timer = $timeout(function () {
                     $timeout.cancel(timer);
-                    $scope.message = '';
+                    $scope.message = "";
                     $("#header-message").slideUp();
                     $scope.showMessage = false;
                 }, 3000);
