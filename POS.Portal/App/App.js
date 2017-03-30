@@ -2,7 +2,7 @@
 
 define(["Services/routeResolver"], function () {
 
-    var app = angular.module("POS", ["ngRoute", "ngCookies", "routeResolverServices", "ui.bootstrap", "angular-loading-bar", "angucomplete" ,"isteven-multi-select"]);
+    var app = angular.module("POS", ["ngRoute", "ngCookies", "routeResolverServices", "ui.bootstrap", "angular-loading-bar", "angucomplete-alt", "isteven-multi-select"]);
     app.run(function ($location, $rootScope, resource) {
             resource.fillAsync(function() {
                 $rootScope.$on("$routeChangeSuccess", function(event, current) {

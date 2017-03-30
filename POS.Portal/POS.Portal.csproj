@@ -240,6 +240,7 @@
     <Content Include="App\Controllers\Supplier\SupplierController.js" />
     <Content Include="App\Controllers\uiHeaderController.js" />
     <Content Include="App\Main.js" />
+    <Content Include="App\Services\angucomplete-alt.js" />
     <Content Include="App\Services\angucomplete.js" />
     <Content Include="App\Services\contenteditable.js" />
     <Content Include="App\Services\ConvertToNumber.js" />

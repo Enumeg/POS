@@ -126,6 +126,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Point.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Product\Product.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Product.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Property\Property.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -179,6 +184,11 @@
     <EmbeddedResource Include="Resources\Point\Point.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Point.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>POS.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Product\Product.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Product.Designer.cs</LastGenOutput>
       <CustomToolNamespace>POS.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Property\Property.resx">

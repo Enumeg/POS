@@ -3,6 +3,7 @@ using System.Linq;
 using POS.Domain.Entities;
 using POS.Domain.Infrastructure;
 using System.Data.Entity;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using POS.Domain.Interfaces;
 
@@ -20,7 +21,7 @@ namespace POS.Domain.Services
             return await CrudService.Update(property, property.Id, p => p.Name == property.Name && p.Id != property.Id);
         }
 
-        async Task<bool?> IPropertiesService.DeleteProperty(int propertyId, bool removeRelatedEntities )
+        async Task<bool?> IPropertiesService.DeleteProperty(int propertyId, bool removeRelatedEntities)
         {
             var property = Context.Properties.Include(u => u.Products).FirstOrDefault(c => c.Id == propertyId);
             if (property == null) return false;
@@ -43,5 +44,13 @@ namespace POS.Domain.Services
         {
             return await Context.Properties.ToListAsync();
         }
+
+        async Task<List<Property>> IPropertiesService.GetCategoryProperties(int categoryId)
+        {
+            var category = await Context.Categories.Include(c => c.Properties).FirstOrDefaultAsync(c => c.Id == categoryId);
+            var properties = category.Properties.Select(p => p.Id);
+            return await Context.Properties.Include(p => p.Products).Where(p => properties.Contains(p.Id)).ToListAsync();
+        }
+
     }
 }

@@ -17,12 +17,25 @@ namespace POS.Domain.Services
 
         async Task<bool?> IProductsService.UpdateProduct(Product product)
         {
-            return await CrudService.Update(product, product.Id, c => c.Name == product.Name && c.Id != product.Id);
+            var oldProduct = await Context.Products.FindAsync(product.Id);
+            if (oldProduct == null)
+                return null;
+            if (await Context.Products.AnyAsync(c => c.Name == product.Name && c.Id != product.Id))
+                return false;
+
+            Context.ProductProperties.RemoveRange(Context.ProductProperties.Where(p => p.ProductId == product.Id));
+            Context.ProductProperties.AddRange(product.Properties);
+            oldProduct.UnitId = product.UnitId;
+            oldProduct.BarCode = product.BarCode;
+            oldProduct.SalePrice = product.SalePrice;
+            oldProduct.Name = product.Name;
+            await Context.SaveChangesAsync();
+            return true;
         }
 
         async Task<bool?> IProductsService.DeleteProduct(int productId, bool removeRelatedEntities)
         {
-            var product = Context.Products.Include(p => p.TransactionDetails).Include(p=> p.TransfareDetails).Include(p=>p.Barcodes).Include(p=>p.Properties).FirstOrDefault(c => c.Id == productId);
+            var product = Context.Products.Include(p => p.TransactionDetails).Include(p => p.TransfareDetails).Include(p => p.Barcodes).Include(p => p.Properties).FirstOrDefault(c => c.Id == productId);
             if (product == null) return false;
             if (product.TransactionDetails.Count > 0)
                 if (removeRelatedEntities)

@@ -28,9 +28,21 @@ namespace POS.Domain.Services
             if (await Context.Categories.AnyAsync(c => c.Name == category.Name && c.Id != category.Id))
                 return false;
             oldCategory.Name = category.Name;
-            oldCategory.Properties.Where(e => category.Properties.All(p => p.Id != e.Id)).ToList().ForEach(p => oldCategory.Properties.Remove(p));
+            var products = await Context.Products.Where(p => p.CategoryId == category.Id).Select(p => p.Id).ToListAsync();
+
+            oldCategory.Properties.Where(e => category.Properties.All(p => p.Id != e.Id)).ToList().ForEach(p =>
+                        {
+                            Context.ProductProperties.RemoveRange(Context.ProductProperties.Where(pr => pr.PropertyId == p.Id && products.Contains(pr.ProductId)));
+                            oldCategory.Properties.Remove(p);
+                        });
             category.Properties.Where(e => oldCategory.Properties.All(p => p.Id != e.Id)).ToList().ForEach(p =>
             {
+                Context.ProductProperties.AddRange(products.Select(id => new ProductProperty
+                {
+                    ProductId = id,
+                    PropertyId = p.Id,
+                    Value = ""
+                }));
                 oldCategory.Properties.Add(p);
                 Context.Entry(p).State = EntityState.Unchanged;
             });

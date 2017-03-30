@@ -23,7 +23,7 @@ define(["app"], function (app) {
         };
         dataSource.getUrl = function (url, param) {
             if (param)
-                return $http.get(url, { param: param });
+                return $http.get(url, { params: param });
             else
                 return $http.get(url);
         };

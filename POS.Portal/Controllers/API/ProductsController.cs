@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -45,7 +46,7 @@ namespace POS.Portal.Controllers.API
                     return BadRequest(Common.Duplicated);
                 return Ok();
             }
-            catch
+            catch (Exception ex)
             {
                 return InternalServerError();
             }

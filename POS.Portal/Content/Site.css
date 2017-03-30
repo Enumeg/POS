@@ -354,12 +354,13 @@ select:disabled {
     padding: 5px;
     color: #000000;
     margin-bottom: 4px;
+    clear: both;
 }
 
-    .angucomplete-selected-row, .angucomplete-row:hover {
-        background-color: lightblue;
-        color: #ffffff;
-    }
+.angucomplete-selected-row {
+    background-color: lightblue;
+    color: #ffffff;
+}
 
 .angucomplete-image-holder {
     padding-top: 2px;

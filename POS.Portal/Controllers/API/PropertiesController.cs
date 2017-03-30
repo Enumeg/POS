@@ -26,7 +26,11 @@ namespace POS.Portal.Controllers.API
             return await _propertiesService.GetAllProperties();
         }
 
-
+        // GET: api/Properties/5
+        public async Task<List<Property>> GetProperties(int categoryId)
+        {
+            return await _propertiesService.GetCategoryProperties(categoryId);
+        }
         // PUT: api/Properties/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutProperty(Property property)

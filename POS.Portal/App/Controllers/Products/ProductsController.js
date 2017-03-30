@@ -6,19 +6,60 @@ define(["app"], function (app) {
         function ($scope, dataSource, $location) {
             $scope.products = [];
             $scope.product = {};
+            $scope.setValue = function (selected) {
+                this.$parent.property.Value = angular.isString(selected.originalObject) ? selected.originalObject : selected.originalObject.Value;
+            }
+            $scope.listProperties = function () {
+                dataSource.getUrl("/api/Properties", { categoryId: $scope.product.CategoryId }).success(function (list) {
+                    list.forEach(function (proprty) {
+                        $scope.product.Properties.push({
+                            PropertyId: proprty.Id,
+                            Name: proprty.Name,
+                            Values: proprty.Products,
+                            Value: ""
+                        });
+                    });
+                }).error(dataSource.error);
+
+            }
             //Create
             $scope.new = function () {
-                $scope.product = (1, 0, { Id: 0, Name: "", BarCode: "" });
+                $scope.product = (1, 0, { Id: 0, Name: "", BarCode: "", Properties: [] });
                 $("#productModal").modal("show");
             }
             //Edit
             $scope.edit = function () {
-                $scope.product = this.product;
-                $("#productModal").modal("show");
+                angular.extend($scope.product, this.product);
+                dataSource.getUrl("/api/Properties", { categoryId: $scope.product.CategoryId }).success(function (list) {
+                    list.forEach(function (proprty, index) {
+                        angular.extend($scope.product.Properties[index], { Name: proprty.Name, Values: proprty.Products, ProductId: $scope.product.Id });
+                        $scope.product.Properties[index].Property = null;
+                    });
+                    $("#productModal").modal("show");
+
+                }).error(dataSource.error);
+
+            }
+            $scope.add = function () {
+                var product = this.product;
+                $scope.product = { Id: 0, Name: product.Name, BarCode: product.BarCode,SalePrice : product.SalePrice, CategoryId: product.CategoryId, UnitId: product.UnitId, Properties: [] }
+                dataSource.getUrl("/api/Properties", { categoryId: $scope.product.CategoryId }).success(function (list) {
+                    list.forEach(function (proprty, index) {
+                        $scope.product.Properties.push({
+                            PropertyId: proprty.Id,
+                            Name: proprty.Name,
+                            Values: proprty.Products,
+                            Value: product.Properties[index].Value
+                        });
+                    });
+                    $("#productModal").modal("show");
+
+                }).error(dataSource.error);
+
             }
             //Delete
             $scope.delete = function () {
-                dataSource.delete(this.unit.Name, this.unit.Id, $scope.products, this.unit);
+                dataSource.delete(this.product.Name, this.product.Id, $scope.products, this.product);
             };
             //Cancel
             $scope.cancel = function () {
@@ -32,16 +73,20 @@ define(["app"], function (app) {
             //Save
             $scope.save = function () {
                 var scope = this;
-                if (!scope.unit.Id)//New unit
-                    dataSource.insert(scope.unit).success(function (data) {
-                        angular.extend(scope.unit, data);
-                        dataSource.success(scope.unit.Name);
-                        scope.editable = false;
+
+                if (!scope.product.Id)//New product
+                    dataSource.insert(scope.product).success(function (data) {
+                        dataSource.success(scope.product.Name);
+                        list();
+                        $("#productModal").modal("hide");
+
                     }).error(dataSource.error);
                 else
-                    dataSource.update(scope.unit).success(function () {
-                        dataSource.success(scope.unit.Name);
-                        scope.editable = false;
+                    dataSource.update(scope.product).success(function () {
+                        dataSource.success(scope.product.Name);
+                        list();
+                        $("#productModal").modal("hide");
+
                     }).error(dataSource.error);
             };
             //List
@@ -55,6 +100,12 @@ define(["app"], function (app) {
             //Initialize
             function initialize() {
                 dataSource.initialize("/api/Products");
+                dataSource.getUrl("/api/categories").success(function (list) {
+                    $scope.categories = list;
+                }).error(dataSource.error);
+                dataSource.getUrl("/api/units").success(function (list) {
+                    $scope.units = list;
+                }).error(dataSource.error);
                 $("#productModal").modal({ show: false });
                 list();
             };

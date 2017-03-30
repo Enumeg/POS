@@ -12,5 +12,6 @@ namespace POS.Domain.Interfaces
         Task<bool?> DeleteProperty(int propertyId, bool removeRelatedEntities = false);
         Task<Property> FindProperty(int propertyId);
         Task<List<Property>> GetAllProperties();
+        Task<List<Property>> GetCategoryProperties(int categoryId);
     }
 }

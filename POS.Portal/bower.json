@@ -1,6 +1,7 @@
 {
   "name": "myproject",
   "dependencies": {
-    "bootstrap-rtl": "~3.4.0"
+    "bootstrap-rtl": "~3.4.0",
+    "angucomplete-alt": "^3.0.0"
   }
 }

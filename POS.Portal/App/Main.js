@@ -10,7 +10,7 @@ require(
         "Services/dataSource",
         "Services/contenteditable",
         "Services/convertToNumber",
-        "Services/angucomplete",
+        "Services/angucomplete-alt",
         "Services/loading-bar",
         "Services/resources",
         "Services/uiHeaderService",
