@@ -1,10 +1,9 @@
 ﻿namespace POS.Domain.Entities
 {
-    public class TransferDetail
+    public class TransferDetail : ProductDetail
     {
-        public int Id { get; set; }
-        public int ProductId { get; set; }
-        public Product Product { get; set; }
-        public decimal Amount { get; set; }
+        public int TransferId { get; set; }
+        public virtual Transfer Transfer { get; set; }
+
     }
 }

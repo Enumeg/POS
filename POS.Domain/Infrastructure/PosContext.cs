@@ -38,14 +38,14 @@ namespace POS.Domain.Infrastructure
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<CustomerInstallment> CustomerInstallments { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<Installment> Installments { get; set; }
+        //public virtual DbSet<Installment> Installments { get; set; }
         public virtual DbSet<Point> Points { get; set; }
         public virtual DbSet<Purchase> Purchases { get; set; }
         public virtual DbSet<PurchaseDetail> PurchasesDetails { get; set; }
         public virtual DbSet<PurchaseBack> PurchasesBack { get; set; }
         public virtual DbSet<PurchaseBackDetail> PurchaseBackDetails { get; set; }
         public virtual DbSet<Sale> Sales { get; set; }
-        public virtual DbSet<SaleBack> SaleBacks { get; set; }   
+        public virtual DbSet<SaleBack> SaleBacks { get; set; }
         public virtual DbSet<SaleDetail> SaleDetails { get; set; }
         public virtual DbSet<SaleBackDetail> SaleBackDetails { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }

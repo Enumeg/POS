@@ -8,8 +8,12 @@ namespace POS.Domain.Entities
         {
             Properties = new List<ProductProperty>();
             Barcodes = new List<BarCode>();
-            TransactionDetails = new List<TransactionDetail>();
+            SaleDetails = new List<SaleDetail>();
+            SaleBackDetails = new List<SaleBackDetail>();
+            PurchaseDetails = new List<PurchaseDetail>();
+            PurchaseBackDetails = new List<PurchaseBackDetail>();
             TransfareDetails = new List<TransferDetail>();
+            DamagedDetails = new List<DamagedDetail>();
         }
         public int Id { get; set; }
         public string Name { get; set; }
@@ -21,8 +25,12 @@ namespace POS.Domain.Entities
         public virtual Unit Unit { get; set; }
         public virtual ICollection<ProductProperty> Properties { get; set; }
         public virtual ICollection<BarCode> Barcodes { get; set; }
-        public virtual ICollection<TransactionDetail> TransactionDetails { get; set; }
+        public virtual ICollection<SaleDetail> SaleDetails { get; set; }
+        public virtual ICollection<SaleBackDetail> SaleBackDetails { get; set; }
+        public virtual ICollection<PurchaseDetail> PurchaseDetails { get; set; }
+        public virtual ICollection<PurchaseBackDetail> PurchaseBackDetails { get; set; }
         public virtual ICollection<TransferDetail> TransfareDetails { get; set; }
+        public virtual ICollection<DamagedDetail> DamagedDetails { get; set; }
 
 
     }

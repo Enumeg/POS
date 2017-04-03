@@ -20,7 +20,7 @@ namespace POS.Domain.Test.Steps.Customers
         private ICustomersService _customersService;
         private int _insertedId;
         private bool? _updateCustomer = false;
-        private bool _deleteCustomer = false;
+        private bool? _deleteCustomer = false;
         private List<Customer> _customersLst;
 
         
@@ -52,15 +52,16 @@ namespace POS.Domain.Test.Steps.Customers
         [When(@"I Add Customer with the previous data")]
         public void WhenIAddCustomerWithThePreviousData()
         {
-            _insertedId = _customersService.AddCustomer(_customer);
-            
+            _customersService.AddCustomer(_customer).Wait();
+            _insertedId = _customer.Id;
+
         }
         
         [Then(@"I should Get the iserted id")]
         public void ThenIShouldGetTheIsertedId()
         {
 
-            Customer findedCustomer = _customersService.FindCustomerById(_customer.Id);
+            Customer findedCustomer = _customersService.FindCustomer(_customer.Id).Result;
 
             Assert.AreNotEqual(null, findedCustomer);
             
@@ -87,7 +88,8 @@ namespace POS.Domain.Test.Steps.Customers
         [When(@"I Add Customer with the Same data")]
         public void WhenIAddCustomerWithTheSameData()
         {
-            _insertedId = _customersService.AddCustomer(_customer);
+            _customersService.AddCustomer(_customer).Wait();
+            _insertedId = _customer.Id;
 
         }
 
@@ -95,7 +97,7 @@ namespace POS.Domain.Test.Steps.Customers
         public void ThenIShouldGetNull()
         {
 
-            Customer findedCustomer = _customersService.FindCustomerById(_customer.Id);
+            Customer findedCustomer = _customersService.FindCustomer(_customer.Id).Result;
 
             Assert.AreEqual(null, findedCustomer);
 
@@ -124,7 +126,7 @@ namespace POS.Domain.Test.Steps.Customers
         [When(@"I Update Customer with this New Data")]
         public void WhenIUpdateCustomerWithTheNewData()
         {
-            _updateCustomer = _customersService.UpdateCustomer(_customer);
+            _updateCustomer = _customersService.UpdateCustomer(_customer).Result;
 
         }
 
@@ -132,7 +134,7 @@ namespace POS.Domain.Test.Steps.Customers
         public void ThenIShouldGetSuccessWithTheNewData()
         {
 
-            Customer findedCustomer = _customersService.FindCustomerById(_customer.Id);
+            Customer findedCustomer = _customersService.FindCustomer(_customer.Id).Result;
 
             Assert.AreNotEqual(null, findedCustomer);
             Assert.AreEqual(_customer.Id, findedCustomer.Id);
@@ -159,7 +161,7 @@ namespace POS.Domain.Test.Steps.Customers
         [When(@"I Update Customer with this New Data and user name exist")]
         public void WhenIUpdateCustomerWithThisNewDataAndUserNameExist()
         {
-            _updateCustomer = _customersService.UpdateCustomer(_customer);
+            _updateCustomer = _customersService.UpdateCustomer(_customer).Result;
         }
 
         [Then(@"I should Get Failed With The New Data")]
@@ -182,7 +184,7 @@ namespace POS.Domain.Test.Steps.Customers
         [When(@"I Update Not Existing Customer with this New Data")]
         public void WhenIUpdateNotExistingCustomerWithThisNewData()
         {
-            _updateCustomer = _customersService.UpdateCustomer(_customer);
+            _updateCustomer = _customersService.UpdateCustomer(_customer).Result;
         }
 
         [Then(@"I should Get Null Response")]
@@ -211,7 +213,7 @@ namespace POS.Domain.Test.Steps.Customers
         [When(@"I Delete this Customer")]
         public void WhenIDeleteCustomer()
         {
-            _deleteCustomer = _customersService.DeleteCustomer(_customer);
+            _deleteCustomer = _customersService.DeleteCustomer(_customer.Id).Result;
 
         }
 
@@ -219,7 +221,7 @@ namespace POS.Domain.Test.Steps.Customers
         public void ThenIShouldGetSuccessDelete()
         {
 
-            Customer findedCustomer = _customersService.FindCustomerById(_customer.Id);
+            Customer findedCustomer = _customersService.FindCustomer(_customer.Id).Result;
 
             Assert.AreEqual(null, findedCustomer);
 
@@ -243,7 +245,7 @@ namespace POS.Domain.Test.Steps.Customers
         [When(@"I Delete this Not Customer")]
         public void WhenIDeleteThisNotCustomer()
         {
-            _deleteCustomer = _customersService.DeleteCustomer(_customer);
+            _deleteCustomer = _customersService.DeleteCustomer(_customer.Id).Result;
         }
 
         [Then(@"I should Get Failed Delete")]
@@ -266,7 +268,7 @@ namespace POS.Domain.Test.Steps.Customers
         [When(@"I Call this Method Get All Customers")]
         public void WhenICallThisMethodGetAllCustomers()
         {
-            _customersLst = _customersService.GetCustomers();
+            _customersLst = _customersService.GetAllCustomers().Result;
         }
 
         [Then(@"I should Get List Of All Customers")]

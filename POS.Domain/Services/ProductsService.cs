@@ -35,9 +35,9 @@ namespace POS.Domain.Services
 
         async Task<bool?> IProductsService.DeleteProduct(int productId, bool removeRelatedEntities)
         {
-            var product = Context.Products.Include(p => p.TransactionDetails).Include(p => p.TransfareDetails).Include(p => p.Barcodes).Include(p => p.Properties).FirstOrDefault(c => c.Id == productId);
+            var product = Context.Products.Include(p => p.TransfareDetails).Include(p => p.TransfareDetails).Include(p => p.Barcodes).Include(p => p.Properties).FirstOrDefault(c => c.Id == productId);
             if (product == null) return false;
-            if (product.TransactionDetails.Count > 0)
+            if (product.TransfareDetails.Count > 0)
                 if (removeRelatedEntities)
                 {
                     Context.TransfareDetails.RemoveRange(product.TransfareDetails);

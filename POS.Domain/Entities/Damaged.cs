@@ -7,13 +7,12 @@ namespace POS.Domain.Entities
     {
         public Damaged()
         {
-            TransfareDetails = new List<TransferDetail>();
+            DamagedDetails = new List<DamagedDetail>();
         }
         public int Id { get; set; }
-
         public int PointId { get; set; }
         public virtual Point Point { get; set; }
-        public virtual ICollection<TransferDetail> TransfareDetails { get; set; }
+        public virtual ICollection<DamagedDetail> DamagedDetails { get; set; }
     }
 
 }

@@ -18,7 +18,7 @@ namespace POS.Domain.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
-        public PointType PointType { get; set; } 
+        public PointType PointType { get; set; }
         public virtual ICollection<Sale> Sales { get; set; }
         public virtual ICollection<SaleBack> SaleBacks { get; set; }
         public virtual ICollection<Purchase> Purchases { get; set; }
