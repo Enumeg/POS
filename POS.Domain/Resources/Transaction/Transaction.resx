@@ -117,58 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Required" xml:space="preserve">
-    <value>The field {0} is required</value>
+  <data name="Amount" xml:space="preserve">
+    <value>Amount</value>
   </data>
-  <data name="Duplicated" xml:space="preserve">
-    <value>Duplicated</value>
+  <data name="Cash" xml:space="preserve">
+    <value>Cash</value>
   </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+  <data name="Discount" xml:space="preserve">
+    <value>Discount</value>
   </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+  <data name="Later" xml:space="preserve">
+    <value>Later</value>
   </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+  <data name="Number" xml:space="preserve">
+    <value>Number</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>Name</value>
+  <data name="Paid" xml:space="preserve">
+    <value>Paid</value>
   </data>
-  <data name="New" xml:space="preserve">
-    <value>New</value>
+  <data name="PaymentMethod" xml:space="preserve">
+    <value>Payment method</value>
   </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
   </data>
-  <data name="Add" xml:space="preserve">
-    <value>Add</value>
+  <data name="Rest" xml:space="preserve">
+    <value>Rest</value>
   </data>
-  <data name="All" xml:space="preserve">
-    <value>All</value>
-  </data>
-  <data name="ConfirmDelete" xml:space="preserve">
-    <value>Do you want to delete </value>
-  </data>
-  <data name="DeletedSuccessfully" xml:space="preserve">
-    <value>Deleted Successfully</value>
-  </data>
-  <data name="DeleteError" xml:space="preserve">
-    <value>Delete Failed</value>
-  </data>
-  <data name="SaveSuccessfully" xml:space="preserve">
-    <value>Saved Successfully</value>
-  </data>
-  <data name="Choose" xml:space="preserve">
-    <value>Choose</value>
-  </data>
-  <data name="Close" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="Date" xml:space="preserve">
-    <value>Date</value>
-  </data>
-  <data name="Barcodes" xml:space="preserve">
-    <value>Barcodes count doesn't equal amount</value>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
   </data>
 </root>

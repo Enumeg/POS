@@ -79,6 +79,15 @@ namespace POS.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Barcodes count doesn&apos;t equal amount.
+        /// </summary>
+        public static string Barcodes {
+            get {
+                return ResourceManager.GetString("Barcodes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Cancel {
@@ -111,6 +120,15 @@ namespace POS.Resources {
         public static string ConfirmDelete {
             get {
                 return ResourceManager.GetString("ConfirmDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string Date {
+            get {
+                return ResourceManager.GetString("Date", resourceCulture);
             }
         }
         

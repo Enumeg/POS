@@ -1,0 +1,153 @@
+﻿<div class="container">
+    <form class="row" name="transactionForm" novalidate>
+        <div class="col-sm-9">
+            <div class="row">
+                <label class="control-label col-sm-3">@Transaction.Number</label>
+                <label class="control-label col-sm-3">@Common.Date</label>
+                <label class="control-label col-sm-3">@Models.Supplier</label>
+                <label class="control-label col-sm-3">@Models.Point</label>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <input class="form-control" ng-model="transaction.Number" name="Number" required />
+                    <span class="ng-invalid" ng-show="(transactionForm.Number.$dirty || transactionForm.$submitted ) &&  transactionForm.Number.$error.required">
+                        @string.Format(Common.Required, Transaction.Number)
+                    </span>
+                </div>
+                <div class="col-sm-3">
+                    <input class="form-control" ng-model="transaction.Date" name="Date"  uib-datepicker-popup="dd/MM/yyyy" is-open="dt1.opened"
+           ng-focus="dt1.opened = true" ng-click="dt1.opened = true" show-weeks="false" show-button-bar="false" required />
+                    <span class="ng-invalid" ng-show="(transactionForm.Date.$dirty || transactionForm.$submitted ) &&  transactionForm.Date.$error.required">
+                        @string.Format(Common.Required, Common.Date)
+                    </span>
+                </div>
+                <div class="col-sm-3">
+                    <select class="form-control" ng-model="transaction.SupplierId" ng-options="supplier.Id as supplier.Name for supplier in suppliers" name="Supplier" required></select>
+                    <span class="ng-invalid" ng-show="(transactionForm.Supplier.$dirty || transactionForm.$submitted ) &&  transactionForm.Supplier.$error.required">
+                        @string.Format(Common.Required, Models.Supplier)
+                    </span>
+                </div>
+                <div class="col-sm-3">
+                    <select class="form-control" ng-model="transaction.PointId" ng-options="point.Id as point.Name for point in points" name="Point" required></select>
+                    <span class="ng-invalid" ng-show="(transactionForm.Point.$dirty || transactionForm.$submitted ) &&  transactionForm.Point.$error.required">
+                        @string.Format(Common.Required, Models.Point)
+                    </span>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <label class="control-label col-sm-2">@Product.Barcode</label>
+                <label class="control-label col-sm-4">@Models.Product</label>
+                <label class="control-label col-sm-2">@Transaction.Amount</label>
+                <label class="control-label col-sm-2">@Transaction.Price</label>
+            </div>
+            <div class="row">
+                <div class="col-sm-2">
+                    <input class="form-control" ng-model="product.Barcode" ng-keyup="checkBarcode($event.keyCode)" id="Barcode" />
+                </div>
+                <div class="col-sm-4">
+                    <angucomplete-alt pause="200" selected-object="setValue" local-data="products" search-fields="Name" title-field="Name" minlength="1" id="productName"
+                                      input-class="form-control" text-searching="false" text-no-results="false" initial-value="product.Name" />
+                </div>
+                <div class="col-sm-2">
+                    <input class="form-control" ng-model="product.Amount" type="number" ng-keypress="$event.keyCode===13 && addProduct()" Id="amount" />
+                </div>
+                <div class="col-sm-2">
+                    <input class="form-control" ng-model="product.Price" type="number" ng-keyup="$event.keyCode===13 && addProduct()" />
+                </div>
+                <div class="col-sm-2">
+                    <a class="btn btn-block btn-success" ng-click="addProduct();">@Common.Add</a>
+                </div>
+            </div>
+            <br />
+            <table class="table table-bordered table-condensed">
+                <tr>
+                    <th>@Product.Barcode</th>
+                    <th>@Common.Name</th>
+                    <th>@Transaction.Amount</th>
+                    <th>@Transaction.Price</th>
+                    <th>@Transaction.Total</th>
+                    <th></th>
+                </tr>
+                <tbody>
+                    <tr ng-animate="'animate'" ng-repeat="item in transactionDetails">
+                        <td>
+                            <span ng-hide="item.Barcode ===''">
+                                {{item.Barcode}}
+                            </span>
+                            <a ng-show="item.Barcode ===''" ng-click="addSerials($index);">...</a>
+                        </td>
+                        <td>{{item.Name}}</td>
+                        <td contenteditable="true" ng-model="item.Amount">{{item.Amount}}</td>
+                        <td contenteditable="true" ng-model="item.Price">{{item.Price}}</td>
+                        <td>{{item.Amount * item.Price}}</td>
+                        <td>
+                            <div class="btn-group">
+                                <a class="btn btn-xs btn-danger" ng-click="delete($index)">@Common.Delete &nbsp;<b class="glyphicon glyphicon-remove"></b></a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-3" style="border-left: 2px solid black">
+            <table class="table table-condensed">
+                <tr>
+                    <td><label>@Transaction.PaymentMethod: </label></td>
+                    <td>
+                        <select ng-model="transaction.PaymentMethod">
+                            <option value="1">@Transaction.Cash</option>
+                            <option value="2">@Transaction.Later</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>@Transaction.Discount: </label></td>
+                    <td><input ng-model="transaction.Discount" /></td>
+                </tr>
+                <tr>
+                    <td><label>@Transaction.Total: </label></td>
+                    <td><input value="{{getTotal()}}" readonly="" /></td>
+                </tr>
+                <tr>
+                    <td><label>@Transaction.Paid: </label></td>
+                    <td><input ng-model="transaction.Paid" /></td>
+                </tr>
+                <tr>
+                    <td><label>@Transaction.Rest: </label></td>
+                    <td><input value="{{getRest()}}" readonly="" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><a class="btn btn-success" ng-click="save();">@Common.Save</a></td>
+                </tr>
+            </table>
+
+
+
+        </div>
+    </form>
+    <div class="modal fade" role="dialog" id="serialsModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="ModalLabel"></h4>
+                </div>
+                <div class="modal-body">
+                    <form ng-submit="addSerial()">
+                        <input class="form-control" ng-model="serial" required />
+                        <input type="submit" style="display: none;" />
+                    </form>
+                    <ul>
+                        <li ng-repeat="barcode in transactionDetails[selectedIndex].Barcodes">{{barcode.Barcode.Barcode}}</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">@Common.Close</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

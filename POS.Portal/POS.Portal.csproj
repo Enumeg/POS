@@ -201,6 +201,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\CategoriesController.cs" />
+    <Compile Include="Controllers\API\PurchasesController.cs" />
     <Compile Include="Controllers\API\CutomersController.cs" />
     <Compile Include="Controllers\API\ProductsController.cs" />
     <Compile Include="Controllers\API\SuppliersController.cs" />
@@ -214,6 +215,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\PropertiesController.cs" />
+    <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Controllers\UnitsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -228,20 +230,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\App.js" />
-    <Content Include="App\Controllers\ComponentType\ComponentTypeController.js" />
-    <Content Include="App\Controllers\Component\ComponentController.js" />
-    <Content Include="App\Controllers\Model\ModelController.js" />
-    <Content Include="App\Controllers\Model\ModelEditController.js" />
-    <Content Include="App\Controllers\Price\PriceController.js" />
+    <Content Include="App\Controllers\Transactions\TransactionsController.js" />
     <Content Include="App\Controllers\Coding\CodingController.js" />
     <Content Include="App\Controllers\Products\ProductsController.js" />
-    <Content Include="App\Controllers\Properties\PropertiesController.js" />
     <Content Include="App\Controllers\Categories\CategoriesController.js" />
-    <Content Include="App\Controllers\Supplier\SupplierController.js" />
-    <Content Include="App\Controllers\uiHeaderController.js" />
     <Content Include="App\Main.js" />
     <Content Include="App\Services\angucomplete-alt.js" />
-    <Content Include="App\Services\angucomplete.js" />
     <Content Include="App\Services\contenteditable.js" />
     <Content Include="App\Services\ConvertToNumber.js" />
     <Content Include="App\Services\dataSource.js" />
@@ -249,7 +243,8 @@
     <Content Include="App\Services\loading-bar.js" />
     <Content Include="App\Services\resources.js" />
     <Content Include="App\Services\routeResolver.js" />
-    <Content Include="App\Services\uiHeaderService.js" />
+    <Content Include="Content\angular-toastr.css" />
+    <Content Include="Content\angular-toastr.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -275,6 +270,10 @@
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
+    <Content Include="Scripts\angular-toastr.js" />
+    <Content Include="Scripts\angular-toastr.min.js" />
+    <Content Include="Scripts\angular-toastr.tpls.js" />
+    <Content Include="Scripts\angular-toastr.tpls.min.js" />
     <Content Include="Scripts\angular-touch.js" />
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
@@ -354,6 +353,7 @@
     <Content Include="Views\Coding\Object.cshtml" />
     <Content Include="Views\Coding\Points.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Transactions\Purchases.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

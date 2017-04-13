@@ -1,7 +1,7 @@
 ﻿"use strict";
 
 define(["app"], function (app) {
-    app.factory("dataSource", ["$http", "uiHeaderService", "$location", "resource", function ($http, ui, $location, resource) {
+    app.factory("dataSource", ["$http", "toastr", "$location", "resource", function ($http, toastr, $location, resource) {
         var baseUrl, $resource;
         var dataSource = {};
         dataSource.initialize = function ($baseUrl) {
@@ -17,7 +17,16 @@ define(["app"], function (app) {
                 return $http.get(baseUrl);
             }
         };
-
+        dataSource.loadList = function (list,url, param) {
+            var result;
+            if (param)
+                result = $http.get(url, { params: param });
+            else
+                result = $http.get(url);
+            result.success(function(data) {
+                angular.copy(data, list);
+            }).error(this.error);
+        };
         dataSource.get = function (id) {
             return $http.get(baseUrl + "/" + id);
         };
@@ -42,26 +51,26 @@ define(["app"], function (app) {
             if (confirm($resource.ConfirmDelete + name + "?")) {
                 return $http.delete(baseUrl + "/" + id).
                     success(function() {
-                        ui.showMessage($resource.DeletedSuccessfully, "success");
+                        toastr.success($resource.DeletedSuccessfully);
                         if (item)
                             list.splice(list.indexOf(item), 1);
                         else
                             $location.path(list);
                     }).
                     error(function() {
-                        ui.showMessage($resource.DeleteError, "error");
+                        toastr.error($resource.DeleteError);
                     });
             } else return false;
         };
 
         dataSource.error = function (data) {
-            ui.showMessage(data.Message, "error");
+            toastr.error(data.Message);
         };
         dataSource.success = function (title) {
             if(title)
-                ui.showMessage(title + " " + $resource.SaveSuccessfully, "success");
+                toastr.success(title + " " + $resource.SaveSuccessfully);
             else
-                ui.showMessage($resource.SaveSuccessfully, "success");
+                toastr.success($resource.SaveSuccessfully);
 
         };
 

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using POS.Domain.Enums;
 using POS.Domain.Interfaces;
 using POS.Portal.Helpers;
 using POS.Resources;
@@ -26,6 +27,10 @@ namespace POS.Portal.Controllers.API
             return await _pointsService.GetAllPoints();
         }
 
+        public async Task<List<Point>> GetPoints(PointType type)
+        {
+            return await _pointsService.GetAllPoints(type);
+        }
 
         // PUT: api/Points/5
         [ResponseType(typeof(void))]

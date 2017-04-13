@@ -117,58 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Required" xml:space="preserve">
-    <value>The field {0} is required</value>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
   </data>
-  <data name="Duplicated" xml:space="preserve">
-    <value>Duplicated</value>
+  <data name="Market" xml:space="preserve">
+    <value>Market</value>
   </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+  <data name="Point" xml:space="preserve">
+    <value>Point</value>
   </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+  <data name="Product" xml:space="preserve">
+    <value>Product</value>
   </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+  <data name="Shift" xml:space="preserve">
+    <value>Shift</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>Name</value>
+  <data name="Store" xml:space="preserve">
+    <value>Store</value>
   </data>
-  <data name="New" xml:space="preserve">
-    <value>New</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="Add" xml:space="preserve">
-    <value>Add</value>
-  </data>
-  <data name="All" xml:space="preserve">
-    <value>All</value>
-  </data>
-  <data name="ConfirmDelete" xml:space="preserve">
-    <value>Do you want to delete </value>
-  </data>
-  <data name="DeletedSuccessfully" xml:space="preserve">
-    <value>Deleted Successfully</value>
-  </data>
-  <data name="DeleteError" xml:space="preserve">
-    <value>Delete Failed</value>
-  </data>
-  <data name="SaveSuccessfully" xml:space="preserve">
-    <value>Saved Successfully</value>
-  </data>
-  <data name="Choose" xml:space="preserve">
-    <value>Choose</value>
-  </data>
-  <data name="Close" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="Date" xml:space="preserve">
-    <value>Date</value>
-  </data>
-  <data name="Barcodes" xml:space="preserve">
-    <value>Barcodes count doesn't equal amount</value>
+  <data name="Supplier" xml:space="preserve">
+    <value>Supplier</value>
   </data>
 </root>

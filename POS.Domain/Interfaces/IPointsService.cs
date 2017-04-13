@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using POS.Domain.Entities;
+using POS.Domain.Enums;
 using POS.Domain.Infrastructure;
 
 namespace POS.Domain.Interfaces
@@ -12,5 +13,6 @@ namespace POS.Domain.Interfaces
         Task<bool?> DeletePoint(int pointId, bool removeRelatedEntities = false);
         Task<Point> FindPoint(int pointId);
         Task<List<Point>> GetAllPoints();
+        Task<List<Point>> GetAllPoints(PointType type);
     }
 }

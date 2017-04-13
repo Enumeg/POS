@@ -5,6 +5,7 @@ using POS.Domain.Infrastructure;
 using System.Data.Entity;
 using POS.Domain.Interfaces;
 using System.Threading.Tasks;
+using POS.Domain.Enums;
 
 namespace POS.Domain.Services
 {
@@ -38,7 +39,10 @@ namespace POS.Domain.Services
         {
             return await Context.Points.FindAsync(pointId);
         }
-
+        async Task<List<Point>> IPointsService.GetAllPoints(PointType type)
+        {
+            return await Context.Points.Where(p=> p.PointType == type).ToListAsync();
+        }
         async Task<List<Point>> IPointsService.GetAllPoints()
         {
             return await Context.Points.ToListAsync();

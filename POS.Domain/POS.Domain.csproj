@@ -92,6 +92,7 @@
     <Compile Include="Infrastructure\ServicesBase.cs" />
     <Compile Include="Infrastructure\IInitializer.cs" />
     <Compile Include="Infrastructure\PosContext.cs" />
+    <Compile Include="Interfaces\IPurchasesService.cs" />
     <Compile Include="Interfaces\ICustomersService.cs" />
     <Compile Include="Interfaces\ISettingsService.cs" />
     <Compile Include="Interfaces\ISuppliersService.cs" />
@@ -135,6 +136,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Property.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Models\Models.Designer.cs">
+      <DependentUpon>Models.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Transaction\Transaction.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Transaction.resx</DependentUpon>
+    </Compile>
     <Compile Include="Services\CategoriesService.cs" />
     <Compile Include="Services\CustomersService.cs" />
     <Compile Include="Interfaces\IShiftsService.cs" />
@@ -150,6 +161,7 @@
     <Compile Include="Services\ShiftsService.cs" />
     <Compile Include="Services\SuppliersService.cs" />
     <Compile Include="Services\PointsService.cs" />
+    <Compile Include="Services\PurchasesService.cs" />
     <Compile Include="Services\UnitsService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +205,16 @@
     <EmbeddedResource Include="Resources\Property\Property.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Property.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>POS.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Models.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Models.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>POS.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Transaction\Transaction.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Transaction.Designer.cs</LastGenOutput>
       <CustomToolNamespace>POS.Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>

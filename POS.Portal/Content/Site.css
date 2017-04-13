@@ -135,9 +135,13 @@ select:disabled {
     -moz-appearance: none;
     text-indent: 1px;
     text-overflow: '';
-
 }
-/*end*/
+
+.form-inline > div ,.form-inline > .form-control{
+    display: inline-block;
+    margin: 0 8px 0 5px;
+}
+/*end bootstrap*/
 .logo img {
     height: 50px;
 }

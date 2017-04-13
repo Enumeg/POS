@@ -14,7 +14,7 @@ namespace POS.Portal
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include("~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include("~/Scripts/angular.js", "~/Scripts/angular-cookies.js", "~/Scripts/angular-animate.js",
-                                         "~/Scripts/angular-route.js", "~/Scripts/angular-touch.js"));
+                                         "~/Scripts/angular-route.js", "~/Scripts/angular-touch.js", "~/Scripts/angular-toastr.tpls.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/require").Include("~/Scripts/require.js", "~/App/Main.js"));
 
@@ -22,7 +22,7 @@ namespace POS.Portal
 
             bundles.Add(new ScriptBundle("~/bundles/ui-bootstrap").Include("~/Scripts/angular-ui/ui-bootstrap-tpls.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/bootstrap.css", "~/Content/site.css", "~/Content/multi-select.css"));
+            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/bootstrap.css", "~/Content/site.css", "~/Content/multi-select.css", "~/Content/angular-toastr.css"));
 
             bundles.Add(new StyleBundle("~/Content/bootstrap-rtl").Include("~/Content/bootstrap-rtl.css", "~/Content/site-rtl.css"));
         }

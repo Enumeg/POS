@@ -2,17 +2,22 @@
 
 define(["Services/routeResolver"], function () {
 
-    var app = angular.module("POS", ["ngRoute", "ngCookies", "routeResolverServices", "ui.bootstrap", "angular-loading-bar", "angucomplete-alt", "isteven-multi-select"]);
+    var app = angular.module("POS", ["ngRoute", "ngCookies", "routeResolverServices", "ui.bootstrap", "angular-loading-bar", "angucomplete-alt", "isteven-multi-select", "toastr"]);
     app.run(function ($location, $rootScope, resource) {
-            resource.fillAsync(function() {
-                $rootScope.$on("$routeChangeSuccess", function(event, current) {
-                    $rootScope.title = resource.getValue( current.$$route.originalPath.split("/")[1]) + " - " + resource.getValue("Application");
-                });
-            });        
+        resource.fillAsync(function () {
+            $rootScope.$on("$routeChangeSuccess", function (event, current) {
+                var application = resource.getValue("Application");
+                var page = resource.getValue(current.$$route.originalPath.split("/")[1]);
+                if (application)
+                    $rootScope.title = application ;
+                if (page)
+                    $rootScope.title += " - " + page;
+            });
+        });
     });
-    
 
-    app.config(["$routeProvider", "routeResolverProvider", "$controllerProvider", "$compileProvider", "$filterProvider", "$provide", 
+
+    app.config(["$routeProvider", "routeResolverProvider", "$controllerProvider", "$compileProvider", "$filterProvider", "$provide",
         function ($routeProvider, routeResolverProvider, $controllerProvider, $compileProvider, $filterProvider, $provide) {
             app.register =
             {
@@ -33,7 +38,8 @@ define(["Services/routeResolver"], function () {
                 .when("/Customers", route.resolve("Coding", "Person"))
                 .when("/Suppliers", route.resolve("Coding", "Person"))
                 .when("/Points", route.resolve("Coding", "Points"))
-                .otherwise({ redirectTo: "/Properties" });
+                .when("/Purchases", route.resolve("Transactions", "Purchases"))
+                .otherwise({ redirectTo: "/Products" });
 
         }]);
     return app;

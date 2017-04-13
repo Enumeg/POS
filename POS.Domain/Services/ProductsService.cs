@@ -26,7 +26,7 @@ namespace POS.Domain.Services
             Context.ProductProperties.RemoveRange(Context.ProductProperties.Where(p => p.ProductId == product.Id));
             Context.ProductProperties.AddRange(product.Properties);
             oldProduct.UnitId = product.UnitId;
-            oldProduct.BarCode = product.BarCode;
+            oldProduct.Barcode = product.Barcode;
             oldProduct.SalePrice = product.SalePrice;
             oldProduct.Name = product.Name;
             await Context.SaveChangesAsync();
@@ -60,6 +60,11 @@ namespace POS.Domain.Services
             return await Context.Products.Include("Category").Include("Unit").Include("Properties").ToListAsync();
         }
 
+        async Task<Product> IProductsService.GetProduct(string barcode)
+        {
+            var product = await Context.Products.FirstOrDefaultAsync(p => p.Barcode == barcode);
+            return product ?? (await Context.BarCodes.Include(b=>b.Product).FirstOrDefaultAsync(b=>b.Barcode == barcode))?.Product;
+        }
     }
 
 }

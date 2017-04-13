@@ -26,7 +26,10 @@ namespace POS.Portal.Controllers.API
         {
             return await _productsService.GetAllProducts();
         }
-
+        public async Task<Product> GetProduct(string barcode)
+        {
+            return await _productsService.GetProduct(barcode);
+        }
 
         // PUT: api/Products/5
         [ResponseType(typeof(void))]

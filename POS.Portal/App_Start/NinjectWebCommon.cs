@@ -75,6 +75,7 @@ namespace POS.Portal.App_Start
             kernel.Bind<ISuppliersService>().To<SuppliersService>();
             kernel.Bind<IPointsService>().To<PointsService>();
             kernel.Bind<IProductsService>().To<ProductsService>();
+            kernel.Bind<IPurchasesService>().To<PurchasesService>();
 
         }
     }

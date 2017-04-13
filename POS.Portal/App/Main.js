@@ -13,9 +13,7 @@ require(
         "Services/angucomplete-alt",
         "Services/loading-bar",
         "Services/resources",
-        "Services/uiHeaderService",
-        "Services/isteven-multi-select",
-        "Controllers/uiHeaderController"        
+        "Services/isteven-multi-select"
     ],
     function () {
         angular.bootstrap(document, ["POS"]);

@@ -12,5 +12,6 @@ namespace POS.Domain.Interfaces
         Task<bool?> DeleteProduct(int productId, bool removeRelatedEntities = false);
         Task<Product> FindProduct(int productId);
         Task<List<Product>> GetAllProducts();
+        Task<Product> GetProduct(string barcode);
     }
 }

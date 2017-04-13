@@ -53,5 +53,7 @@ namespace POS.Domain.Infrastructure
         public virtual DbSet<Transfer> Transfares { get; set; }
         public virtual DbSet<TransferDetail> TransfareDetails { get; set; }   
         public virtual DbSet<Damaged> Damaged { get; set; }
+        public virtual DbSet<BarCode> BarCodes { get; set; }
+
     }
 }
