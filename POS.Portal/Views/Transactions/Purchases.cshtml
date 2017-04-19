@@ -95,7 +95,7 @@
                 <tr>
                     <td><label>@Transaction.PaymentMethod: </label></td>
                     <td>
-                        <select ng-model="transaction.PaymentMethod">
+                        <select ng-model="transaction.PaymentMethod" required convert-to-number>
                             <option value="1">@Transaction.Cash</option>
                             <option value="2">@Transaction.Later</option>
                         </select>

@@ -12,26 +12,26 @@ namespace POS.Domain.Services
     public class ShiftsService : ServicesBase, IShiftsService
     {
         public async Task<Result> GetUserCurrentShift(string userId, int machineId = 0)
-        {        
+        {
             var result = new Result() { Id = 0, Message = "" };
             if (machineId == 0)
             {
-                var  shift = await Context.Shifts.Where(s => s.UserId == userId && !s.IsClosed).FirstOrDefaultAsync();
-                if (shift != null)               
+                var shift = await Context.Shifts.Where(s => s.UserId == userId && s.EndDate == null).FirstOrDefaultAsync();
+                if (shift != null)
                     result.Id = shift.Id;
                 return result;
             }
             else
             {
                 //check for an open shift for the given user on the given machine
-                var shift = await Context.Shifts.Where(s => s.UserId == userId && s.MachineId == machineId && !s.IsClosed).FirstOrDefaultAsync();
+                var shift = await Context.Shifts.Where(s => s.UserId == userId && s.MachineId == machineId && s.EndDate == null).FirstOrDefaultAsync();
                 if (shift != null)
                 {
                     result.Id = shift.Id;
                     return result;
                 }
                 //check for an open shift for the given user on any machine
-                shift = await Context.Shifts.Where(s => s.UserId == userId && !s.IsClosed).FirstOrDefaultAsync();
+                shift = await Context.Shifts.Where(s => s.UserId == userId && s.EndDate == null).FirstOrDefaultAsync();
                 if (shift != null)
                 {
                     result.Message = "there is an open shift for this user on  another machine";
@@ -39,7 +39,7 @@ namespace POS.Domain.Services
                     return result;
                 }
                 //check for an open shift for the any user on the given machine
-                shift = await Context.Shifts.Where(s => s.MachineId == machineId && !s.IsClosed).FirstOrDefaultAsync();
+                shift = await Context.Shifts.Where(s => s.MachineId == machineId && s.EndDate == null).FirstOrDefaultAsync();
                 if (shift == null) return result;
                 result.Message = "there is an open shift for another user on this machine";
                 result.Id = shift.Id;
@@ -52,9 +52,9 @@ namespace POS.Domain.Services
             var shift = Context.Shifts.Find(shiftId);
             shift.IsClosing = true;
             Context.SaveChanges();
-                         
+
             shift.EndDate = DateTime.Now;
-            return shift.Balance;                  
+            return shift.Balance;
         }
         public void CancelCloseShift(int shiftId)
         {
@@ -63,20 +63,20 @@ namespace POS.Domain.Services
             Context.SaveChanges();
         }
 
-        public int OpenShift(string userId, int? machineId = null)
+        public async Task<int> OpenShift(string userId, int? machineId)
         {
-            var settings = Context.Settings.First();
+            var settings = await Context.Settings.FirstAsync();
             var lastShift = machineId != null
-                ? Context.Shifts.FirstOrDefault(s => s.IsLast && s.MachineId == machineId)
-                : Context.Shifts.FirstOrDefault(s => s.IsLast);
+                ? await Context.Shifts.FirstOrDefaultAsync(s => s.IsLast && s.MachineId == machineId)
+                : await Context.Shifts.FirstOrDefaultAsync(s => s.IsLast);
             var shift = new Shift()
             {
-                Balance = lastShift?.Balance ?? settings.StartBalance,               
+                Balance = lastShift?.Balance ?? settings.StartBalance,
                 MachineId = machineId,
                 UserId = userId,
                 StartDate = DateTime.Now
             };
-            CrudService.Add(shift);
+            await CrudService.Add(shift);
             return shift.Id;
         }
     }

@@ -9,6 +9,6 @@ namespace POS.Domain.Interfaces
         void CancelCloseShift(int shiftId);
         decimal CloseShift(int shiftId);
         Task<Result> GetUserCurrentShift(string userId, int machineId = 0);
-        int OpenShift(string userId, int? machineId = default(int?));
+        Task<int> OpenShift(string userId, int? machineId);
     }
 }

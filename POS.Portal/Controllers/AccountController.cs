@@ -85,7 +85,7 @@ namespace POS.Portal.Controllers
                 return View(model);
             }
             var machineName = "";
-            var machineId = 0;
+            int? machineId = null;
             var settings = _settingsService.GetSettings();
             if (settings.HasMachines)
             {
@@ -96,7 +96,7 @@ namespace POS.Portal.Controllers
                     ModelState.AddModelError("", Identity.machinenotregistered);
                     return View(model);
                 }
-                machineId = machine?.Id ?? 0;
+                machineId = machine?.Id;
             }
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
@@ -104,22 +104,23 @@ namespace POS.Portal.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    var userId = User.Identity.GetUserId();
+                    var userId = SignInManager.AuthenticationManager.AuthenticationResponseGrant.Identity.GetUserId();
                     if (settings.HasShifts)
                     {
                         if (settings.HasMachines)
                         {
-                            if (machineId == 0)
+                            if (machineId == null)
                                 return Redirect(Url.Action("CreateMachine", "Account", new { machineName }));
                         }
-                        CookieHelper.MachineId = machineId;
-                        //var shiftResult = await _shiftsService.GetUserCurrentShift(userId, machineId);
-                        //if (shiftResult.Id == 0)
-                        //    CookieHelper.ShiftId = _shiftsService.OpenShift(userId, machineId);
-                        //else if (shiftResult.Message != "")
-                        //{
-                        //    //todo: close shift
-                        //}
+                        if (machineId != null)
+                            CookieHelper.MachineId = machineId.Value;
+                        var shiftResult = await _shiftsService.GetUserCurrentShift(userId, machineId ?? 0);
+                        if (shiftResult.Id == 0)
+                            CookieHelper.ShiftId = await _shiftsService.OpenShift(userId, machineId);
+                        else if (shiftResult.Message != "")
+                        {
+                            //todo: close shift
+                        }
                         return RedirectToLocal(returnUrl);
                     }
                     else
@@ -530,7 +531,7 @@ namespace POS.Portal.Controllers
             var shiftResult = await _shiftsService.GetUserCurrentShift(userId, machineId);
             if (shiftResult.Id == 0)
             {
-                CookieHelper.ShiftId = _shiftsService.OpenShift(userId, machineId);
+                CookieHelper.ShiftId = await _shiftsService.OpenShift(userId, machineId);
             }
             else if (shiftResult.Message != "")
             {

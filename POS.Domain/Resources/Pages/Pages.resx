@@ -135,6 +135,9 @@
   <data name="Properties" xml:space="preserve">
     <value>Properties</value>
   </data>
+  <data name="Purchases" xml:space="preserve">
+    <value>Purchases</value>
+  </data>
   <data name="Suppliers" xml:space="preserve">
     <value>Suppliers</value>
   </data>

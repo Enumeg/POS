@@ -12,7 +12,7 @@ define(["app"], function (app) {
             $scope.products = [];
             $scope.transactionDetails = [];
             $scope.selectedProducts = [];
-            $scope.transaction = { Total: 0, Discount: 0, Paid: 0, Rest: 0 };
+            $scope.transaction = { Total: 0, Discount: 0, Paid: 0, Rest: 0, PaymentMethod : 1 };
             $scope.product = {};
             $scope.selectedIndex = -1;
             $scope.checkBarcode = function (key) {
@@ -20,7 +20,7 @@ define(["app"], function (app) {
                     var barcode = $scope.product.Barcode;
                     dataSource.getUrl("api/products", { barcode }).success(function (product) {
                         if (product) {
-                            $scope.product = { Amount: 1.0, Price: 0.0, Name: product.Name, Id: product.Id, Barcode: barcode };
+                            $scope.product = { Amount: 1.0, Price: 0.0, Name: product.Name, ProductId: product.Id, Barcode: barcode };
                             $scope.$broadcast("angucomplete-alt:changeInput", "productName", product.Name);
                             $("#amount").focus();
                         }
@@ -32,13 +32,13 @@ define(["app"], function (app) {
             }
             $scope.setValue = function (selected) {
                 if (selected) {
-                    $scope.product = { Amount: 1.0, Price: 0.0, Name: selected.title, Id: selected.originalObject.Id, Barcode: "", Barcodes: [] };
+                    $scope.product = { Amount: 1.0, Price: 0.0, Name: selected.title, ProductId: selected.originalObject.Id, Barcode: "", Barcodes: [] };
                     $("#amount").focus();
                 }
             }
             $scope.addProduct = function () {
-                if (!$scope.product.Id) return;
-                var productId = $scope.product.Id + "" + $scope.product.Price;
+                if (!$scope.product.ProductId) return;
+                var productId = $scope.product.ProductId + "" + $scope.product.Price;
                 var index = $scope.selectedProducts.indexOf(productId);
                 if (index === -1) {
                     $scope.selectedProducts.push(productId);
@@ -57,7 +57,7 @@ define(["app"], function (app) {
             }
             $scope.addSerial = function () {
                 var item = $scope.transactionDetails[$scope.selectedIndex];
-                item.Barcodes.push({ Barcode :{ Barcode : $scope.serial , ProductId : item.Id} });
+                item.Barcodes.push({ Barcode: { Barcode: $scope.serial, ProductId: item.ProductId } });
                 if (item.Barcodes.length > item.Amount)
                     item.Amount = item.Barcodes.length;
                 $scope.serial = "";
@@ -84,6 +84,10 @@ define(["app"], function (app) {
                 scope.transactionForm.$submitted = true;
                 if (!scope.transactionForm.$valid)
                     return;
+                if (!scope.transaction.PaymentMethod) {
+                    toastr.error("Payment");
+                    return;
+                }
                 $scope.transactionDetails.forEach(function (item) {
                     if (item.Barcode === "" && item.Barcodes.length !== item.Amount) {
                         toastr.error($scope.resource.Barcodes);

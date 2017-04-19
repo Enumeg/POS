@@ -115,6 +115,15 @@ namespace POS.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Purchases.
+        /// </summary>
+        public static string Purchases {
+            get {
+                return ResourceManager.GetString("Purchases", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Suppliers.
         /// </summary>
         public static string Suppliers {

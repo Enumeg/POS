@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using POS.Domain.Entities;
@@ -60,12 +61,13 @@ namespace POS.Portal.Controllers.API
             }
             try
             {
-                //var result = await _purchasesServices.AddPurchase(purchase);
-                //if (result == false)
-                //    return BadRequest(Common.Duplicated);
+                purchase.ShiftId = CookieHelper.ShiftId;
+                var result = await _purchasesServices.AddPurchase(purchase);
+                if (result == false)
+                    return BadRequest(Common.Duplicated);
                 return Ok(purchase);
             }
-            catch
+            catch (Exception ex)
             {
                 return InternalServerError();
             }
