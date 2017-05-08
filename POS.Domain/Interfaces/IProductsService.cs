@@ -13,5 +13,6 @@ namespace POS.Domain.Interfaces
         Task<Product> FindProduct(int productId);
         Task<List<Product>> GetAllProducts();
         Task<Product> GetProduct(string barcode);
+        Task<bool> AddProducts(List<Product> products);
     }
 }

@@ -36,11 +36,12 @@ define(["app"], function (app) {
             else
                 return $http.get(url);
         };
-        dataSource.insert = function (data, param) {
+        dataSource.insert = function (data, param, url) {
+            url = url || baseUrl
             if (!param)
-                return $http.post(baseUrl, data);
+                return $http.post(url, data);
             else
-                return $http.post(baseUrl, data, { params: param });
+                return $http.post(url, data, { params: param });
         };
 
         dataSource.update = function (data) {

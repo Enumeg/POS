@@ -12,9 +12,16 @@ namespace POS.Domain.Services
     {
         async Task<bool> IProductsService.AddProduct(Product product)
         {
-            return await CrudService.Add(product, c => c.Name == product.Name);
+            return await CrudService.Add(product, c => c.Name == product.Name || (c.Barcode != "" && c.Barcode == product.Barcode));
         }
-
+        async Task<bool> IProductsService.AddProducts(List<Product> products)
+        {
+            foreach (var product in products)
+            {
+                await CrudService.Add(product, c => c.Name == product.Name || (c.Barcode != "" && c.Barcode == product.Barcode), false);
+            }
+            return await Context.SaveChangesAsync() > 0;
+        }
         async Task<bool?> IProductsService.UpdateProduct(Product product)
         {
             var oldProduct = await Context.Products.FindAsync(product.Id);
@@ -56,14 +63,14 @@ namespace POS.Domain.Services
 
         async Task<List<Product>> IProductsService.GetAllProducts()
         {
-            await Context.Properties.LoadAsync();
+            //await Context.Properties.LoadAsync();
             return await Context.Products.Include("Category").Include("Unit").Include("Properties").ToListAsync();
         }
 
         async Task<Product> IProductsService.GetProduct(string barcode)
         {
             var product = await Context.Products.FirstOrDefaultAsync(p => p.Barcode == barcode);
-            return product ?? (await Context.BarCodes.Include(b=>b.Product).FirstOrDefaultAsync(b=>b.Barcode == barcode))?.Product;
+            return product ?? (await Context.BarCodes.Include(b => b.Product).FirstOrDefaultAsync(b => b.Barcode == barcode))?.Product;
         }
     }
 

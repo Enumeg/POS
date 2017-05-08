@@ -12,7 +12,8 @@
     public enum PaymentMethod
     {
         Cash = 1,
-        Later = 2
+        Later = 2,
+        Visa = 3
     };
 
     public enum LoanType

@@ -98,6 +98,7 @@
     <Compile Include="Interfaces\ISuppliersService.cs" />
     <Compile Include="Interfaces\IPointsService.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\PropertyValue.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\Shift.cs" />

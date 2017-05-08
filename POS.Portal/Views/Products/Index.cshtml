@@ -1,6 +1,8 @@
 ﻿<h3>{{title.split("-")[0]}}</h3>
 <hr />
-<a class="btn btn-primary" ng-click="new()">@Common.New &nbsp; <b class="glyphicon glyphicon-plus"></b></a>
+<a class="btn btn-primary" ng-click="new(false)">@Common.New &nbsp; <b class="glyphicon glyphicon-plus"></b></a>
+<a class="btn btn-primary" ng-click="new(true)">@Common.AddMany &nbsp; <b class="glyphicon glyphicon-plus"></b></a>
+
 <br /><br />
 <table class="table table-bordered table-condensed">
     <tr>
@@ -23,92 +25,126 @@
                     <a class="btn btn-xs btn-success" ng-click="add()">@Product.AddSimilarProduct &nbsp;<b class="glyphicon glyphicon-add"></b></a>
                     <a class="btn btn-xs btn-info" ng-click="edit()">@Common.Edit &nbsp;<b class="glyphicon glyphicon-edit"></b></a>
                     <a class="btn btn-xs btn-danger" ng-click="delete()">@Common.Delete &nbsp;<b class="glyphicon glyphicon-remove"></b></a>
-                </div>               
+                </div>
             </td>
         </tr>
     </tbody>
 </table>
 <div class="modal fade" role="dialog" id="productModal">
-    <div class="modal-dialog">
+    <div ng-class="{ 'modal-dialog-lg': isMultiple,'modal-dialog':!isMultiple }">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="ModalLabel">{{modelTitle}}</h4>
             </div>
             <div class="modal-body">
-                <form novalidate="" name="productForm" class="form-horizontal">
-                    <div class="form-group">
-                        <div class="col-sm-2">
-                            <label class="control-label">@Product.Category</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <select class="form-control" ng-model="product.CategoryId" ng-options="category.Id as category.Name for category in categories" name="Category" ng-change="listProperties();" ng-disabled="product.Id > 0 " required></select>
-                            <span class="ng-invalid" ng-show="(productForm.Category.$dirty || productForm.$submitted ) &&  productForm.Category.$error.required">
-                                @string.Format(Common.Required, Product.Category)
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-2">
-                            <label class="control-label">@Common.Name</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <input class="form-control" ng-model="product.Name" name="Name" required />
+                <div class="row">
+                    <div ng-class="{ 'col-sm-6': isMultiple, 'col-sm-12' : !isMultiple}">
+                        <form novalidate="" name="productForm" class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">@Product.Category</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <select class="form-control" ng-model="product.CategoryId" ng-options="category.Id as category.Name for category in categories" name="Category" ng-change="listProperties();" ng-disabled="product.Id > 0 " required></select>
+                                    <span class="ng-invalid" ng-show="(productForm.Category.$dirty || productForm.$submitted ) &&  productForm.Category.$error.required">
+                                        @string.Format(Common.Required, Product.Category)
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">@Common.Name</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <input class="form-control" ng-model="product.Name" name="Name" required />
 
-                            <span class="ng-invalid" ng-show="(productForm.Name.$dirty || productForm.$submitted ) &&  productForm.Name.$error.required">
-                                @string.Format(Common.Required, Common.Name)
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-2">
-                            <label class="control-label">@Product.Barcode</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <input class="form-control" ng-model="product.Barcode" name="Barcode" />
-                            @*<span class="ng-invalid" ng-show="(productForm.Barcode.$dirty || productForm.$submitted ) &&  productForm.Barcode.$error.required">
-                                    @string.Format(Common.Required, Product.Barcode)
-                                </span>*@
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-2">
-                            <label class="control-label">@Product.SalePrice</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <input class="form-control" ng-model="product.SalePrice" name="SalePrice" required />
+                                    <span class="ng-invalid" ng-show="(productForm.Name.$dirty || productForm.$submitted ) &&  productForm.Name.$error.required">
+                                        @string.Format(Common.Required, Common.Name)
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">@Product.Barcode</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <input class="form-control" ng-model="product.Barcode" name="Barcode" />
+                                    @*<span class="ng-invalid" ng-show="(productForm.Barcode.$dirty || productForm.$submitted ) &&  productForm.Barcode.$error.required">
+                                            @string.Format(Common.Required, Product.Barcode)
+                                        </span>*@
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">@Product.SalePrice</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <input class="form-control" ng-model="product.SalePrice" name="SalePrice" required />
 
-                            <span class="ng-invalid" ng-show="(productForm.SalePrice.$dirty || productForm.$submitted ) &&  productForm.SalePrice.$error.required">
-                                @string.Format(Common.Required, Product.SalePrice)
-                            </span>
-                        </div>
+                                    <span class="ng-invalid" ng-show="(productForm.SalePrice.$dirty || productForm.$submitted ) &&  productForm.SalePrice.$error.required">
+                                        @string.Format(Common.Required, Product.SalePrice)
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">@Product.Unit</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <select class="form-control" ng-model="product.Name" ng-options="unit.Name as unit.Id for unit in units" name="Unit"></select>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-repeat="property in product.Properties">
+                                <div class="col-sm-2">
+                                    <label class="control-label">{{property.Name}}</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <angucomplete-alt pause="200" selected-object="setValue" local-data="property.Values" search-fields="Value" title-field="Value" minlength="1"
+                                                      input-class="form-control " override-suggestions="true" text-searching="false" text-no-results="false" initial-value="property.Value" />
+                                    <div>
+                                        <span ng-repeat="value in property.values">{{value}}<b ng-hide="$last">, </b></span>
+                                    </div>           
+                                </div>
+                            </div>
+                            <div class="form-group" ng-show="isMultiple">
+                                <div class="col-sm-2">
+                                </div>
+                                <div class="col-sm-8">
+                                    <a class="btn btn-block btn-success" ng-click="generate()">@Common.Generate</a>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                </div>
+                                <div class="col-sm-8">
+                                    <a class="btn btn-block btn-success" ng-click="save()">@Common.Save</a>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-2">
-                            <label class="control-label">@Product.Unit</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <select class="form-control" ng-model="product.Name" ng-options="unit.Name as unit.Id for unit in units" name="Unit"></select>
-                        </div>
+                    <div class="col-sm-6" ng-show="isMultiple">
+                        <table class="table table-bordered table-condensed">
+                            <thead>
+                                <tr>
+                                    <th class="col-sm1"></th>
+                                    <th class="col-sm-11"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="product in newProducts">
+                                    <td>
+                                        <input type="checkbox" ng-model="product.isAdded" />
+                                    </td>
+                                    <td>
+                                        {{product.Name}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="form-group" ng-repeat="property in product.Properties">
-                        <div class="col-sm-2">
-                            <label class="control-label">{{property.Name}}</label>
-                        </div>
-                        <div class="col-sm-8">
-                            <angucomplete-alt pause="200" selected-object="setValue" local-data="property.Values" search-fields="Value" title-field="Value" minlength="1" 
-                                              input-class="form-control " override-suggestions="true" text-searching="false" text-no-results="false" initial-value="property.Value" />
+                </div>
 
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-2">
-                        </div>
-                        <div class="col-sm-8">
-                            <a class="btn btn-block btn-success" ng-click="save()">@Common.Save</a>
-                        </div>
-                    </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-default" data-dismiss="modal">@Common.Close</button>

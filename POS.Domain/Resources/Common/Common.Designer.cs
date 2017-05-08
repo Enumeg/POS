@@ -70,6 +70,15 @@ namespace POS.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Many.
+        /// </summary>
+        public static string AddMany {
+            get {
+                return ResourceManager.GetString("AddMany", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All.
         /// </summary>
         public static string All {
@@ -174,6 +183,15 @@ namespace POS.Resources {
         public static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate.
+        /// </summary>
+        public static string Generate {
+            get {
+                return ResourceManager.GetString("Generate", resourceCulture);
             }
         }
         

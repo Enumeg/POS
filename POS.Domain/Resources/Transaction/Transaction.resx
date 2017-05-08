@@ -147,4 +147,7 @@
   <data name="Total" xml:space="preserve">
     <value>Total</value>
   </data>
+  <data name="Visa" xml:space="preserve">
+    <value>Visa</value>
+  </data>
 </root>

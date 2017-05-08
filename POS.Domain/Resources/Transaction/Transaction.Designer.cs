@@ -149,5 +149,14 @@ namespace POS.Resources {
                 return ResourceManager.GetString("Total", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visa.
+        /// </summary>
+        public static string Visa {
+            get {
+                return ResourceManager.GetString("Visa", resourceCulture);
+            }
+        }
     }
 }

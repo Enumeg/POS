@@ -171,4 +171,10 @@
   <data name="Barcodes" xml:space="preserve">
     <value>Barcodes count doesn't equal amount</value>
   </data>
+  <data name="AddMany" xml:space="preserve">
+    <value>Add Many</value>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>Generate</value>
+  </data>
 </root>

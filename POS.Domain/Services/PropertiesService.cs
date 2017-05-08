@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using POS.Domain.Interfaces;
+using POS.Domain.Models;
 
 namespace POS.Domain.Services
 {
@@ -48,8 +49,14 @@ namespace POS.Domain.Services
         async Task<List<Property>> IPropertiesService.GetCategoryProperties(int categoryId)
         {
             var category = await Context.Categories.Include(c => c.Properties).FirstOrDefaultAsync(c => c.Id == categoryId);
-            var properties = category.Properties.Select(p => p.Id);
-            return await Context.Properties.Include(p => p.Products).Where(p => properties.Contains(p.Id)).ToListAsync();
+            var ids = category.Properties.Select(p => p.Id);
+            var properties = await Context.Properties.Include(p => p.Products).Where(p => ids.Contains(p.Id)).ToListAsync();
+            properties.ForEach(p =>
+            {
+                p.Values = p.Products.Select(v => v.Value).Distinct().Select(v=> new PropertyValue { Value = v }).ToList();
+                p.Products.Clear();
+            });
+            return properties;
         }
 
     }

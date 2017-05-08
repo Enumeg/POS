@@ -75,6 +75,26 @@ namespace POS.Portal.Controllers.API
                 return InternalServerError();
             }
         }
+       
+        [Route("api/products/Add")]
+        public async Task<IHttpActionResult> PostProducts(List<Product> products)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                var result = await _productsService.AddProducts(products);
+                if (result == false)
+                    return BadRequest(Common.Duplicated);
+                return Ok();
+            }
+            catch
+            {
+                return InternalServerError();
+            }
+        }
 
         // DELETE: api/Products/5
         [ResponseType(typeof(Product))]
