@@ -124,18 +124,9 @@
                         </form>
                     </div>
                     <div class="col-sm-6" ng-show="isMultiple">
-                        <table class="table table-bordered table-condensed">
-                            <thead>
-                                <tr>
-                                    <th class="col-sm1"></th>
-                                    <th class="col-sm-11"></th>
-                                </tr>
-                            </thead>
+                        <table class="table table-bordered table-condensed">                         
                             <tbody>
-                                <tr ng-repeat="product in newProducts">
-                                    <td>
-                                        <input type="checkbox" ng-model="product.isAdded" />
-                                    </td>
+                                <tr ng-repeat="product in newProducts">                           
                                     <td>
                                         {{product.Name}}
                                     </td>
