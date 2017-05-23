@@ -92,7 +92,7 @@
                                     <label class="control-label">@Product.Unit</label>
                                 </div>
                                 <div class="col-sm-8">
-                                    <select class="form-control" ng-model="product.Name" ng-options="unit.Name as unit.Id for unit in units" name="Unit"></select>
+                                    <select class="form-control" ng-model="product.UnitId" ng-options="unit.Name as unit.Id for unit in units" name="Unit"></select>
                                 </div>
                             </div>
                             <div class="form-group" ng-repeat="property in product.Properties">
