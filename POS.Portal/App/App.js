@@ -35,9 +35,11 @@ define(["Services/routeResolver"], function () {
                 .when("/Products", route.resolve("Products"))
                 .when("/Units", route.resolve("Coding", "Object"))
                 .when("/Properties", route.resolve("Coding", "Object"))
+                .when("/Banks", route.resolve("Coding", "Object"))
                 .when("/Customers", route.resolve("Coding", "Person"))
                 .when("/Suppliers", route.resolve("Coding", "Person"))
                 .when("/Points", route.resolve("Coding", "Points"))
+                .when("/BankAccounts", route.resolve("Coding", "BankAccounts"))
                 .when("/Purchases", route.resolve("Transactions", "Purchases"))
                 .otherwise({ redirectTo: "/Products" });
 

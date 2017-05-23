@@ -22,5 +22,9 @@ namespace POS.Portal.Controllers
         {
             return View();
         }
+        public ActionResult BankAccounts()
+        {
+            return View();
+        }
     }
 }

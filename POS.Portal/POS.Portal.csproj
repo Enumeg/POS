@@ -200,12 +200,14 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\API\BankAccountsController.cs" />
     <Compile Include="Controllers\API\CategoriesController.cs" />
     <Compile Include="Controllers\API\PurchasesController.cs" />
     <Compile Include="Controllers\API\CutomersController.cs" />
     <Compile Include="Controllers\API\ProductsController.cs" />
     <Compile Include="Controllers\API\SuppliersController.cs" />
     <Compile Include="Controllers\API\PointsController.cs" />
+    <Compile Include="Controllers\API\BanksController.cs" />
     <Compile Include="Controllers\API\UnitsController.cs" />
     <Compile Include="Controllers\API\PropertiesController.cs" />
     <Compile Include="Controllers\API\ResourceController.cs" />
@@ -263,6 +265,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Images\pos.png" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-cookies.js" />
@@ -354,6 +357,7 @@
     <Content Include="Views\Coding\Points.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Transactions\Purchases.cshtml" />
+    <Content Include="Views\Coding\BankAccounts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

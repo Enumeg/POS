@@ -120,6 +120,12 @@
   <data name="Application" xml:space="preserve">
     <value>POS</value>
   </data>
+  <data name="BankAccounts" xml:space="preserve">
+    <value>Bank Accounts</value>
+  </data>
+  <data name="Banks" xml:space="preserve">
+    <value>Banls</value>
+  </data>
   <data name="Categories" xml:space="preserve">
     <value>Categories</value>
   </data>

@@ -1,0 +1,39 @@
+﻿
+<h3>{{title.split("-")[1]}}</h3>
+<hr />
+<a class="btn btn-primary" ng-click="new({Id:0 ,Name: '',Number: '' ,BankId : 0})">@Common.New &nbsp; <b class="glyphicon glyphicon-plus"></b></a>
+<br /><br />
+<table class="table table-bordered table-condensed">
+    <tbody>
+        <tr>
+            <th>@Common.Name</th>
+            <th>@Bank.Number</th>
+            <th>@Bank.BankTitle</th>
+            <th></th>
+        </tr>
+
+        <tr ng-animate="'animate'" ng-repeat="entity in list" ng-init="editable=entity.Id === 0" class="editable" ng-form="editForm">
+            <td ng-class="{ 'ng-invalid' : (editForm.Name.$dirty || editForm.$submitted ) &&  editForm.Name.$error.required}">
+                <input type="text" class="form-control" name="Name" ng-readonly="!editable" ng-model="entity.Name" required>
+            </td>
+            <td ng-class="{ 'ng-invalid' : (editForm.Number.$dirty || editForm.$submitted ) &&  editForm.Number.$error.required}">
+                <input type="text" class="form-control" name="Number" ng-readonly="!editable" ng-model="entity.Number" required>
+            </td>         
+            <td ng-class="{ 'ng-invalid' : (editForm.Bank.$dirty || editForm.$submitted ) &&  editForm.PointType.$error.required}">
+                <Select class="form-control" name="Bank" ng-disabled="!editable" ng-model="entity.BankId" ng-options="bank.Id as bank.Name for bank in banks"
+                required ></Select>
+            </td>
+
+            <td>
+                <div class="btn-group" ng-hide="editable">
+                    <a class="btn btn-xs btn-info" ng-click="edit()">@Common.Edit &nbsp;<b class="glyphicon glyphicon-edit"></b></a>
+                    <a class="btn btn-xs btn-danger" ng-click="delete()">@Common.Delete &nbsp;<b class="glyphicon glyphicon-remove"></b></a>
+                </div>
+                <div class="btn-group" ng-show="editable">
+                    <a class="btn btn-xs btn-success" ng-click="save()">@Common.Save &nbsp;<b class="glyphicon glyphicon-ok"></b></a>
+                    <a class="btn btn-xs btn-warning" ng-click="cancel()">@Common.Cancel &nbsp;<b class="glyphicon glyphicon-remove"></b></a>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

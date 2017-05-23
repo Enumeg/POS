@@ -18,7 +18,7 @@
 
     public enum LoanType
     {
-        Check = 1,
+        Cheque = 1,
         Loan = 2
     };
     public enum PointType
@@ -26,6 +26,10 @@
         Store = 1,
         Market = 2
     }
-
+    public enum BankTransactionTypes :byte
+    {
+        Deposit = 1,
+        WithDrawal =2
+    }
 }
 

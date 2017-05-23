@@ -10,39 +10,43 @@
 </head>
 <body>
     <div class="wraper">
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coding <b class="caret"></b></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="/#/Units">@Pages.Units</a></li>
-                                <li><a href="/#/Properties">@Pages.Properties</a></li>
-                                <li><a href="/#/Categories">@Pages.Categories</a></li>
-                                <li><a href="/#/Points">@Pages.Points</a></li>
-                                <li><a href="/#/Customers">@Pages.Customers</a></li>
-                                <li><a href="/#/Suppliers">@Pages.Suppliers</a></li>
-                                <li><a href="/#/Products">@Pages.Products</a></li>
-                                <li><a href="/#/Purchases">@Pages.Purchases</a></li>
+        @if (Request.IsAuthenticated)
+        {
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coding <b class="caret"></b></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/#/Units">@Pages.Units</a></li>
+                                    <li><a href="/#/Properties">@Pages.Properties</a></li>
+                                    <li><a href="/#/Categories">@Pages.Categories</a></li>
+                                    <li><a href="/#/Points">@Pages.Points</a></li>
+                                    <li><a href="/#/Customers">@Pages.Customers</a></li>
+                                    <li><a href="/#/Suppliers">@Pages.Suppliers</a></li>
+                                    <li><a href="/#/Products">@Pages.Products</a></li>
+                                    <li><a href="/#/Purchases">@Pages.Purchases</a></li>
+                                    <li><a href="/#/Banks">@Pages.Banks</a></li>
+                                    <li><a href="/#/BankAccounts">@Pages.BankAccounts</a></li>
+                                </ul>
+                            </li>
 
-                            </ul>
-                        </li>
-
-                    </ul>
-                    @Html.Partial("_LoginPartial")
+                        </ul>
+                        @Html.Partial("_LoginPartial")
+                    </div>
                 </div>
             </div>
-        </div>
+        }
         <div class="container">
-                @RenderBody()   
+            @RenderBody()
         </div>
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>

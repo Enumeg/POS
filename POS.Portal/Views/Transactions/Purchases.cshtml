@@ -15,8 +15,8 @@
                     </span>
                 </div>
                 <div class="col-sm-3">
-                    <input class="form-control" ng-model="transaction.Date" name="Date"  uib-datepicker-popup="dd/MM/yyyy" is-open="dt1.opened"
-           ng-focus="dt1.opened = true" ng-click="dt1.opened = true" show-weeks="false" show-button-bar="false" required />
+                    <input class="form-control" ng-model="transaction.Date" name="Date" uib-datepicker-popup="dd/MM/yyyy" is-open="dt1.opened"
+                           ng-focus="dt1.opened = true" ng-click="dt1.opened = true" show-weeks="false" show-button-bar="false" required />
                     <span class="ng-invalid" ng-show="(transactionForm.Date.$dirty || transactionForm.$submitted ) &&  transactionForm.Date.$error.required">
                         @string.Format(Common.Required, Common.Date)
                     </span>
@@ -75,7 +75,7 @@
                             <span ng-hide="item.Barcode ===''">
                                 {{item.Barcode}}
                             </span>
-                            <a ng-show="item.Barcode ===''" ng-click="addSerials($index);">...</a>
+                            <a class="btn" ng-show="item.Barcode ===''" ng-click="addSerials($index);"><i class="glyphicon glyphicon-barcode"></i></a>
                         </td>
                         <td>{{item.Name}}</td>
                         <td contenteditable="true" ng-model="item.Amount">{{item.Amount}}</td>
@@ -91,7 +91,23 @@
             </table>
         </div>
         <div class="col-sm-3" style="border-left: 2px solid black">
-            <table class="table table-condensed">
+            <table class="table table-condensed">             
+                <tr>
+                    <td><label>@Transaction.Discount: </label></td>
+                    <td><input class="form-control" ng-model="transaction.Discount" /></td>
+                </tr>
+                <tr>
+                    <td><label>@Transaction.Total: </label></td>
+                    <td><input class="form-control" value="{{getTotal()}}" readonly="" /></td>
+                </tr>
+                <tr>
+                    <td><label>@Transaction.Paid: </label></td>
+                    <td><input class="form-control" ng-model="transaction.Paid" /></td>
+                </tr>
+                <tr>
+                    <td><label>@Transaction.Rest: </label></td>
+                    <td><input class="form-control" value="{{getRest()}}" readonly="" /></td>
+                </tr>
                 <tr>
                     <td><label>@Transaction.PaymentMethod: </label></td>
                     <td>
@@ -102,24 +118,21 @@
                         </select>
                     </td>
                 </tr>
-                <tr>
-                    <td><label>@Transaction.Discount: </label></td>
-                    <td><input ng-model="transaction.Discount" /></td>
+                <tr ng-show="transaction.PaymentMethod===2">
+                    <td colspan="2">
+                        <div class="btn-group btn-group-justified">
+                            <a class="btn btn-default" ng-click="addInstallments();">@Transaction.Installments</a>
+                            <a class="btn btn-default" ng-click="addCheques();">@Transaction.Cheques</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr ng-show="transaction.PaymentMethod===3">
+                    <td colspan="2">
+                        <a class="btn btn-default btn-block" ng-click="PayVisa();">@Transaction.Visa</a>
+                    </td>
                 </tr>
                 <tr>
-                    <td><label>@Transaction.Total: </label></td>
-                    <td><input value="{{getTotal()}}" readonly="" /></td>
-                </tr>
-                <tr>
-                    <td><label>@Transaction.Paid: </label></td>
-                    <td><input ng-model="transaction.Paid" /></td>
-                </tr>
-                <tr>
-                    <td><label>@Transaction.Rest: </label></td>
-                    <td><input value="{{getRest()}}" readonly="" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><a class="btn btn-success" ng-click="save();">@Common.Save</a></td>
+                    <td colspan="2"><a class="btn btn-success btn-block" ng-click="save();">@Common.Save</a></td>
                 </tr>
             </table>
 
@@ -127,28 +140,130 @@
 
         </div>
     </form>
-    <div class="modal fade" role="dialog" id="serialsModal">
-        <div class="modal-dialog modal-lg">
+    <div class="modal fade" role="dialog" id="Modal">
+        <div class="modal-dialog modal-auto">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="ModalLabel"></h4>
+                    <h4 class="modal-title" id="ModalLabel">@Product.Barcode</h4>
                 </div>
-                <div class="modal-body">
-                    <form ng-submit="addSerial()">
-                        <input class="form-control" ng-model="serial" required />
-                        <input type="submit" style="display: none;" />
-                    </form>
-                    <ul>
-                        <li ng-repeat="barcode in transactionDetails[selectedIndex].Barcodes">{{barcode.Barcode.Barcode}}</li>
-                    </ul>
+                <div class="modal-body" ng-include="tmpl">
+
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-default" data-dismiss="modal">@Common.Close</button>
                 </div>
             </div>
         </div>
-
     </div>
 
 </div>
+<script type="text/ng-template" id="serials.tmpl">
+    <form ng-submit="addSerial()">
+        <input class="form-control" ng-model="serial" required />
+        <input type="submit" style="display: none;" />
+    </form>
+    <ul>
+        <li ng-repeat="barcode in transactionDetails[selectedIndex].Barcodes">{{barcode.Barcode.Barcode}}</li>
+    </ul>
+</script>
+<script type="text/ng-template" id="installments.tmpl">
+    <form class="form-inline">
+        <label>@Common.Date</label>
+        <input class="form-control" ng-model="installment.DueDate" uib-datepicker-popup="dd/MM/yyyy" is-open="dt3.opened"
+               ng-focus="dt3.opened = true" ng-click="dt3.opened = true" show-weeks="false" show-button-bar="false" required />
+        <label>@Common.Value</label>
+        <input class="form-control" ng-model="installment.Value" required />
+        <a class="btn btn-success" ng-click="addInstallment();">@Common.Add</a>
+    </form>
+    <form class="form-inline">
+        <label>@Common.Date</label>
+        <input class="form-control" ng-model="installment.Date" uib-datepicker-popup="dd/MM/yyyy" is-open="dt2.opened"
+               ng-focus="dt2.opened = true" ng-click="dt2.opened = true" show-weeks="false" show-button-bar="false" required />
+        <label>@Common.Count</label>
+        <input class="form-control" ng-model="installment.Count" required />
+        <label>@Common.Every</label>
+        <div class="input-group">
+            <input type="number" class="form-control" ng-model="installment.Months" required />
+            <span class="input-group-addon">@Common.Month</span>
+        </div>
+        <a class="btn btn-success" ng-click="generateInstallments();">@Common.Generate</a>
+    </form>
+    <br />
+    <table class="table table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th>@Installment.DueDate</th>
+                <th>@Common.Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in transaction.Installments">
+                <td>{{item.DueDate | date: 'dd/MM/yyyy'}}</td>
+                <td>{{item.Value}}</td>
+            </tr>
+        </tbody>
+    </table>
+</script>
+<script type="text/ng-template" id="cheques.tmpl">
+    <form class="form-inline">
+        <label>@Common.Date</label>
+        <input class="form-control" ng-model="cheque.DueDate" uib-datepicker-popup="dd/MM/yyyy" is-open="dt3.opened"
+               ng-focus="dt3.opened = true" ng-click="dt3.opened = true" show-weeks="false" show-button-bar="false" required />
+        <label>@Common.Value</label>
+        <input class="form-control" ng-model="cheque.Value" required />
+        <label>@Bank.Number</label>
+        <input class="form-control" ng-model="cheque.Number" required />
+        <label>@Bank.BankAccount</label>
+        <select class="form-control" ng-model="cheque.BankAccountId" ng-options="bankAccount.Id as bankAccount.Label for bankAccount in bankAccounts" required></select>
+        <a class="btn btn-success" ng-click="addCheque();">@Common.Add</a>
+    </form>
+    <form class="form-inline">
+        <label>@Common.Date</label>
+        <input class="form-control" ng-model="cheque.Date" uib-datepicker-popup="dd/MM/yyyy" is-open="dt2.opened"
+               ng-focus="dt2.opened = true" ng-click="dt2.opened = true" show-weeks="false" show-button-bar="false" required />
+        <label>@Common.Count</label>
+        <input class="form-control" ng-model="cheque.Count" required />
+        <label>@Common.Every</label>
+        <div class="input-group">
+            <input type="number" class="form-control" ng-model="cheque.Months" required />
+            <span class="input-group-addon">@Common.Month</span>
+        </div>
+        <label>@Bank.BankAccount</label>
+        <select class="form-control" ng-model="cheque.BankAccount" ng-options="bankAccount.Id as bankAccount.Label for bankAccount in bankAccounts" required></select>
+        <a class="btn btn-success" ng-click="generateCheques();">@Common.Generate</a>
+    </form>
+    <br />
+    <table class="table table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th>@Bank.Number</th>
+                <th>@Installment.DueDate</th>
+                <th>@Common.Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in transaction.Cheques">
+                <td>
+                    <input type="text" class="form-control" ng-model="item.Number" required>
+                </td>
+                <td>{{item.DueDate | date: 'dd/MM/yyyy'}}</td>
+                <td>{{item.Value}}</td>
+            </tr>
+        </tbody>
+    </table>
+</script>
+<script type="text/ng-template" id="visa.tmpl">
+    <form class="form-inline">
+        <label>@Common.Date</label>
+        <input class="form-control" ng-model="visa.Date" uib-datepicker-popup="dd/MM/yyyy" is-open="dt3.opened"
+               ng-focus="dt3.opened = true" ng-click="dt3.opened = true" show-weeks="false" show-button-bar="false" required />
+        <label>@Common.Value</label>
+        <input class="form-control" ng-model="visa.Value" required />
+        <label>@Bank.Number</label>
+        <input class="form-control" ng-model="visa.Number" required />
+        <label>@Bank.BankAccount</label>
+        <select class="form-control" ng-model="visa.BankAccountId" ng-options="bankAccount.Id as bankAccount.Label for bankAccount in bankAccounts" required></select>
+    </form>
+
+</script>

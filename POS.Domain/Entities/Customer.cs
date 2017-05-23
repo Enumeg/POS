@@ -11,5 +11,6 @@ namespace POS.Domain.Entities
         }
         public virtual ICollection<Sale> Sales { get; set; }
         public virtual ICollection<SaleBack> SaleBacks { get; set; }
+
     }
 }

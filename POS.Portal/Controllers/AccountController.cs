@@ -121,6 +121,8 @@ namespace POS.Portal.Controllers
                         {
                             //todo: close shift
                         }
+                        else
+                            CookieHelper.ShiftId = shiftResult.Id;
                         return RedirectToLocal(returnUrl);
                     }
                     else

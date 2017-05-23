@@ -104,29 +104,23 @@
                                                       input-class="form-control " override-suggestions="true" text-searching="false" text-no-results="false" initial-value="property.Value" />
                                     <div>
                                         <span ng-repeat="value in property.values">{{value}}<b ng-hide="$last">, </b></span>
-                                    </div>           
-                                </div>
-                            </div>
-                            <div class="form-group" ng-show="isMultiple">
-                                <div class="col-sm-2">
-                                </div>
-                                <div class="col-sm-8">
-                                    <a class="btn btn-block btn-success" ng-click="generate()">@Common.Generate</a>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-sm-2">
-                                </div>
-                                <div class="col-sm-8">
-                                    <a class="btn btn-block btn-success" ng-click="save()">@Common.Save</a>
+                                <div class="col-sm-offset-2 col-sm-8">
+                                    <div class="btn-group btn-group-justified">
+                                        <a class="btn btn-default" ng-click="generate()" ng-show="isMultiple">@Common.Generate</a>
+                                        <a class="btn btn-success" ng-click="save()">@Common.Save</a>
+                                    </div>                          
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="col-sm-6" ng-show="isMultiple">
-                        <table class="table table-bordered table-condensed">                         
+                        <table class="table table-bordered table-condensed">
                             <tbody>
-                                <tr ng-repeat="product in newProducts">                           
+                                <tr ng-repeat="product in newProducts">
                                     <td>
                                         {{product.Name}}
                                     </td>

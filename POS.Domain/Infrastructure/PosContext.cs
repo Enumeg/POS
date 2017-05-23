@@ -25,6 +25,8 @@ namespace POS.Domain.Infrastructure
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Point>().HasMany(p => p.InTransfares).WithRequired(t => t.ToPoint);
             modelBuilder.Entity<Point>().HasMany(p => p.OutTransfares).WithRequired(t => t.FromPoint);
+            modelBuilder.Entity<Sale>().HasOptional(s => s.Deposit).WithOptionalDependent(d => d.Sale).Map(x => x.MapKey("DepositId"));
+            modelBuilder.Entity<Purchase>().HasOptional(s => s.WithDrawal).WithOptionalDependent(d => d.Purchase).Map(x => x.MapKey("WithDrawalId"));
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }               
         public virtual DbSet<Shift> Shifts { get; set; }
@@ -54,6 +56,13 @@ namespace POS.Domain.Infrastructure
         public virtual DbSet<TransferDetail> TransfareDetails { get; set; }   
         public virtual DbSet<Damaged> Damaged { get; set; }
         public virtual DbSet<BarCode> BarCodes { get; set; }
+        public virtual DbSet<Bank> Banks { get; set; }
+        public virtual DbSet<BankAccount> BankAccounts { get; set; }
+        public virtual DbSet<CustomerCheque> CustomerCheques { get; set; }
+        public virtual DbSet<SupplierCheque> SupplierCheques { get; set; }
+
+        public virtual DbSet<Deposit> Deposits { get; set; }
+        public virtual DbSet<WithDrawal> WithDrawal { get; set; }
 
     }
 }

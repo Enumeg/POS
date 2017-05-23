@@ -137,7 +137,7 @@ select:disabled {
     text-overflow: '';
 }
 
-.form-inline > div ,.form-inline > .form-control{
+.form-inline > div, .form-inline > .form-control {
     display: inline-block;
     margin: 0 8px 0 5px;
 }
@@ -419,6 +419,10 @@ select:disabled {
             margin-bottom: 10px;
             width: 100%;
         }
+
+.modal-dialog.modal-auto {
+    width: auto!important;
+}
 /*end modal*/
 .bordered {
     border: solid #ccc 0.2em;

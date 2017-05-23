@@ -22,14 +22,14 @@ namespace POS.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Pages {
+    public class Bank {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Pages() {
+        internal Bank() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace POS.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("POS.Domain.Resources.Pages.Pages", typeof(Pages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("POS.Domain.Resources.Bank.Bank", typeof(Bank).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,101 +61,38 @@ namespace POS.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to POS.
+        ///   Looks up a localized string similar to Bank account.
         /// </summary>
-        public static string Application {
+        public static string BankAccount {
             get {
-                return ResourceManager.GetString("Application", resourceCulture);
+                return ResourceManager.GetString("BankAccount", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bank Accounts.
+        ///   Looks up a localized string similar to Bank.
         /// </summary>
-        public static string BankAccounts {
+        public static string BankTitle {
             get {
-                return ResourceManager.GetString("BankAccounts", resourceCulture);
+                return ResourceManager.GetString("BankTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Banls.
+        ///   Looks up a localized string similar to Cheque.
         /// </summary>
-        public static string Banks {
+        public static string Cheque {
             get {
-                return ResourceManager.GetString("Banks", resourceCulture);
+                return ResourceManager.GetString("Cheque", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Categories.
+        ///   Looks up a localized string similar to Number.
         /// </summary>
-        public static string Categories {
+        public static string Number {
             get {
-                return ResourceManager.GetString("Categories", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Customers.
-        /// </summary>
-        public static string Customers {
-            get {
-                return ResourceManager.GetString("Customers", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Points.
-        /// </summary>
-        public static string Points {
-            get {
-                return ResourceManager.GetString("Points", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Products.
-        /// </summary>
-        public static string Products {
-            get {
-                return ResourceManager.GetString("Products", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Properties.
-        /// </summary>
-        public static string Properties {
-            get {
-                return ResourceManager.GetString("Properties", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Purchases.
-        /// </summary>
-        public static string Purchases {
-            get {
-                return ResourceManager.GetString("Purchases", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Suppliers.
-        /// </summary>
-        public static string Suppliers {
-            get {
-                return ResourceManager.GetString("Suppliers", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Units.
-        /// </summary>
-        public static string Units {
-            get {
-                return ResourceManager.GetString("Units", resourceCulture);
+                return ResourceManager.GetString("Number", resourceCulture);
             }
         }
     }

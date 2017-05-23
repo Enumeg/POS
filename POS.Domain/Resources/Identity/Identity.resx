@@ -153,4 +153,7 @@
   <data name="machinenotregistered" xml:space="preserve">
     <value>This machine is not registered</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>Log in</value>
+  </data>
 </root>

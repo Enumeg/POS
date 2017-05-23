@@ -3,8 +3,7 @@
 
 define(["app"], function (app) {
     app.register.controller("CodingController", ["$scope", "dataSource", "$location",
-        function ($scope, dataSource, $location) {
-
+        function ($scope, dataSource, $location) {        
             $scope.list = [];
             $scope.entity = {};
             //Create
@@ -59,7 +58,12 @@ define(["app"], function (app) {
             };
             //Initialize
             function initialize() {
-                dataSource.initialize("/api/" + $location.url().split("/")[1]);
+                $scope.page = $location.url().split("/")[1];
+                dataSource.initialize("/api/" + $scope.page);
+                if ($scope.page === "BankAccounts") {
+                    $scope.banks = [];
+                    dataSource.loadList($scope.banks, "api/banks");
+                }
                 list();
             };
 

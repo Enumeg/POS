@@ -58,11 +58,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\ApplicationUser.cs" />
+    <Compile Include="Entities\Bank.cs" />
+    <Compile Include="Entities\BankTransaction.cs" />
     <Compile Include="Entities\BarCode.cs" />
     <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Cheque.cs" />
     <Compile Include="Entities\ProductDetail.cs" />
-    <Compile Include="Entities\SupplierInstallment.cs" />
-    <Compile Include="Entities\CustomerInstallment.cs" />
     <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\Installment.cs" />
     <Compile Include="Entities\Point.cs" />
@@ -102,6 +103,11 @@
     <Compile Include="Models\Result.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\Shift.cs" />
+    <Compile Include="Resources\Bank\Bank.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Bank.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Common\Common.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -111,6 +117,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Identity.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Installment\Installment.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Installment.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\Pages\Pages.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -147,6 +158,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Transaction.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\BankAccountsService.cs" />
+    <Compile Include="Services\BanksService.cs" />
     <Compile Include="Services\CategoriesService.cs" />
     <Compile Include="Services\CustomersService.cs" />
     <Compile Include="Interfaces\IShiftsService.cs" />
@@ -173,6 +186,11 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Bank\Bank.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Bank.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>POS.Resources</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Common\Common.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Common.Designer.cs</LastGenOutput>
@@ -181,6 +199,11 @@
     <EmbeddedResource Include="Resources\Identity\Identity.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Identity.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>POS.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Installment\Installment.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Installment.Designer.cs</LastGenOutput>
       <CustomToolNamespace>POS.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Pages\Pages.resx">

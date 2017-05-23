@@ -12,9 +12,37 @@ define(["app"], function (app) {
             $scope.products = [];
             $scope.transactionDetails = [];
             $scope.selectedProducts = [];
-            $scope.transaction = { Total: 0, Discount: 0, Paid: 0, Rest: 0, PaymentMethod : 1 };
+            $scope.bankAccounts = [];
+            $scope.transaction = { Total: 0, Discount: 0, Paid: 0, Rest: 0, PaymentMethod: 1, Installments: [], Cheques :[] };
             $scope.product = {};
             $scope.selectedIndex = -1;
+
+            $scope.addInstallment = function () {
+                addInstallment($scope.transaction.Installments, this.installment);
+            };
+            $scope.generateInstallments = function () {
+                generateInstallments($scope.transaction.Installments, this.installment);
+            };
+            $scope.addCheque = function () {
+                addInstallment($scope.transaction.Cheques, this.cheque);
+            };
+            $scope.generateCheques = function () {
+                generateInstallments($scope.transaction.Cheques, this.cheque);
+            };
+
+            $scope.addInstallments = function () {
+                $scope.tmpl = "installments.tmpl";
+                $("#Modal").modal("show");
+            };
+            $scope.addCheques = function () {
+                $scope.tmpl = "cheques.tmpl";
+                $("#Modal").modal("show");
+            };
+            $scope.PayVisa = function () {
+                $scope.tmpl = "visa.tmpl";
+                $("#Modal").modal("show");
+            };
+            
             $scope.checkBarcode = function (key) {
                 if (key === 13) {
                     var barcode = $scope.product.Barcode;
@@ -25,7 +53,6 @@ define(["app"], function (app) {
                             $("#amount").focus();
                         }
                         else
-
                             toastr.error("No product found for this serial");
                     }).error(dataSource.error);
                 }
@@ -53,14 +80,15 @@ define(["app"], function (app) {
             }
             $scope.addSerials = function (index) {
                 $scope.selectedIndex = index;
-                $("#serialsModal").modal("show");
+                $scope.tmpl = "serials.tmpl";
+                $("#Modal").modal("show");
             }
             $scope.addSerial = function () {
                 var item = $scope.transactionDetails[$scope.selectedIndex];
-                item.Barcodes.push({ Barcode: { Barcode: $scope.serial, ProductId: item.ProductId } });
+                item.Barcodes.push({ Barcode: { Barcode: this.serial, ProductId: item.ProductId } });
                 if (item.Barcodes.length > item.Amount)
                     item.Amount = item.Barcodes.length;
-                $scope.serial = "";
+                this.serial = "";
             }
             //Delete
             $scope.delete = function (index) {
@@ -109,6 +137,7 @@ define(["app"], function (app) {
             function initialize() {
                 dataSource.initialize("/api/" + page);
                 dataSource.loadList($scope.products, "api/products");
+                dataSource.loadList($scope.bankAccounts, "api/BankAccounts");
 
                 if (page.indexOf("Purchase") !== -1) {
                     dataSource.loadList($scope.suppliers, "api/suppliers");
@@ -118,9 +147,29 @@ define(["app"], function (app) {
                     dataSource.loadList($scope.customers, "api/customers");
                     dataSource.loadList($scope.points, "api/points?type=1");
                 }
-                $("#serialsModal").modal({ show: false });
+                $("#Modal").modal({ show: false });
             };
-
+            var addInstallment = function (list, installment) {
+                var total = 0;
+                list.forEach(function (item) {
+                    total += item.Value;
+                });
+                if (total + installment.Value > $scope.transaction.Rest) {
+                    toastr.error("");
+                    return;
+                }
+                list.push(installment);
+            }
+            var generateInstallments = function (list, installment) {
+                list.length = 0;
+                var rest = $scope.transaction.Rest;
+                var Value = $scope.transaction.Rest / installment.Count;
+                var date = new Date(installment.Date.getTime());
+                for (var i = 0; i < installment.Count; i++) {
+                    list.push({ Value, DueDate: new Date(date.getTime()), Number: (installment.Number || "") });
+                    date.setMonth(date.getMonth() + installment.Months);
+                }
+            }
             initialize();
 
         }]);
