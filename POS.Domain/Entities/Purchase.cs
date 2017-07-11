@@ -9,7 +9,7 @@ namespace POS.Domain.Entities
     {
         public Purchase()
         {
-            PurchaseDetails = new List<PurchaseDetail>();
+            Details = new List<PurchaseDetail>();
             PurchaseBacks = new List<PurchaseBack>();
             Installments = new List<SupplierInstallment>();
             Cheques = new List<SupplierCheque>();
@@ -20,12 +20,12 @@ namespace POS.Domain.Entities
         public int PointId { get; set; }
         public virtual Point Point { get; set; }
         public virtual WithDrawal WithDrawal { get; set; }
-        public virtual ICollection<PurchaseDetail> PurchaseDetails { get; set; }
+        public virtual ICollection<PurchaseDetail> Details { get; set; }
         public virtual ICollection<PurchaseBack> PurchaseBacks { get; set; }
         public virtual ICollection<SupplierInstallment> Installments { get; set; }
         public virtual ICollection<SupplierCheque> Cheques { get; set; }
         [NotMapped]
-        public decimal Total => PurchaseDetails.Sum(s => s.Total);
+        public decimal Total => Details.Sum(s => s.Total);
 
 
 

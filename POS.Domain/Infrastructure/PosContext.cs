@@ -64,5 +64,8 @@ namespace POS.Domain.Infrastructure
         public virtual DbSet<Deposit> Deposits { get; set; }
         public virtual DbSet<WithDrawal> WithDrawal { get; set; }
 
+        public virtual DbSet<Stock> Stocks { get; set; }
+
+
     }
 }

@@ -7,6 +7,7 @@ using POS.Domain.Interfaces;
 using POS.Portal.Helpers;
 using POS.Resources;
 using Product = POS.Domain.Entities.Product;
+using POS.Domain.Services;
 
 namespace POS.Portal.Controllers.API
 {
@@ -14,11 +15,16 @@ namespace POS.Portal.Controllers.API
     {
         private readonly IProductsService _productsService;
 
-        public ProductsController(IProductsService productsService)
+        private readonly IStockService _stockService;
+       
+      
+        public ProductsController(IProductsService productsService ,IStockService stockService)
         {
             var context = ContextCache.GetPosContext();
             _productsService = productsService;
+            _stockService = stockService;        
             _productsService.Initialize(context);
+            _stockService.Initialize(context);
         }
 
         // GET: api/Products
@@ -30,7 +36,11 @@ namespace POS.Portal.Controllers.API
         {
             return await _productsService.GetProduct(barcode);
         }
-
+        [Route("api/Products/CheckStorage")]
+        public async Task<decimal> GetProduct(int productId, int pointId)
+        {
+            return await _stockService.GetStock(productId, pointId);
+        }
         // PUT: api/Products/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutProduct(Product product)
@@ -75,7 +85,7 @@ namespace POS.Portal.Controllers.API
                 return InternalServerError();
             }
         }
-       
+
         [Route("api/products/Add")]
         public async Task<IHttpActionResult> PostProducts(List<Product> products)
         {

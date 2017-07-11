@@ -6,6 +6,7 @@ using POS.Domain.Entities;
 using POS.Domain.Interfaces;
 using POS.Portal.Helpers;
 using POS.Resources;
+using POS.Domain.Services;
 
 namespace POS.Portal.Controllers.API
 {
@@ -13,11 +14,16 @@ namespace POS.Portal.Controllers.API
     {
         private readonly IPurchasesService _purchasesServices;
 
-        public PurchasesController(IPurchasesService purchasesService)
+        private readonly IStockService _stockService;
+
+        public PurchasesController(IPurchasesService purchasesService, IStockService stockService
+)
         {
             var context = ContextCache.GetPosContext();
             _purchasesServices = purchasesService;
+            _stockService = stockService;
             _purchasesServices.Initialize(context);
+            _stockService.Initialize(context);
         }
 
         // GET: api/Purchases
@@ -62,6 +68,10 @@ namespace POS.Portal.Controllers.API
             try
             {
                 purchase.ShiftId = CookieHelper.ShiftId;
+                foreach (var item in purchase.Details)
+                {
+                    await _stockService.UpdateStock(new Stock { Amount = item.Amount, ProductId = item.ProductId, PointId = purchase.PointId });
+                }
                 var result = await _purchasesServices.AddPurchase(purchase);
                 if (result == false)
                     return BadRequest(Common.Duplicated);

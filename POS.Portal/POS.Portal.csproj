@@ -358,6 +358,7 @@
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Transactions\Purchases.cshtml" />
     <Content Include="Views\Coding\BankAccounts.cshtml" />
+    <Content Include="Views\Transactions\Sales.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

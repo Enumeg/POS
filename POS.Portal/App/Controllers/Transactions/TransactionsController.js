@@ -10,10 +10,9 @@ define(["app"], function (app) {
             $scope.customers = [];
             $scope.points = [];
             $scope.products = [];
-            $scope.transactionDetails = [];
             $scope.selectedProducts = [];
             $scope.bankAccounts = [];
-            $scope.transaction = { Total: 0, Discount: 0, Paid: 0, Rest: 0, PaymentMethod: 1, Installments: [], Cheques :[] };
+            $scope.transaction = { Total: 0, Discount: 0, Paid: 0, Rest: 0, PaymentMethod: 1, Installments: [], Cheques: [], Details :[]};
             $scope.product = {};
             $scope.selectedIndex = -1;
 
@@ -42,13 +41,14 @@ define(["app"], function (app) {
                 $scope.tmpl = "visa.tmpl";
                 $("#Modal").modal("show");
             };
-            
+
             $scope.checkBarcode = function (key) {
                 if (key === 13) {
                     var barcode = $scope.product.Barcode;
                     dataSource.getUrl("api/products", { barcode }).success(function (product) {
                         if (product) {
-                            $scope.product = { Amount: 1.0, Price: 0.0, Name: product.Name, ProductId: product.Id, Barcode: barcode };
+                            var price = page === "Sales" ? product.SalePrice : 0.0;
+                            $scope.product = { Amount: 1.0, Price: price, Name: product.Name, ProductId: product.Id, Barcode: barcode };
                             $scope.$broadcast("angucomplete-alt:changeInput", "productName", product.Name);
                             $("#amount").focus();
                         }
@@ -59,19 +59,26 @@ define(["app"], function (app) {
             }
             $scope.setValue = function (selected) {
                 if (selected) {
-                    $scope.product = { Amount: 1.0, Price: 0.0, Name: selected.title, ProductId: selected.originalObject.Id, Barcode: "", Barcodes: [] };
+                    var price = page === "Sales" ? selected.originalObject.SalePrice : 0.0;
+                    $scope.product = { Amount: 1.0, Price: price, Name: selected.title, ProductId: selected.originalObject.Id, Barcode: "", Barcodes: [] };
                     $("#amount").focus();
                 }
             }
-            $scope.addProduct = function () {
+            $scope.addProduct = function () {            
                 if (!$scope.product.ProductId) return;
+                if (page === "Sales" && !$scope.transaction.PointId)
+                {
+                    toastr.error("asdasd");
+                    return;
+                }
+                checkStorage($scope.product.ProductId, $scope.transaction.PointId);
                 var productId = $scope.product.ProductId + "" + $scope.product.Price;
                 var index = $scope.selectedProducts.indexOf(productId);
                 if (index === -1) {
                     $scope.selectedProducts.push(productId);
-                    $scope.transactionDetails.push($scope.product);
+                    $scope.transaction.Details.push($scope.product);
                 } else {
-                    $scope.transactionDetails[index].Amount += $scope.product.Amount;
+                    $scope.transaction.Details[index].Amount += $scope.product.Amount;
                 }
                 $scope.product = {};
                 $scope.$broadcast("angucomplete-alt:clearInput", "productName");
@@ -84,7 +91,7 @@ define(["app"], function (app) {
                 $("#Modal").modal("show");
             }
             $scope.addSerial = function () {
-                var item = $scope.transactionDetails[$scope.selectedIndex];
+                var item = $scope.transaction.Details[$scope.selectedIndex];
                 item.Barcodes.push({ Barcode: { Barcode: this.serial, ProductId: item.ProductId } });
                 if (item.Barcodes.length > item.Amount)
                     item.Amount = item.Barcodes.length;
@@ -92,12 +99,12 @@ define(["app"], function (app) {
             }
             //Delete
             $scope.delete = function (index) {
-                $scope.transactionDetails.splice(index, 1);
+                $scope.transaction.Details.splice(index, 1);
                 $scope.selectedProducts.splice(index, 1);
             };
             $scope.getTotal = function () {
                 $scope.transaction.Total = 0;
-                $scope.transactionDetails.forEach(function (item) {
+                $scope.transaction.Details.forEach(function (item) {
                     $scope.transaction.Total += item.Amount * item.Price;
                 });
                 return $scope.transaction.Total;
@@ -116,13 +123,12 @@ define(["app"], function (app) {
                     toastr.error("Payment");
                     return;
                 }
-                $scope.transactionDetails.forEach(function (item) {
+                $scope.transaction.Details.forEach(function (item) {
                     if (item.Barcode === "" && item.Barcodes.length !== item.Amount) {
                         toastr.error($scope.resource.Barcodes);
                         return;
                     }
                 });
-                scope.transaction[page.substr(0, page.length - 1) + "Details"] = $scope.transactionDetails;
                 if (!scope.transaction.Id)//New entity
                     dataSource.insert(scope.transaction).success(function (data) {
 
@@ -133,6 +139,9 @@ define(["app"], function (app) {
                         scope.editable = false;
                     }).error(dataSource.error);
             };
+            function checkStorage(productId,PointId) {
+
+            }
             //Initialize
             function initialize() {
                 dataSource.initialize("/api/" + page);

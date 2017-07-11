@@ -14,6 +14,7 @@ namespace POS.Domain.Entities
             PurchaseBackDetails = new List<PurchaseBackDetail>();
             TransfareDetails = new List<TransferDetail>();
             DamagedDetails = new List<DamagedDetail>();
+            Stores = new List<Stock>();
         }
         public int Id { get; set; }
         public string Name { get; set; }
@@ -31,7 +32,7 @@ namespace POS.Domain.Entities
         public virtual ICollection<PurchaseBackDetail> PurchaseBackDetails { get; set; }
         public virtual ICollection<TransferDetail> TransfareDetails { get; set; }
         public virtual ICollection<DamagedDetail> DamagedDetails { get; set; }
-
+        public virtual ICollection<Stock> Stores { get; set; }
 
     }
 }

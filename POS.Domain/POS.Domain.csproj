@@ -71,6 +71,7 @@
     <Compile Include="Entities\ProductProperty.cs" />
     <Compile Include="Entities\Property.cs" />
     <Compile Include="Entities\Damaged.cs" />
+    <Compile Include="Entities\Stock.cs" />
     <Compile Include="Entities\TransactionDetailBarcodes.cs" />
     <Compile Include="Entities\Transfer.cs" />
     <Compile Include="Entities\PurchaseBack.cs" />
@@ -160,6 +161,7 @@
     </Compile>
     <Compile Include="Services\BankAccountsService.cs" />
     <Compile Include="Services\BanksService.cs" />
+    <Compile Include="Services\StocksService.cs" />
     <Compile Include="Services\CategoriesService.cs" />
     <Compile Include="Services\CustomersService.cs" />
     <Compile Include="Interfaces\IShiftsService.cs" />

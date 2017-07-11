@@ -4,7 +4,7 @@
             <div class="row">
                 <label class="control-label col-sm-3">@Transaction.Number</label>
                 <label class="control-label col-sm-3">@Common.Date</label>
-                <label class="control-label col-sm-3">@Models.Supplier</label>
+                <label class="control-label col-sm-3">@Models.Customer</label>
                 <label class="control-label col-sm-3">@Models.Point</label>
             </div>
             <div class="row">
@@ -22,9 +22,9 @@
                     </span>
                 </div>
                 <div class="col-sm-3">
-                    <select class="form-control" ng-model="transaction.SupplierId" ng-options="supplier.Id as supplier.Name for supplier in suppliers" name="Supplier" required></select>
-                    <span class="ng-invalid" ng-show="(transactionForm.Supplier.$dirty || transactionForm.$submitted ) &&  transactionForm.Supplier.$error.required">
-                        @string.Format(Common.Required, Models.Supplier)
+                    <select class="form-control" ng-model="transaction.CustomerId" ng-options="customer.Id as customer.Name for customer in customers" name="Customer" required></select>
+                    <span class="ng-invalid" ng-show="(transactionForm.Customer.$dirty || transactionForm.$submitted ) &&  transactionForm.Customer.$error.required">
+                        @string.Format(Common.Required, Models.Customer)
                     </span>
                 </div>
                 <div class="col-sm-3">

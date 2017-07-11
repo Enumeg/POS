@@ -78,6 +78,7 @@ namespace POS.Portal.App_Start
             kernel.Bind<IPurchasesService>().To<PurchasesService>();
             kernel.Bind<IBanksService>().To<BanksService>();
             kernel.Bind<IBankAccountsService>().To<BankAccountsService>();
+            kernel.Bind<IStockService>().To<StockService>();
 
         }
     }

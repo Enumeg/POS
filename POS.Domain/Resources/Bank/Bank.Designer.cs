@@ -61,33 +61,6 @@ namespace POS.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bank account.
-        /// </summary>
-        public static string BankAccount {
-            get {
-                return ResourceManager.GetString("BankAccount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Bank.
-        /// </summary>
-        public static string BankTitle {
-            get {
-                return ResourceManager.GetString("BankTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cheque.
-        /// </summary>
-        public static string Cheque {
-            get {
-                return ResourceManager.GetString("Cheque", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Number.
         /// </summary>
         public static string Number {
