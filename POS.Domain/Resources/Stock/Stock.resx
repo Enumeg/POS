@@ -117,40 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Application" xml:space="preserve">
-    <value>POS</value>
-  </data>
-  <data name="BankAccounts" xml:space="preserve">
-    <value>Bank Accounts</value>
-  </data>
-  <data name="Banks" xml:space="preserve">
-    <value>Banls</value>
-  </data>
-  <data name="Categories" xml:space="preserve">
-    <value>Categories</value>
-  </data>
-  <data name="Customers" xml:space="preserve">
-    <value>Customers</value>
-  </data>
-  <data name="Person" xml:space="preserve">
-    <value>Person</value>
-  </data>
-  <data name="Points" xml:space="preserve">
-    <value>Points</value>
-  </data>
-  <data name="Products" xml:space="preserve">
-    <value>Products</value>
-  </data>
-  <data name="Properties" xml:space="preserve">
-    <value>Properties</value>
-  </data>
-  <data name="Purchases" xml:space="preserve">
-    <value>Purchases</value>
-  </data>
-  <data name="Suppliers" xml:space="preserve">
-    <value>Suppliers</value>
-  </data>
-  <data name="Units" xml:space="preserve">
-    <value>Units</value>
+  <data name="NoStock" xml:space="preserve">
+    <value>There is no Stock of this product in this store</value>
   </data>
 </root>

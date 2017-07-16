@@ -2,8 +2,18 @@
 
 define(["app"], function (app) {
     app.service("resource",["$http", function ($http) {
-        var resource = {};
-      
+        var resource = null;
+        this.loadDictionary = function (callBack) {
+            if (resource === null) {
+                $http.get("/api/Resource").success(function (data) {
+                    resource = data;
+                    callBack(resource);
+                });
+            }
+            else
+                callBack(resource);
+
+        };
         this.fill = function () {
             $http.get("/api/Resource").success(function(data) {
                 resource = data;

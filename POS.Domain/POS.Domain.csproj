@@ -154,6 +154,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Resources\Stock\Stock.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Stock.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Transaction\Transaction.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -238,9 +243,13 @@
       <LastGenOutput>Models.Designer.cs</LastGenOutput>
       <CustomToolNamespace>POS.Resources</CustomToolNamespace>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Stock\Stock.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Stock.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>POS.Resources</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Transaction\Transaction.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Transaction.Designer.cs</LastGenOutput>
       <CustomToolNamespace>POS.Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>

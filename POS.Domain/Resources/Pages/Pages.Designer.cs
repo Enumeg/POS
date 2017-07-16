@@ -106,6 +106,15 @@ namespace POS.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Person.
+        /// </summary>
+        public static string Person {
+            get {
+                return ResourceManager.GetString("Person", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Points.
         /// </summary>
         public static string Points {

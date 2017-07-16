@@ -22,7 +22,10 @@
                     </span>
                 </div>
                 <div class="col-sm-3">
-                    <select class="form-control" ng-model="transaction.SupplierId" ng-options="supplier.Id as supplier.Name for supplier in suppliers" name="Supplier" required></select>
+                    <div class="input-group">
+                        <select class="form-control" ng-model="transaction.SupplierId" ng-options="supplier.Id as supplier.Name for supplier in suppliers" name="Supplier" required></select>
+                        <a class="input-group-addon btn" ng-click="add('Person');"><i class="glyphicon glyphicon-plus"></i></a>
+                    </div>                   
                     <span class="ng-invalid" ng-show="(transactionForm.Supplier.$dirty || transactionForm.$submitted ) &&  transactionForm.Supplier.$error.required">
                         @string.Format(Common.Required, Models.Supplier)
                     </span>
@@ -121,14 +124,14 @@
                 <tr ng-show="transaction.PaymentMethod===2">
                     <td colspan="2">
                         <div class="btn-group btn-group-justified">
-                            <a class="btn btn-default" ng-click="addInstallments();">@Transaction.Installments</a>
-                            <a class="btn btn-default" ng-click="addCheques();">@Transaction.Cheques</a>
+                            <a class="btn btn-default" ng-click="add('Installments');">@Transaction.Installments</a>
+                            <a class="btn btn-default" ng-click="add('Cheques');">@Transaction.Cheques</a>
                         </div>
                     </td>
                 </tr>
                 <tr ng-show="transaction.PaymentMethod===3">
                     <td colspan="2">
-                        <a class="btn btn-default btn-block" ng-click="PayVisa();">@Transaction.Visa</a>
+                        <a class="btn btn-default btn-block" ng-click="add('Visa');">@Transaction.Visa</a>
                     </td>
                 </tr>
                 <tr>
@@ -145,7 +148,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="ModalLabel">@Product.Barcode</h4>
+                    <h4 class="modal-title" id="ModalLabel" >{{modalTitle}}</h4>
                 </div>
                 <div class="modal-body" ng-include="tmpl">
 
@@ -167,7 +170,7 @@
         <li ng-repeat="barcode in transaction.Details[selectedIndex].Barcodes">{{barcode.Barcode.Barcode}}</li>
     </ul>
 </script>
-<script type="text/ng-template" id="installments.tmpl">
+<script type="text/ng-template" id="Installments.tmpl">
     <form class="form-inline">
         <label>@Common.Date</label>
         <input class="form-control" ng-model="installment.DueDate" uib-datepicker-popup="dd/MM/yyyy" is-open="dt3.opened"
@@ -205,7 +208,7 @@
         </tbody>
     </table>
 </script>
-<script type="text/ng-template" id="cheques.tmpl">
+<script type="text/ng-template" id="Cheques.tmpl">
     <form class="form-inline">
         <label>@Common.Date</label>
         <input class="form-control" ng-model="cheque.DueDate" uib-datepicker-popup="dd/MM/yyyy" is-open="dt3.opened"
@@ -253,7 +256,7 @@
         </tbody>
     </table>
 </script>
-<script type="text/ng-template" id="visa.tmpl">
+<script type="text/ng-template" id="Visa.tmpl">
     <form class="form-inline">
         <label>@Common.Date</label>
         <input class="form-control" ng-model="visa.Date" uib-datepicker-popup="dd/MM/yyyy" is-open="dt3.opened"
@@ -266,4 +269,23 @@
         <select class="form-control" ng-model="visa.BankAccountId" ng-options="bankAccount.Id as bankAccount.Label for bankAccount in bankAccounts" required></select>
     </form>
 
+</script>
+<script type="text/ng-template" id="Person.tmpl">
+    <form class="form-inline" name="personForm">
+        <label>@Common.Name</label>
+        <div>
+            <input type="text" class="form-control" name="Name" ng-model="supplier.Name" required>
+            <span class="ng-invalid" ng-show="(personForm.Name.$dirty || personForm.$submitted ) &&  personForm.Name.$error.required">
+                @string.Format(Common.Required, Common.Name)
+            </span>
+        </div>    
+        <label>@Person.Phone</label>
+        <div>
+            <input type="text" class="form-control" name="Phone" ng-model="supplier.Phone" required>
+            <span class="ng-invalid" ng-show="(personForm.Phone.$dirty || personForm.$submitted ) &&  personForm.Phone.$error.required">
+                @string.Format(Common.Required, Person.Phone)
+            </span>
+        </div>            
+        <a class="btn btn-success" ng-click="savePerson(supplier);">@Common.Save</a>
+    </form>
 </script>

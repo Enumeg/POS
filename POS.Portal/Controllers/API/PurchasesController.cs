@@ -70,7 +70,7 @@ namespace POS.Portal.Controllers.API
                 purchase.ShiftId = CookieHelper.ShiftId;
                 foreach (var item in purchase.Details)
                 {
-                    await _stockService.UpdateStock(new Stock { Amount = item.Amount, ProductId = item.ProductId, PointId = purchase.PointId });
+                    await _stockService.UpdateStock(new Domain.Entities.Stock { Amount = item.Amount, ProductId = item.ProductId, PointId = purchase.PointId });
                 }
                 var result = await _purchasesServices.AddPurchase(purchase);
                 if (result == false)

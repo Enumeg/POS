@@ -4,18 +4,20 @@
 define(["app"], function (app) {
     app.register.controller("TransactionsController", ["$scope", "dataSource", "$location", "toastr", "resource",
         function ($scope, dataSource, $location, toastr, resource) {
-            var page = $location.url().split("/")[1];
-            $scope.resource = resource.getAll();
+            var page = $location.url().split("/")[1];          
+            resource.loadDictionary(function (data) {
+                $scope.resource = data;
+            });
             $scope.suppliers = [];
             $scope.customers = [];
             $scope.points = [];
             $scope.products = [];
             $scope.selectedProducts = [];
             $scope.bankAccounts = [];
-            $scope.transaction = { Total: 0, Discount: 0, Paid: 0, Rest: 0, PaymentMethod: 1, Installments: [], Cheques: [], Details :[]};
+            $scope.transaction = { Total: 0, Discount: 0, Paid: 0, Rest: 0, PaymentMethod: 1, Installments: [], Cheques: [], Details: [] };
             $scope.product = {};
             $scope.selectedIndex = -1;
-
+            $scope.modalTitle = '';
             $scope.addInstallment = function () {
                 addInstallment($scope.transaction.Installments, this.installment);
             };
@@ -28,26 +30,17 @@ define(["app"], function (app) {
             $scope.generateCheques = function () {
                 generateInstallments($scope.transaction.Cheques, this.cheque);
             };
-
-            $scope.addInstallments = function () {
-                $scope.tmpl = "installments.tmpl";
+            $scope.add = function (tmpl) {
+                $scope.tmpl = tmpl + ".tmpl";
+                $scope.modalTitle = $scope.resource[tmpl];
                 $("#Modal").modal("show");
             };
-            $scope.addCheques = function () {
-                $scope.tmpl = "cheques.tmpl";
-                $("#Modal").modal("show");
-            };
-            $scope.PayVisa = function () {
-                $scope.tmpl = "visa.tmpl";
-                $("#Modal").modal("show");
-            };
-
             $scope.checkBarcode = function (key) {
                 if (key === 13) {
                     var barcode = $scope.product.Barcode;
                     dataSource.getUrl("api/products", { barcode }).success(function (product) {
                         if (product) {
-                            var price = page === "Sales" ? product.SalePrice : 0.0;
+                            var price = page.indexOf("Sale") !== -1 ? product.SalePrice : 0.0;
                             $scope.product = { Amount: 1.0, Price: price, Name: product.Name, ProductId: product.Id, Barcode: barcode };
                             $scope.$broadcast("angucomplete-alt:changeInput", "productName", product.Name);
                             $("#amount").focus();
@@ -59,15 +52,14 @@ define(["app"], function (app) {
             }
             $scope.setValue = function (selected) {
                 if (selected) {
-                    var price = page === "Sales" ? selected.originalObject.SalePrice : 0.0;
+                    var price = page.indexOf("Sale") !== -1 ? selected.originalObject.SalePrice : 0.0;
                     $scope.product = { Amount: 1.0, Price: price, Name: selected.title, ProductId: selected.originalObject.Id, Barcode: "", Barcodes: [] };
                     $("#amount").focus();
                 }
             }
-            $scope.addProduct = function () {            
+            $scope.addProduct = function () {
                 if (!$scope.product.ProductId) return;
-                if (page === "Sales" && !$scope.transaction.PointId)
-                {
+                if (page.indexOf("Sale") !== -1 && !$scope.transaction.PointId) {
                     toastr.error("asdasd");
                     return;
                 }
@@ -88,6 +80,7 @@ define(["app"], function (app) {
             $scope.addSerials = function (index) {
                 $scope.selectedIndex = index;
                 $scope.tmpl = "serials.tmpl";
+                $scope.modalTitle = $scope.resource.Barcode;            
                 $("#Modal").modal("show");
             }
             $scope.addSerial = function () {
@@ -139,7 +132,26 @@ define(["app"], function (app) {
                         scope.editable = false;
                     }).error(dataSource.error);
             };
-            function checkStorage(productId,PointId) {
+            $scope.savePerson = function (person) {
+                var url = page.indexOf("Sale") !== -1 ? "api/customers" : "api/suppliers";
+                this.personForm.$submitted = true;
+                if (!this.personForm.$valid)
+                    return;
+                dataSource.insert(person, null, url).success(function (data) {
+                    if (page.indexOf("Sale") !== -1) {
+                        $scope.customers.push(data);
+                        $scope.transaction.CustomerId = data.Id;                       
+                    }
+                    else
+                    {
+                        $scope.suppliers.push(data);
+                        $scope.transaction.SupplierId = data.Id;
+                    }
+                    $("#Modal").modal("hide");
+                }).error(dataSource.error);
+
+            };
+            function checkStorage(productId, PointId) {
 
             }
             //Initialize
