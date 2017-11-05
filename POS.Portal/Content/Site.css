@@ -67,7 +67,15 @@ input[type="checkbox"].input-validation-error {
 .radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
     margin-left: 0;
 }
-
+a.lang {
+    color: #9d9d9d;
+    padding: 15px;
+    text-decoration: none;
+    cursor: pointer;
+}
+a.lang:hover {
+    color: #fff;
+}
 .alert {
     z-index: 3400;
     position: fixed;

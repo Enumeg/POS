@@ -1,10 +1,19 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var isEn = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.StartsWith("en");
+    var lang = isEn ? "AR" : "EN";
+
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title ng-bind="title">Home</title>
     @Styles.Render("~/Content/css")
+    @if (!isEn)
+    {
+        @Styles.Render("~/Content/rtl")
+    }
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -41,6 +50,8 @@
 
                         </ul>
                         @Html.Partial("_LoginPartial")
+                        <a onclick="change()" class="pull-right flip lang">@lang</a>
+
                     </div>
                 </div>
             </div>
@@ -59,7 +70,13 @@
     @Scripts.Render("~/bundles/require")
     @Scripts.Render("~/bundles/ui-bootstrap")
     @RenderSection("scripts", required: false)
+    <script>
+        function change() {
+            $.get("/Home/ToggleLanguage", function (data) {
+                location.reload();
+            });
+        };
 
-
+    </script>
 </body>
 </html>

@@ -1,19 +1,19 @@
 ﻿using POS.Domain.Entities;
 using POS.Domain.Infrastructure;
 using System.Data.Entity;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System;
+using POS.Domain.Enums;
 
 namespace POS.Domain.Services
 {
     public interface IStockService : IInitializer
     {
-        Task<bool> UpdateStock(Stock stock, bool saveChanges = false);
+        Task<bool> UpdateStock(Stock stock, Operation operation, bool saveChanges = false);
         Task<decimal> GetStock(int productId, int pointId);
     }
+
+  
+
     public class StockService : ServicesBase, IStockService
     {
         async Task<decimal> IStockService.GetStock(int productId, int pointId)
@@ -22,15 +22,19 @@ namespace POS.Domain.Services
             return stock?.Amount ?? 0;
         }
 
-        async Task<bool> IStockService.UpdateStock(Stock stock, bool saveChanges)
+        async Task<bool> IStockService.UpdateStock(Stock stock,Operation operation, bool saveChanges)
         {
+            var amount = stock.Amount * (operation == Operation.Put ? 1 : -1);
             var oldStock = await Context.Stocks.SingleOrDefaultAsync(s => s.PointId == stock.PointId && s.ProductId == stock.ProductId);
             if (oldStock != null)
-                oldStock.Amount += stock.Amount;
+                oldStock.Amount += amount;
             else
+            {
+                stock.Amount = amount;
                 Context.Stocks.Add(stock);
+            }
 
-            return saveChanges ? (await Context.SaveChangesAsync()) > 0 : true;
+            return !saveChanges || await Context.SaveChangesAsync() > 0;
         }
     }
 

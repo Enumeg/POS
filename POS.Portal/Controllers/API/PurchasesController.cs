@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using POS.Domain.Entities;
+using POS.Domain.Enums;
 using POS.Domain.Interfaces;
 using POS.Portal.Helpers;
 using POS.Resources;
@@ -16,8 +17,7 @@ namespace POS.Portal.Controllers.API
 
         private readonly IStockService _stockService;
 
-        public PurchasesController(IPurchasesService purchasesService, IStockService stockService
-)
+        public PurchasesController(IPurchasesService purchasesService, IStockService stockService)
         {
             var context = ContextCache.GetPosContext();
             _purchasesServices = purchasesService;
@@ -70,7 +70,7 @@ namespace POS.Portal.Controllers.API
                 purchase.ShiftId = CookieHelper.ShiftId;
                 foreach (var item in purchase.Details)
                 {
-                    await _stockService.UpdateStock(new Domain.Entities.Stock { Amount = item.Amount, ProductId = item.ProductId, PointId = purchase.PointId });
+                    await _stockService.UpdateStock(new Domain.Entities.Stock { Amount = item.Amount, ProductId = item.ProductId, PointId = purchase.PointId }, Operation.Put);
                 }
                 var result = await _purchasesServices.AddPurchase(purchase);
                 if (result == false)
@@ -79,7 +79,7 @@ namespace POS.Portal.Controllers.API
             }
             catch (Exception ex)
             {
-                return InternalServerError();
+                return InternalServerError(ex);
             }
         }
 

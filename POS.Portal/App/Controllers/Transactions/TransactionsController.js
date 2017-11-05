@@ -2,9 +2,9 @@
 /* Controller that manage a list of list of certain type */
 
 define(["app"], function (app) {
-    app.register.controller("TransactionsController", ["$scope", "dataSource", "$location", "toastr", "resource",
-        function ($scope, dataSource, $location, toastr, resource) {
-            var page = $location.url().split("/")[1];          
+    app.register.controller("TransactionsController", ["$scope", "dataSource", "$location", "toastr", "resource", '$route',
+        function ($scope, dataSource, $location, toastr, resource, $route) {
+            var page = $location.url().split("/")[1];
             resource.loadDictionary(function (data) {
                 $scope.resource = data;
             });
@@ -18,6 +18,26 @@ define(["app"], function (app) {
             $scope.product = {};
             $scope.selectedIndex = -1;
             $scope.modalTitle = '';
+            var addInstallment = function (list, installment) {
+                var total = 0;
+                list.forEach(function (item) {
+                    total += item.Value;
+                });
+                if (total + installment.Value > $scope.transaction.Rest) {
+                    toastr.error("");
+                    return;
+                }
+                list.push(installment);
+            }
+            var generateInstallments = function (list, installment) {
+                list.length = 0;
+                var value = $scope.transaction.Rest / installment.Count;
+                var date = new Date(installment.Date.getTime());
+                for (var i = 0; i < installment.Count; i++) {
+                    list.push({ value, DueDate: new Date(date.getTime()), Number: (installment.Number || "") });
+                    date.setMonth(date.getMonth() + installment.Months);
+                }
+            }
             $scope.addInstallment = function () {
                 addInstallment($scope.transaction.Installments, this.installment);
             };
@@ -57,13 +77,7 @@ define(["app"], function (app) {
                     $("#amount").focus();
                 }
             }
-            $scope.addProduct = function () {
-                if (!$scope.product.ProductId) return;
-                if (page.indexOf("Sale") !== -1 && !$scope.transaction.PointId) {
-                    toastr.error("asdasd");
-                    return;
-                }
-                checkStorage($scope.product.ProductId, $scope.transaction.PointId);
+            var addProduct = function () {
                 var productId = $scope.product.ProductId + "" + $scope.product.Price;
                 var index = $scope.selectedProducts.indexOf(productId);
                 if (index === -1) {
@@ -75,12 +89,35 @@ define(["app"], function (app) {
                 $scope.product = {};
                 $scope.$broadcast("angucomplete-alt:clearInput", "productName");
                 $("#Barcode").focus();
+            }
+            $scope.addProduct = function () {
+                if (!$scope.transaction.PointId)
+                { toastr.error(""); return }
+                if (!$scope.product.ProductId) { toastr.error(""); return }
+                if (page.indexOf("Sale") !== -1) {
+                    checkStorage($scope.product.ProductId, $scope.transaction.PointId).success(function (stock) {
+                        var enough;
+                        var productId = $scope.product.ProductId + "" + $scope.product.Price;
+                        var index = $scope.selectedProducts.indexOf(productId);
+                        if (index === -1) {
+                            enough = $scope.product.Amount <= stock;
+                        } else {
+                            enough = $scope.transaction.Details[index].Amount + $scope.product.Amount <= stock;
+                        }
+                        if (enough)
+                            addProduct();
+                        else
+                        { toastr.error(""); }
+                    });
+                    return;
+                } else addProduct();
+
 
             }
             $scope.addSerials = function (index) {
                 $scope.selectedIndex = index;
                 $scope.tmpl = "serials.tmpl";
-                $scope.modalTitle = $scope.resource.Barcode;            
+                $scope.modalTitle = $scope.resource.Barcode;
                 $("#Modal").modal("show");
             }
             $scope.addSerial = function () {
@@ -109,6 +146,7 @@ define(["app"], function (app) {
             //Save
             $scope.save = function () {
                 var scope = this;
+                var error = false;
                 scope.transactionForm.$submitted = true;
                 if (!scope.transactionForm.$valid)
                     return;
@@ -119,12 +157,16 @@ define(["app"], function (app) {
                 $scope.transaction.Details.forEach(function (item) {
                     if (item.Barcode === "" && item.Barcodes.length !== item.Amount) {
                         toastr.error($scope.resource.Barcodes);
+                        error = true;
                         return;
                     }
                 });
+                if (error === true)
+                    return;
                 if (!scope.transaction.Id)//New entity
-                    dataSource.insert(scope.transaction).success(function (data) {
-
+                    dataSource.insert(scope.transaction).success(function () {
+                        dataSource.success();
+                        $route.reload();
                     }).error(dataSource.error);
                 else
                     dataSource.update(scope.entity).success(function () {
@@ -140,10 +182,9 @@ define(["app"], function (app) {
                 dataSource.insert(person, null, url).success(function (data) {
                     if (page.indexOf("Sale") !== -1) {
                         $scope.customers.push(data);
-                        $scope.transaction.CustomerId = data.Id;                       
+                        $scope.transaction.CustomerId = data.Id;
                     }
-                    else
-                    {
+                    else {
                         $scope.suppliers.push(data);
                         $scope.transaction.SupplierId = data.Id;
                     }
@@ -151,8 +192,8 @@ define(["app"], function (app) {
                 }).error(dataSource.error);
 
             };
-            function checkStorage(productId, PointId) {
-
+            function checkStorage(productId, pointId) {
+                return dataSource.getUrl("api/Products/CheckStorage", { productId, pointId });
             }
             //Initialize
             function initialize() {
@@ -170,27 +211,8 @@ define(["app"], function (app) {
                 }
                 $("#Modal").modal({ show: false });
             };
-            var addInstallment = function (list, installment) {
-                var total = 0;
-                list.forEach(function (item) {
-                    total += item.Value;
-                });
-                if (total + installment.Value > $scope.transaction.Rest) {
-                    toastr.error("");
-                    return;
-                }
-                list.push(installment);
-            }
-            var generateInstallments = function (list, installment) {
-                list.length = 0;
-                var rest = $scope.transaction.Rest;
-                var Value = $scope.transaction.Rest / installment.Count;
-                var date = new Date(installment.Date.getTime());
-                for (var i = 0; i < installment.Count; i++) {
-                    list.push({ Value, DueDate: new Date(date.getTime()), Number: (installment.Number || "") });
-                    date.setMonth(date.getMonth() + installment.Months);
-                }
-            }
+
+
             initialize();
 
         }]);

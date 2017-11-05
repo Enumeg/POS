@@ -9,7 +9,7 @@ namespace POS.Domain.Entities
     {
         public Sale()
         {
-            SaleDetails = new List<SaleDetail>();
+            Details = new List<SaleDetail>();
             CustomerInstallments = new List<CustomerInstallment>();
             SaleBacks = new List<SaleBack>();
             CustomerCheques = new List<CustomerCheque>();
@@ -20,11 +20,11 @@ namespace POS.Domain.Entities
         public int PointId { get; set; }
         public virtual Point Point { get; set; }
         public virtual Deposit Deposit { get; set; }
-        public virtual ICollection<SaleDetail> SaleDetails { get; set; }
+        public virtual ICollection<SaleDetail> Details { get; set; }
         public virtual ICollection<SaleBack> SaleBacks { get; set; }
         public virtual ICollection<CustomerInstallment> CustomerInstallments { get; set; }
         public virtual ICollection<CustomerCheque> CustomerCheques { get; set; }
         [NotMapped]
-        public decimal Total => SaleDetails.Sum(s => s.Total);
+        public decimal Total => Details.Sum(s => s.Total);
     }
 }

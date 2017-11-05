@@ -31,5 +31,10 @@
         Deposit = 1,
         WithDrawal =2
     }
+    public enum Operation
+    {
+        Put = 1,
+        Take = 2
+    }
 }
 

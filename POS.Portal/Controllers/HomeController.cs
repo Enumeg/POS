@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity.Owin;
 using POS.Domain.Infrastructure;
@@ -26,6 +27,14 @@ namespace POS.Portal.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+        [AllowAnonymous]
+        public void ToggleLanguage()
+        {
+            Response.Cookies.Remove("Culture");
+            Response.Cookies.Add(System.Threading.Thread.CurrentThread.CurrentUICulture.Name.StartsWith("ar")
+                ? new HttpCookie("Culture") {Expires = DateTime.Now.AddDays(360), Value = "en-US"}
+                : new HttpCookie("Culture") {Expires = DateTime.Now.AddDays(360), Value = "ar-EG"});
         }
     }
 }

@@ -24,7 +24,7 @@ namespace POS.Portal
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/bootstrap.css", "~/Content/site.css", "~/Content/multi-select.css", "~/Content/angular-toastr.css"));
 
-            bundles.Add(new StyleBundle("~/Content/bootstrap-rtl").Include("~/Content/bootstrap-rtl.css", "~/Content/site-rtl.css"));
+            bundles.Add(new StyleBundle("~/Content/rtl").Include("~/Content/bootstrap-rtl.css", "~/Content/site.rtl.css"));
         }
     }
 }

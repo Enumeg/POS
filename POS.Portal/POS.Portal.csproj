@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -205,6 +206,7 @@
     <Compile Include="Controllers\API\PurchasesController.cs" />
     <Compile Include="Controllers\API\CutomersController.cs" />
     <Compile Include="Controllers\API\ProductsController.cs" />
+    <Compile Include="Controllers\API\SalesController.cs" />
     <Compile Include="Controllers\API\SuppliersController.cs" />
     <Compile Include="Controllers\API\PointsController.cs" />
     <Compile Include="Controllers\API\BanksController.cs" />
@@ -247,6 +249,8 @@
     <Content Include="App\Services\routeResolver.js" />
     <Content Include="Content\angular-toastr.css" />
     <Content Include="Content\angular-toastr.min.css" />
+    <Content Include="Content\bootstrap-rtl.css" />
+    <Content Include="Content\bootstrap-rtl.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -291,6 +295,7 @@
     <Content Include="Scripts\angular-cookies.min.js.map" />
     <Content Include="Scripts\angular-touch.min.js.map" />
     <Content Include="bower.json" />
+    <Content Include="Content\bootstrap-rtl.css.map" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

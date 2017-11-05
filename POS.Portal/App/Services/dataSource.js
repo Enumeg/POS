@@ -7,7 +7,9 @@ define(["app"], function (app) {
         dataSource.initialize = function ($baseUrl) {
             dataSource.initialized = true;
             baseUrl = $baseUrl;
-            $resource = resource.getAll();
+            resource.loadDictionary(function (data) {
+                $resource = data;
+            });
         };
         dataSource.getList = function (param) {
             if (param) {

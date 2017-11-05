@@ -117,49 +117,76 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Email" xml:space="preserve">
-    <value>Email</value>
+  <data name="Add" xml:space="preserve">
+    <value>إضافة</value>
   </data>
-  <data name="UserName" xml:space="preserve">
-    <value>User Name</value>
+  <data name="AddMany" xml:space="preserve">
+    <value>إضافة مجموعة</value>
   </data>
-  <data name="Password" xml:space="preserve">
-    <value>Password</value>
+  <data name="All" xml:space="preserve">
+    <value>الكل</value>
   </data>
-  <data name="Rememberme" xml:space="preserve">
-    <value>Remember me?</value>
+  <data name="Barcodes" xml:space="preserve">
+    <value>عدد الباركود أقل من الكمية</value>
   </data>
-  <data name="PasswordLength" xml:space="preserve">
-    <value>The {0} must be at least {2} characters long.</value>
+  <data name="Cancel" xml:space="preserve">
+    <value>إلغاء</value>
   </data>
-  <data name="Confirmpassword" xml:space="preserve">
-    <value>Confirm password</value>
+  <data name="Choose" xml:space="preserve">
+    <value>اختر</value>
   </data>
-  <data name="PasswordConfirmation" xml:space="preserve">
-    <value>The password and confirmation password do not match.</value>
+  <data name="Close" xml:space="preserve">
+    <value>إغلاق</value>
   </data>
-  <data name="NewPassword" xml:space="preserve">
-    <value>New password</value>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>هل أنت متأكد من الحذف؟</value>
   </data>
-  <data name="ConfirmNewPassword" xml:space="preserve">
-    <value>Confirm new password</value>
+  <data name="Count" xml:space="preserve">
+    <value>العدد</value>
   </data>
-  <data name="CurrentPassword" xml:space="preserve">
-    <value>Current password</value>
+  <data name="Date" xml:space="preserve">
+    <value>التاريخ</value>
   </data>
-  <data name="Register" xml:space="preserve">
-    <value>Register</value>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
   </data>
-  <data name="machinenotregistered" xml:space="preserve">
-    <value>This machine is not registered</value>
+  <data name="DeletedSuccessfully" xml:space="preserve">
+    <value>تم الحذف بنجاح</value>
   </data>
-  <data name="Login" xml:space="preserve">
-    <value>Log in</value>
+  <data name="DeleteError" xml:space="preserve">
+    <value>لم يتم الحذف</value>
   </data>
-  <data name="Hello" xml:space="preserve">
-    <value>Hello</value>
+  <data name="Duplicated" xml:space="preserve">
+    <value>مكرر</value>
   </data>
-  <data name="LogOff" xml:space="preserve">
-    <value>Log off</value>
+  <data name="Edit" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="Every" xml:space="preserve">
+    <value>كل</value>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>إنشاء</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>شهر</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>الإسم</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>جديد</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>يجد إدخال قيمة في {0}</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="SaveSuccessfully" xml:space="preserve">
+    <value>تم الحفظ بنجاح</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>القيمة</value>
   </data>
 </root>

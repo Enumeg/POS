@@ -118,48 +118,48 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Email" xml:space="preserve">
-    <value>Email</value>
+    <value>البريد الإلكتروني</value>
   </data>
   <data name="UserName" xml:space="preserve">
-    <value>User Name</value>
+    <value>إسم المستخدم</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Password</value>
+    <value>كلمة السر</value>
   </data>
   <data name="Rememberme" xml:space="preserve">
-    <value>Remember me?</value>
+    <value>تذكرني</value>
   </data>
   <data name="PasswordLength" xml:space="preserve">
-    <value>The {0} must be at least {2} characters long.</value>
+    <value>{0} يجب أن تكون {2} على الأقل</value>
   </data>
   <data name="Confirmpassword" xml:space="preserve">
-    <value>Confirm password</value>
+    <value>تأكيد كلمة السر</value>
   </data>
   <data name="PasswordConfirmation" xml:space="preserve">
-    <value>The password and confirmation password do not match.</value>
+    <value>كلمة السر وتأكيدها غير متطبقتان</value>
   </data>
   <data name="NewPassword" xml:space="preserve">
-    <value>New password</value>
+    <value>كلمة السر الجديدة</value>
   </data>
   <data name="ConfirmNewPassword" xml:space="preserve">
-    <value>Confirm new password</value>
+    <value>تأكيد كلمة السر الجديدة</value>
   </data>
   <data name="CurrentPassword" xml:space="preserve">
-    <value>Current password</value>
+    <value>كلمة السر الحالية</value>
   </data>
   <data name="Register" xml:space="preserve">
-    <value>Register</value>
+    <value>تسجيل</value>
   </data>
   <data name="machinenotregistered" xml:space="preserve">
-    <value>This machine is not registered</value>
+    <value>هذا الجهاز غير مسجل</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Log in</value>
+    <value>دخول</value>
   </data>
   <data name="Hello" xml:space="preserve">
-    <value>Hello</value>
+    <value>مرحباً</value>
   </data>
   <data name="LogOff" xml:space="preserve">
-    <value>Log off</value>
+    <value>خروج</value>
   </data>
 </root>

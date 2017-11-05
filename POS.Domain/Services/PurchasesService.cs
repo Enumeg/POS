@@ -13,7 +13,7 @@ namespace POS.Domain.Services
     {
       async Task<bool> IPurchasesService.AddPurchase(Purchase purchase)
       {
-          return await CrudService.Add(purchase);
+          return await CrudService.Add(purchase, p=> p.Number == purchase.Number && p.SupplierId == purchase.SupplierId);
       }
 
     

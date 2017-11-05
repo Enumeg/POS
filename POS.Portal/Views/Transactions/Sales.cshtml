@@ -24,7 +24,7 @@
                 <div class="col-sm-3">
                     <div class="input-group">
                         <select class="form-control" ng-model="transaction.CustomerId" ng-options="customer.Id as customer.Name for customer in customers" name="Customer" required></select>                        
-                        <a class="input-group-addon btn" ng-click="add('person');"><i class="glyphicon glyphicon-plus"></i></a>
+                        <a class="input-group-addon btn" ng-click="add('Person');"><i class="glyphicon glyphicon-plus"></i></a>
                     </div>
                     <span class="ng-invalid" ng-show="(transactionForm.Customer.$dirty || transactionForm.$submitted ) &&  transactionForm.Customer.$error.required">
                         @string.Format(Common.Required, Models.Customer)
@@ -93,7 +93,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-sm-3" style="border-left: 2px solid black">
+        <div class="col-sm-3 bordered">
             <table class="table table-condensed">
                 <tr>
                     <td><label>@Transaction.Discount: </label></td>

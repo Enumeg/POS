@@ -166,6 +166,7 @@
     </Compile>
     <Compile Include="Services\BankAccountsService.cs" />
     <Compile Include="Services\BanksService.cs" />
+    <Compile Include="Services\SalesService.cs" />
     <Compile Include="Services\StocksService.cs" />
     <Compile Include="Services\CategoriesService.cs" />
     <Compile Include="Services\CustomersService.cs" />
@@ -193,14 +194,20 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Bank\Bank.ar.resx" />
     <EmbeddedResource Include="Resources\Bank\Bank.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Bank.Designer.cs</LastGenOutput>
       <CustomToolNamespace>POS.Resources</CustomToolNamespace>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Common\Common.ar.resx" />
     <EmbeddedResource Include="Resources\Common\Common.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Common.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>POS.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Identity\Identity.ar.resx">
+      <LastGenOutput>Identity.ar.Designer.cs</LastGenOutput>
       <CustomToolNamespace>POS.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Identity\Identity.resx">
@@ -208,9 +215,15 @@
       <LastGenOutput>Identity.Designer.cs</LastGenOutput>
       <CustomToolNamespace>POS.Resources</CustomToolNamespace>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Installment\installment.ar.resx" />
     <EmbeddedResource Include="Resources\Installment\Installment.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Installment.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>POS.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Models\Models.ar.resx" />
+    <EmbeddedResource Include="Resources\Pages\Pages.ar.resx">
+      <LastGenOutput>Pages.ar.Designer.cs</LastGenOutput>
       <CustomToolNamespace>POS.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Pages\Pages.resx">
@@ -218,9 +231,15 @@
       <LastGenOutput>Pages.Designer.cs</LastGenOutput>
       <CustomToolNamespace>POS.Resources</CustomToolNamespace>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Person\Person.ar.resx">
+      <CustomToolNamespace>POS.Resources</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Person\Person.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Person.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>POS.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Point\Point.ar.resx">
       <CustomToolNamespace>POS.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Point\Point.resx">
@@ -228,9 +247,15 @@
       <LastGenOutput>Point.Designer.cs</LastGenOutput>
       <CustomToolNamespace>POS.Resources</CustomToolNamespace>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Product\Product.ar.resx">
+      <CustomToolNamespace>POS.Resources</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Product\Product.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Product.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>POS.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Property\Property.ar.resx">
       <CustomToolNamespace>POS.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Property\Property.resx">
@@ -243,9 +268,15 @@
       <LastGenOutput>Models.Designer.cs</LastGenOutput>
       <CustomToolNamespace>POS.Resources</CustomToolNamespace>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Stock\Stock.ar.resx">
+      <CustomToolNamespace>POS.Resources</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Stock\Stock.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Stock.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>POS.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Transaction\Transaction.ar.resx">
       <CustomToolNamespace>POS.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Transaction\Transaction.resx">
