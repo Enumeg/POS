@@ -16,11 +16,11 @@ namespace POS.Portal.Controllers.API
             var dic = new Dictionary<string, string>();
             var sets = new List<ResourceSet>
             {
-                Resources.Common.ResourceManager.GetResourceSet(Thread.CurrentThread.CurrentUICulture, false, false),
-                Resources.Person.ResourceManager.GetResourceSet(Thread.CurrentThread.CurrentUICulture, false, false),
-                Resources.Product.ResourceManager.GetResourceSet(Thread.CurrentThread.CurrentUICulture, false, false),
-                Resources.Pages.ResourceManager.GetResourceSet(Thread.CurrentThread.CurrentUICulture, false, false),
-                Resources.Transaction.ResourceManager.GetResourceSet(Thread.CurrentThread.CurrentUICulture, false, false),
+                Resources.Common.ResourceManager.GetResourceSet(Thread.CurrentThread.CurrentUICulture, true, true),
+                Resources.Person.ResourceManager.GetResourceSet(Thread.CurrentThread.CurrentUICulture, true, true),
+                Resources.Product.ResourceManager.GetResourceSet(Thread.CurrentThread.CurrentUICulture, true, true),
+                Resources.Pages.ResourceManager.GetResourceSet(Thread.CurrentThread.CurrentUICulture, true, true),
+                Resources.Transaction.ResourceManager.GetResourceSet(Thread.CurrentThread.CurrentUICulture, true, true),
             };
             foreach (var item in sets.SelectMany(resourceSet => resourceSet.Cast<DictionaryEntry>().Where(item => !dic.ContainsKey(item.Key.ToString()))))
             {
