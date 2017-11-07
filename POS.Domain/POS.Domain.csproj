@@ -165,6 +165,8 @@
       <DependentUpon>Transaction.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\BankAccountsService.cs" />
+    <Compile Include="Services\CustomerInstallmentsService.cs" />
+    <Compile Include="Services\SupplierInstallmentsService.cs" />
     <Compile Include="Services\BanksService.cs" />
     <Compile Include="Services\SalesService.cs" />
     <Compile Include="Services\StocksService.cs" />

@@ -26,5 +26,9 @@ namespace POS.Portal.Controllers
         {
             return View();
         }
+        public ActionResult Installment()
+        {
+            return View();
+        }
     }
 }

@@ -202,6 +202,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\BankAccountsController.cs" />
+    <Compile Include="Controllers\API\CustomerInstallmentsController.cs" />
+    <Compile Include="Controllers\API\SupplierInstallmentsController.cs" />
     <Compile Include="Controllers\API\CategoriesController.cs" />
     <Compile Include="Controllers\API\PurchasesController.cs" />
     <Compile Include="Controllers\API\CutomersController.cs" />
@@ -364,6 +366,7 @@
     <Content Include="Views\Transactions\Purchases.cshtml" />
     <Content Include="Views\Coding\BankAccounts.cshtml" />
     <Content Include="Views\Transactions\Sales.cshtml" />
+    <Content Include="Views\Coding\Installment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
