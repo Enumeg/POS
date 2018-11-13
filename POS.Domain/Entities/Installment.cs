@@ -13,19 +13,17 @@ namespace POS.Domain.Entities
 
         public DateTime? PaymentDate { get; set; }
 
+        public int IncomeId { get; set; }
+
+        public Income Income { get; set; }
+
         public int? ShiftId { get; set; }
 
         public virtual Shift Shift { get; set; }
 
-    }
-    public class CustomerInstallment : Installment
-    {
-        public int SaleId { get; set; }
-        public virtual Sale Sale { get; set; }
-    }
-    public class SupplierInstallment : Installment
-    {
-        public int PurchaseId { get; set; }
-        public virtual Purchase Purchase { get; set; }
+        public int TransactionId { get; set; }
+
+        public virtual Transaction Transaction { get; set; }
+
     }
 }

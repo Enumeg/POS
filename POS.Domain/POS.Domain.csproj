@@ -59,10 +59,10 @@
   <ItemGroup>
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\Bank.cs" />
-    <Compile Include="Entities\BankTransaction.cs" />
     <Compile Include="Entities\BarCode.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Cheque.cs" />
+    <Compile Include="Entities\Income.cs" />
     <Compile Include="Entities\ProductDetail.cs" />
     <Compile Include="Entities\Employee.cs" />
     <Compile Include="Entities\Installment.cs" />
@@ -74,12 +74,6 @@
     <Compile Include="Entities\Stock.cs" />
     <Compile Include="Entities\TransactionDetailBarcodes.cs" />
     <Compile Include="Entities\Transfer.cs" />
-    <Compile Include="Entities\PurchaseBack.cs" />
-    <Compile Include="Entities\Purchase.cs" />
-    <Compile Include="Entities\SaleBack.cs" />
-    <Compile Include="Entities\Sale.cs" />
-    <Compile Include="Entities\Supplier.cs" />
-    <Compile Include="Entities\Customer.cs" />
     <Compile Include="Entities\Machine.cs" />
     <Compile Include="Entities\Person.cs" />
     <Compile Include="Entities\Setting.cs" />
@@ -94,10 +88,7 @@
     <Compile Include="Infrastructure\ServicesBase.cs" />
     <Compile Include="Infrastructure\IInitializer.cs" />
     <Compile Include="Infrastructure\PosContext.cs" />
-    <Compile Include="Interfaces\IPurchasesService.cs" />
-    <Compile Include="Interfaces\ICustomersService.cs" />
     <Compile Include="Interfaces\ISettingsService.cs" />
-    <Compile Include="Interfaces\ISuppliersService.cs" />
     <Compile Include="Interfaces\IPointsService.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\PropertyValue.cs" />
@@ -165,13 +156,12 @@
       <DependentUpon>Transaction.resx</DependentUpon>
     </Compile>
     <Compile Include="Services\BankAccountsService.cs" />
-    <Compile Include="Services\CustomerInstallmentsService.cs" />
-    <Compile Include="Services\SupplierInstallmentsService.cs" />
+    <Compile Include="Services\IncomeService.cs" />
     <Compile Include="Services\BanksService.cs" />
-    <Compile Include="Services\SalesService.cs" />
+    <Compile Include="Services\InstallmentsService.cs" />
     <Compile Include="Services\StocksService.cs" />
     <Compile Include="Services\CategoriesService.cs" />
-    <Compile Include="Services\CustomersService.cs" />
+    <Compile Include="Services\PeopleService.cs" />
     <Compile Include="Interfaces\IShiftsService.cs" />
     <Compile Include="Interfaces\IMachinesService.cs" />
     <Compile Include="Interfaces\ICategoriesService.cs" />
@@ -183,9 +173,8 @@
     <Compile Include="Services\PropertiesService.cs" />
     <Compile Include="Services\SettingsService.cs" />
     <Compile Include="Services\ShiftsService.cs" />
-    <Compile Include="Services\SuppliersService.cs" />
     <Compile Include="Services\PointsService.cs" />
-    <Compile Include="Services\PurchasesService.cs" />
+    <Compile Include="Services\TransactionsService.cs" />
     <Compile Include="Services\UnitsService.cs" />
   </ItemGroup>
   <ItemGroup>

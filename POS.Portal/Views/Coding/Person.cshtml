@@ -5,6 +5,7 @@
 <br /><br />
 <table class="table table-bordered table-condensed">
     <tr>
+        <th>@Person.Type</th>
         <th>@Common.Name</th>
         <th>@Person.Phone</th>
         <th>@Person.Email</th>
@@ -13,26 +14,33 @@
         <th></th>
     </tr>
     <tbody>
-        <tr ng-animate="'animate'" ng-repeat="entity in list" ng-init="editable=entity.Id === 0" class="editable" ng-form="editForm">
-            <td ng-class="{ 'ng-invalid' : (editForm.Name.$dirty || editForm.$submitted ) &&  editForm.Name.$error.required}">
-                <input type="text" class="form-control" name="Name" ng-readonly="!editable" ng-model="entity.Name" required>
-            </td>
-            <td><input type="text" class="form-control" ng-readonly="!editable" ng-model="entity.Phone"></td>
-            <td><input type="text" class="form-control" ng-readonly="!editable" ng-model="entity.Email"></td>
-            <td><input type="text" class="form-control" ng-readonly="!editable" ng-model="entity.Address"></td>
-            <td ng-class="{ 'ng-invalid' : (editForm.balance.$dirty || editForm.$submitted ) &&  editForm.balance.$error.required}">
-                <input type="number" class="form-control" name="balance" ng-readonly="!editable" ng-model="entity.Balance" required>
-            </td>
-            <td>
-                <div class="btn-group" ng-hide="editable">
-                    <a class="btn btn-xs btn-info" ng-click="edit()">@Common.Edit &nbsp;<b class="glyphicon glyphicon-edit"></b></a>
-                    <a class="btn btn-xs btn-danger" ng-click="delete()">@Common.Delete &nbsp;<b class="glyphicon glyphicon-remove"></b></a>
-                </div>
-                <div class="btn-group" ng-show="editable">
-                    <a class="btn btn-xs btn-success" ng-click="save()">@Common.Save &nbsp;<b class="glyphicon glyphicon-ok"></b></a>
-                    <a class="btn btn-xs btn-warning" ng-click="cancel()">@Common.Cancel &nbsp;<b class="glyphicon glyphicon-remove"></b></a>
-                </div>
-            </td>
-        </tr>
+    <tr ng-animate="'animate'" ng-repeat="entity in list" ng-init="editable=entity.Id === 0" class="editable" ng-form="editForm">
+        <td ng-class="{ 'ng-invalid' : (editForm.PersonType.$dirty || editForm.$submitted ) &&  editForm.PersonType.$error.required}">
+            <Select class="form-control" name="PersonType" ng-disabled="!editable" ng-model="entity.PersonType" required convert-to-number>
+                <option value="">@Common.Choose</option>
+                <option value="1">@Models.Customer</option>
+                <option value="2">@Models.Supplier</option>
+                <option value="3">@Models.Customer - @Models.Supplier</option>
+            </Select>        </td>
+        <td ng-class="{ 'ng-invalid' : (editForm.Name.$dirty || editForm.$submitted ) &&  editForm.Name.$error.required}">
+            <input type="text" class="form-control" name="Name" ng-readonly="!editable" ng-model="entity.Name" required>
+        </td>
+        <td><input type="text" class="form-control" ng-readonly="!editable" ng-model="entity.Phone"></td>
+        <td><input type="text" class="form-control" ng-readonly="!editable" ng-model="entity.Email"></td>
+        <td><input type="text" class="form-control" ng-readonly="!editable" ng-model="entity.Address"></td>
+        <td ng-class="{ 'ng-invalid' : (editForm.balance.$dirty || editForm.$submitted ) &&  editForm.balance.$error.required}">
+            <input type="number" class="form-control" name="balance" ng-readonly="!editable" ng-model="entity.Balance" required>
+        </td>
+        <td>
+            <div class="btn-group" ng-hide="editable">
+                <a class="btn btn-xs btn-info" ng-click="edit()">@Common.Edit &nbsp;<b class="glyphicon glyphicon-edit"></b></a>
+                <a class="btn btn-xs btn-danger" ng-click="delete()">@Common.Delete &nbsp;<b class="glyphicon glyphicon-remove"></b></a>
+            </div>
+            <div class="btn-group" ng-show="editable">
+                <a class="btn btn-xs btn-success" ng-click="save()">@Common.Save &nbsp;<b class="glyphicon glyphicon-ok"></b></a>
+                <a class="btn btn-xs btn-warning" ng-click="cancel()">@Common.Cancel &nbsp;<b class="glyphicon glyphicon-remove"></b></a>
+            </div>
+        </td>
+    </tr>
     </tbody>
 </table>

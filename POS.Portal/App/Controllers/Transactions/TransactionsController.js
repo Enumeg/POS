@@ -5,6 +5,7 @@ define(["app"], function (app) {
     app.register.controller("TransactionsController", ["$scope", "dataSource", "$location", "toastr", "resource", '$route',
         function ($scope, dataSource, $location, toastr, resource, $route) {
             var page = $location.url().split("/")[1];
+            var isSale = page.indexOf("Sale") !== -1;
             resource.loadDictionary(function (data) {
                 $scope.resource = data;
             });
@@ -14,7 +15,10 @@ define(["app"], function (app) {
             $scope.products = [];
             $scope.selectedProducts = [];
             $scope.bankAccounts = [];
-            $scope.transaction = { Total: 0, Discount: 0, Paid: 0, Rest: 0, PaymentMethod: 1, Installments: [], Cheques: [], Details: [] };
+            $scope.transaction = {
+                Total: 0, Discount: 0, Paid: 0, Rest: 0, PaymentMethod: 1, Installments: [], Cheques: [], Details: [] , TransactionType :
+                    page.slice(0, -1)
+            };
             $scope.product = {};
             $scope.selectedIndex = -1;
             $scope.modalTitle = '';
@@ -60,7 +64,7 @@ define(["app"], function (app) {
                     var barcode = $scope.product.Barcode;
                     dataSource.getUrl("api/products", { barcode }).success(function (product) {
                         if (product) {
-                            var price = page.indexOf("Sale") !== -1 ? product.SalePrice : 0.0;
+                            var price = isSale ? product.SalePrice : 0.0;
                             $scope.product = { Amount: 1.0, Price: price, Name: product.Name, ProductId: product.Id, Barcode: barcode };
                             $scope.$broadcast("angucomplete-alt:changeInput", "productName", product.Name);
                             $("#amount").focus();
@@ -72,7 +76,7 @@ define(["app"], function (app) {
             }
             $scope.setValue = function (selected) {
                 if (selected) {
-                    var price = page.indexOf("Sale") !== -1 ? selected.originalObject.SalePrice : 0.0;
+                    var price = isSale ? selected.originalObject.SalePrice : 0.0;
                     $scope.product = { Amount: 1.0, Price: price, Name: selected.title, ProductId: selected.originalObject.Id, Barcode: "", Barcodes: [] };
                     $("#amount").focus();
                 }
@@ -94,7 +98,7 @@ define(["app"], function (app) {
                 if (!$scope.transaction.PointId)
                 { toastr.error(""); return }
                 if (!$scope.product.ProductId) { toastr.error(""); return }
-                if (page.indexOf("Sale") !== -1) {
+                if (isSale) {
                     checkStorage($scope.product.ProductId, $scope.transaction.PointId).success(function (stock) {
                         var enough;
                         var productId = $scope.product.ProductId + "" + $scope.product.Price;
@@ -175,19 +179,12 @@ define(["app"], function (app) {
                     }).error(dataSource.error);
             };
             $scope.savePerson = function (person) {
-                var url = page.indexOf("Sale") !== -1 ? "api/customers" : "api/suppliers";
                 this.personForm.$submitted = true;
                 if (!this.personForm.$valid)
                     return;
-                dataSource.insert(person, null, url).success(function (data) {
-                    if (page.indexOf("Sale") !== -1) {
-                        $scope.customers.push(data);
-                        $scope.transaction.CustomerId = data.Id;
-                    }
-                    else {
-                        $scope.suppliers.push(data);
-                        $scope.transaction.SupplierId = data.Id;
-                    }
+                dataSource.insert(person, null, "api/people" ).success(function (data) {                   
+                        $scope.people.push(data);
+                        $scope.transaction.PersonId = data.Id;                   
                     $("#Modal").modal("hide");
                 }).error(dataSource.error);
 
@@ -200,15 +197,8 @@ define(["app"], function (app) {
                 dataSource.initialize("/api/" + page);
                 dataSource.loadList($scope.products, "api/products");
                 dataSource.loadList($scope.bankAccounts, "api/BankAccounts");
-
-                if (page.indexOf("Purchase") !== -1) {
-                    dataSource.loadList($scope.suppliers, "api/suppliers");
-                    dataSource.loadList($scope.points, "api/points?type=1");
-
-                } else {
-                    dataSource.loadList($scope.customers, "api/customers");
-                    dataSource.loadList($scope.points, "api/points?type=1");
-                }
+                dataSource.loadList($scope.people, "api/people", { isCustomer: isSale });
+                dataSource.loadList($scope.points, "api/points?type=" + (isSale ? 2 : 1));
                 $("#Modal").modal({ show: false });
             };
 

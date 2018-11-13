@@ -25,8 +25,7 @@ namespace POS.Domain.Infrastructure
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Point>().HasMany(p => p.InTransfares).WithRequired(t => t.ToPoint);
             modelBuilder.Entity<Point>().HasMany(p => p.OutTransfares).WithRequired(t => t.FromPoint);
-            modelBuilder.Entity<Sale>().HasOptional(s => s.Deposit).WithOptionalDependent(d => d.Sale).Map(x => x.MapKey("DepositId"));
-            modelBuilder.Entity<Purchase>().HasOptional(s => s.WithDrawal).WithOptionalDependent(d => d.Purchase).Map(x => x.MapKey("WithDrawalId"));
+            modelBuilder.Entity<Transaction>().HasOptional(s => s.BankTransaction).WithOptionalDependent(d => d.Transaction).Map(x => x.MapKey("BankTransactionId"));
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }               
         public virtual DbSet<Shift> Shifts { get; set; }
@@ -37,35 +36,20 @@ namespace POS.Domain.Infrastructure
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Property> Properties { get; set; }
         public virtual DbSet<ProductProperty> ProductProperties { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<CustomerInstallment> CustomerInstallments { get; set; }
+        public virtual DbSet<Transaction> Transactions { get; set; }
+        public virtual DbSet<TransactionDetail> TransactionDetails { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
-        //public virtual DbSet<Installment> Installments { get; set; }
+        public virtual DbSet<Installment> Installments { get; set; }
         public virtual DbSet<Point> Points { get; set; }
-        public virtual DbSet<Purchase> Purchases { get; set; }
-        public virtual DbSet<PurchaseDetail> PurchasesDetails { get; set; }
-        public virtual DbSet<PurchaseBack> PurchasesBack { get; set; }
-        public virtual DbSet<PurchaseBackDetail> PurchaseBackDetails { get; set; }
-        public virtual DbSet<Sale> Sales { get; set; }
-        public virtual DbSet<SaleBack> SaleBacks { get; set; }
-        public virtual DbSet<SaleDetail> SaleDetails { get; set; }
-        public virtual DbSet<SaleBackDetail> SaleBackDetails { get; set; }
-        public virtual DbSet<Supplier> Suppliers { get; set; }
-        public virtual DbSet<SupplierInstallment> SupplierInstallments { get; set; }
         public virtual DbSet<Transfer> Transfares { get; set; }
         public virtual DbSet<TransferDetail> TransfareDetails { get; set; }   
         public virtual DbSet<Damaged> Damaged { get; set; }
         public virtual DbSet<BarCode> BarCodes { get; set; }
         public virtual DbSet<Bank> Banks { get; set; }
-        public virtual DbSet<BankAccount> BankAccounts { get; set; }
-        public virtual DbSet<CustomerCheque> CustomerCheques { get; set; }
-        public virtual DbSet<SupplierCheque> SupplierCheques { get; set; }
-
-        public virtual DbSet<Deposit> Deposits { get; set; }
-        public virtual DbSet<WithDrawal> WithDrawal { get; set; }
-
+        public virtual DbSet<BankAccount> BankAccounts { get; set; }    
         public virtual DbSet<Stock> Stocks { get; set; }
-
-
+        public virtual DbSet<Income> Incomes { get; set; }
+        public virtual DbSet<Person> People { get; set; }
+        public virtual DbSet<Cheque> Cheques { get; set; }
     }
 }

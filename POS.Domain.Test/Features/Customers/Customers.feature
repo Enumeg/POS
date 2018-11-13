@@ -6,7 +6,7 @@ Scenario: Add New Customer to the Application
  Given That I have the following Customer Data
 	| Name    | Phone | Email     | Address  | Balance |
 	| M.hamed | 01144 | it.m.atef | 16 farid | 1000    |
-    When I Add Customer with the previous data
+    When I Add Customer with the previous data 
     Then I should Get the iserted id
 
 

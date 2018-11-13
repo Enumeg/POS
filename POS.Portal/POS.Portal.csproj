@@ -202,14 +202,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\BankAccountsController.cs" />
-    <Compile Include="Controllers\API\CustomerInstallmentsController.cs" />
-    <Compile Include="Controllers\API\SupplierInstallmentsController.cs" />
+    <Compile Include="Controllers\API\IncomesController.cs" />
+    <Compile Include="Controllers\API\InstallmentsController.cs" />
     <Compile Include="Controllers\API\CategoriesController.cs" />
-    <Compile Include="Controllers\API\PurchasesController.cs" />
-    <Compile Include="Controllers\API\CutomersController.cs" />
+    <Compile Include="Controllers\API\TransactionsController.cs" />
+    <Compile Include="Controllers\API\PeopleController.cs" />
     <Compile Include="Controllers\API\ProductsController.cs" />
-    <Compile Include="Controllers\API\SalesController.cs" />
-    <Compile Include="Controllers\API\SuppliersController.cs" />
     <Compile Include="Controllers\API\PointsController.cs" />
     <Compile Include="Controllers\API\BanksController.cs" />
     <Compile Include="Controllers\API\UnitsController.cs" />
@@ -218,6 +216,7 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CodingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IncomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\PropertiesController.cs" />
@@ -236,6 +235,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\App.js" />
+    <Content Include="App\Controllers\Income\IncomeController.js" />
     <Content Include="App\Controllers\Transactions\TransactionsController.js" />
     <Content Include="App\Controllers\Coding\CodingController.js" />
     <Content Include="App\Controllers\Products\ProductsController.js" />
@@ -367,6 +367,7 @@
     <Content Include="Views\Coding\BankAccounts.cshtml" />
     <Content Include="Views\Transactions\Sales.cshtml" />
     <Content Include="Views\Coding\Installment.cshtml" />
+    <Content Include="Views\Income\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

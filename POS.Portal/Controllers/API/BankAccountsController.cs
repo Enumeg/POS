@@ -2,8 +2,6 @@
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using POS.Domain.Entities;
-using POS.Domain.Interfaces;
 using POS.Portal.Helpers;
 using POS.Resources;
 using POS.Domain.Services;

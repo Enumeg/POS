@@ -8,7 +8,20 @@
     //    Section = 3,
     //    Unit = 4
     //}
+    public enum PersonType
+    {
+        Customer = 1,
+        Supplier = 2,
+        CustomerSupplier = 3
+    }
 
+    public enum TransactionType
+    {
+        Purchase = 1,
+        Sale = 2 ,
+        PurchaseBack = 3,
+        SaleBack = 4
+    }
     public enum PaymentMethod
     {
         Cash = 1,

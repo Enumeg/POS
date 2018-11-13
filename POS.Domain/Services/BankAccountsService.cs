@@ -29,11 +29,11 @@ namespace POS.Domain.Services
 
         async Task<bool?> IBankAccountsService.DeleteBankAccount(int bankAccountId, bool removeRelatedEntities)
         {
-            var bankAccount = Context.BankAccounts.Include(p => p.SupplierCheques).FirstOrDefault(c => c.Id == bankAccountId);
+            var bankAccount = Context.BankAccounts.Include(p => p.Cheques).FirstOrDefault(c => c.Id == bankAccountId);
             if (bankAccount == null) return false;
-            if (bankAccount.SupplierCheques.Count > 0)
+            if (bankAccount.Cheques.Count > 0)
                 if (removeRelatedEntities)
-                    Context.SupplierCheques.RemoveRange(bankAccount.SupplierCheques);
+                    Context.Cheques.RemoveRange(bankAccount.Cheques);
                 else
                     return null;
             Context.BankAccounts.Remove(bankAccount);

@@ -1,7 +1,7 @@
 ﻿using System;
 namespace POS.Domain.Entities
 {
-   public class Cheque
+    public class Cheque
     {
         public int Id { get; set; }
 
@@ -16,16 +16,10 @@ namespace POS.Domain.Entities
         public int BankAccountId { get; set; }
 
         public virtual BankAccount BankAccount { get; set; }
+        
+        public int TransactionId { get; set; }
 
-    }
-    public class CustomerCheque : Cheque
-    {
-        public int SaleId { get; set; }
-        public virtual Sale Sale { get; set; }
-    }
-    public class SupplierCheque : Cheque
-    {
-        public int PurchaseId { get; set; }
-        public virtual Purchase Purchase { get; set; }
-    }
+        public virtual Transaction Transaction { get; set; }
+
+    }   
 }

@@ -1,9 +1,6 @@
-﻿using POS.Domain.Enums;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace POS.Domain.Entities
 {
@@ -21,18 +18,32 @@ namespace POS.Domain.Entities
     }
     public class BankAccount
     {
+        public BankAccount()
+        {
+            Cheques = new List<Cheque>();
+            BankTransactions = new List<BankTransaction>();
+        }
         public int Id { get; set; }
         public string Name { get; set; }
         public string Number { get; set; }
         public int BankId { get; set; }
         public virtual Bank Bank { get; set; }    
-        public virtual ICollection<SupplierCheque> SupplierCheques { get; set; }    
-        public virtual ICollection<CustomerCheque> CustomerCheques { get; set; }    
-        public virtual ICollection<Deposit> Deposits { get; set; }    
-        public virtual ICollection<WithDrawal> WithDrawals { get; set; }    
+        public virtual ICollection<Cheque> Cheques { get; set; }    
+        public virtual ICollection<BankTransaction> BankTransactions { get; set; }    
 
         [NotMapped]
         public string Label => Name + " - " + Number; 
     }
 
+    public class BankTransaction
+    {
+        public int Id { get; set; }
+        public DateTime Date { get; set; }
+        public decimal Value { get; set; }
+        public string Number { get; set; }
+        public int BankAccountId { get; set; }
+        public int TransactionId { get; set; }
+        public virtual BankAccount BankAccount { get; set; }
+        public virtual Transaction Transaction { get; set; }
+    }
 }

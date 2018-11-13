@@ -71,16 +71,13 @@ namespace POS.Portal.App_Start
             kernel.Bind<ICategoriesService>().To<CategoriesService>();
             kernel.Bind<IUnitsService>().To<UnitsService>();
             kernel.Bind<IPropertiesService>().To<PropertiesService>();
-            kernel.Bind<ICustomersService>().To<CustomersService>();
-            kernel.Bind<ISuppliersService>().To<SuppliersService>();
+            kernel.Bind<IPeopleService>().To<PeopleService>();
             kernel.Bind<IPointsService>().To<PointsService>();
             kernel.Bind<IProductsService>().To<ProductsService>();
-            kernel.Bind<IPurchasesService>().To<PurchasesService>();
+            kernel.Bind<ITransactionsService>().To<TransactionsService>();
             kernel.Bind<IBanksService>().To<BanksService>();
             kernel.Bind<IBankAccountsService>().To<BankAccountsService>();
             kernel.Bind<IStockService>().To<StockService>();
-            kernel.Bind<ISalesService>().To<SalesService>();
-
         }
     }
 }

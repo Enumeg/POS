@@ -129,4 +129,7 @@
   <data name="Phone" xml:space="preserve">
     <value>الهاتف</value>
   </data>
+  <data name="Type" xml:space="preserve">
+    <value>يعامل ك</value>
+  </data>
 </root>
