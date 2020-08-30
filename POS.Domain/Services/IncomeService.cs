@@ -1,16 +1,14 @@
 ﻿using POS.Domain.Entities;
 using POS.Domain.Infrastructure;
-using System.Data.Entity;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Data.Entity;
 using System.Threading.Tasks;
 
 namespace POS.Domain.Services
 {
     public interface IIncomesService : IInitializer
     {
-        Task<bool> AddIncome(Income income);
+        Task<bool> AddIncome(Income income, bool saveChanges = true);
         Task<bool?> UpdateIncome(Income income);
         Task<bool?> DeleteIncome(int incomeId, bool removeRelatedEntities = false);
         Task<Income> FindIncome(int incomeId);
@@ -18,9 +16,9 @@ namespace POS.Domain.Services
     }
     public class IncomesService : ServicesBase, IIncomesService
     {
-        async Task<bool> IIncomesService.AddIncome(Income income)
+        async Task<bool> IIncomesService.AddIncome(Income income, bool saveChanges )
         {
-            return await CrudService.Add(income);
+            return await CrudService.Add(income, saveChanges: saveChanges);
         }
 
         async Task<bool?> IIncomesService.UpdateIncome(Income income)

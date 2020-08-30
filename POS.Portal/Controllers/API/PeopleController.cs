@@ -27,9 +27,9 @@ namespace POS.Portal.Controllers.API
         {
             return await _peopleService.GetAllPeople();
         }
-        public async Task<List<Person>> GetPeople(bool isCutomer)
+        public async Task<List<Person>> GetPeople(bool isCustomer)
         {
-            return await _peopleService.GetPeople(isCutomer);
+            return await _peopleService.GetPeople(isCustomer);
         }    
         // PUT: api/People/5
         [ResponseType(typeof(void))]

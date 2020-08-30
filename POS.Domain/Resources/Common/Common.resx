@@ -189,4 +189,13 @@
   <data name="Month" xml:space="preserve">
     <value>Month</value>
   </data>
+  <data name="AccountType" xml:space="preserve">
+    <value>Account type</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="PartnerSeed" xml:space="preserve">
+    <value>Partner seed</value>
+  </data>
 </root>

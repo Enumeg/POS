@@ -3,10 +3,8 @@ using POS.Domain.Enums;
 
 namespace POS.Domain.Entities
 {
-    public class Installment
+    public class Installment : EntityBase
     {
-        public int Id { get; set; }
-
         public decimal Value { get; set; }
 
         public DateTime DueDate { get; set; }

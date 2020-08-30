@@ -1,9 +1,8 @@
 ﻿using System;
 namespace POS.Domain.Entities
 {
-    public class Cheque
+    public class Cheque : EntityBase
     {
-        public int Id { get; set; }
 
         public decimal Value { get; set; }
 

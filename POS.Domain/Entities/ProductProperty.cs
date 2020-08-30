@@ -11,6 +11,7 @@ namespace POS.Domain.Entities
         [Key]
         [Column(Order = 2)]
         public int PropertyId { get; set; }
+        public int TenantId { get; set; }
         public virtual Product Product { get; set; }
         public virtual Property Property { get; set; }
         public string Value { get; set; }

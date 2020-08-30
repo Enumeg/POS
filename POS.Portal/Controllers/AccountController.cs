@@ -24,13 +24,9 @@ namespace POS.Portal.Controllers
         private readonly ISettingsService _settingsService;
         public AccountController(IShiftsService shiftsService, IMachinesService machinesService, ISettingsService settingsService)
         {
-            var context = ContextCache.GetPosContext();
             _shiftsService = shiftsService;
             _machinesService = machinesService;
             _settingsService = settingsService;
-            _shiftsService.Initialize(context);
-            _machinesService.Initialize(context);
-            _settingsService.Initialize(context);
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -84,6 +80,18 @@ namespace POS.Portal.Controllers
             {
                 return View(model);
             }
+            var user = await UserManager.FindByNameAsync(model.UserName);
+            if (user == null)
+            {
+                ModelState.AddModelError("", Identity.InvalidUserName);
+                return View(model);
+            }
+            var context = PosContext.CreateContext(user.TenantId);
+            CookieHelper.TenantId = user.TenantId;
+            //HttpContext.GetOwinContext().Set(context);
+            _settingsService.Initialize(context);
+            _machinesService.Initialize(context);
+            _shiftsService.Initialize(context);
             var machineName = "";
             int? machineId = null;
             var settings = _settingsService.GetSettings();
@@ -198,7 +206,7 @@ namespace POS.Portal.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName };
+                var user = new ApplicationUser { UserName = model.UserName, TenantId = CookieHelper.TenantId };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -528,8 +536,10 @@ namespace POS.Portal.Controllers
             }
         }
 
-        private async Task checkShift(string userId, int machineId)
+        private async Task CheckShift(string userId, int machineId)
         {
+            _shiftsService.Initialize(ContextCache.GetPosContext());
+
             var shiftResult = await _shiftsService.GetUserCurrentShift(userId, machineId);
             if (shiftResult.Id == 0)
             {

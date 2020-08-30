@@ -153,4 +153,16 @@
   <data name="Units" xml:space="preserve">
     <value>Units</value>
   </data>
+  <data name="Sales" xml:space="preserve">
+    <value>Sales</value>
+  </data>
+  <data name="Coding" xml:space="preserve">
+    <value>Coding</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Transactions</value>
+  </data>
+  <data name="Income" xml:space="preserve">
+    <value>Income</value>
+  </data>
 </root>

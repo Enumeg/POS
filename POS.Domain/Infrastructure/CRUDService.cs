@@ -24,6 +24,7 @@ namespace POS.Domain.Infrastructure
                 }
             }
             _context.Set<TEntity>().Add(entity);
+            _context.SetTenantId(entity);
             if (saveChanges)
                 return await _context.SaveChangesAsync() > 0;
             return true;
@@ -38,11 +39,12 @@ namespace POS.Domain.Infrastructure
                 {
                     return false;
                 }
-            }            
+            }
             _context.Entry(oldEntity).State = EntityState.Detached;
+            _context.SetTenantId(entityToUpdate);
             _context.Entry(entityToUpdate).State = EntityState.Modified;
             if (saveChanges)
-                 await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             return true;
         }
         public void Remove<TEntity>(TEntity entityToDelete, bool saveChanges = true) where TEntity : class
@@ -111,6 +113,6 @@ namespace POS.Domain.Infrastructure
             return list;
         }
 
-
+       
     }
 }

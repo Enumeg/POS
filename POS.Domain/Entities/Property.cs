@@ -4,19 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace POS.Domain.Entities
 {
-   public class Property
+   public class Property : EntityBase
     {
-        public Property()
-        {
-            Products = new List<ProductProperty>();
-            Categories = new List<Category>();
-            Values = new List<PropertyValue>();
-        }
-        public int Id { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<ProductProperty> Products { get; set; }
-        public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<ProductProperty> Products { get; set; } = new List<ProductProperty>();
+        public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
         [NotMapped]
-        public List<PropertyValue> Values { get; set; }
+        public List<PropertyValue> Values { get; set; }= new List<PropertyValue>();
     }
 }

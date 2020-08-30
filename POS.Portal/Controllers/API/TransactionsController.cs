@@ -1,13 +1,12 @@
-﻿using System;
+﻿using POS.Domain.Enums;
+using POS.Domain.Interfaces;
+using POS.Domain.Services;
+using POS.Portal.Helpers;
+using POS.Resources;
+using System;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using POS.Domain.Entities;
-using POS.Domain.Enums;
-using POS.Domain.Interfaces;
-using POS.Portal.Helpers;
-using POS.Resources;
-using POS.Domain.Services;
 using Transaction = POS.Domain.Entities.Transaction;
 
 namespace POS.Portal.Controllers.API
@@ -15,16 +14,56 @@ namespace POS.Portal.Controllers.API
     public class TransactionsController : ApiController
     {
         private readonly ITransactionsService _transactionsServices;
-
+        private readonly ISettingsService _settingsService;
         private readonly IStockService _stockService;
+        private readonly IIncomesService _incomesService;
 
-        public TransactionsController(ITransactionsService transactionsService, IStockService stockService)
+        public TransactionsController(ITransactionsService transactionsService, IStockService stockService, ISettingsService settingsService, IIncomesService incomesService)
         {
             var context = ContextCache.GetPosContext();
             _transactionsServices = transactionsService;
             _stockService = stockService;
+            _settingsService = settingsService;
+            _incomesService = incomesService;
             _transactionsServices.Initialize(context);
             _stockService.Initialize(context);
+            _settingsService.Initialize(context);
+        }
+        [HttpGet]
+        [Route("api/Transactions/NewSales")]
+        public async Task<IHttpActionResult> GetNewSales()
+        {
+            var setting = _settingsService.GetSettings();
+            var count = setting == null || setting.SalesPerYear == 0 ? 5 : setting.SalesPerYear;
+            return Ok(await _transactionsServices.GetNewSales(count));
+        }
+        [ResponseType(typeof(Transaction))]
+        public async Task<IHttpActionResult> PostTransaction(Transaction transaction)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                transaction.ShiftId = CookieHelper.ShiftId;
+                var result = await _transactionsServices.AddTransaction(transaction);
+                if (result == false)
+                    return BadRequest(Common.Duplicated);
+                return Ok(transaction);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _transactionsServices.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
         // GET: api/Transactions
@@ -59,35 +98,7 @@ namespace POS.Portal.Controllers.API
         //}
 
         // POST: api/Transactions
-        [ResponseType(typeof(Transaction))]
-        public async Task<IHttpActionResult> PostTransaction(Transaction transaction)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            try
-            {
-                transaction.ShiftId = CookieHelper.ShiftId;
-                var operation =
-                    transaction.TransactionType == TransactionType.Purchase ||
-                    transaction.TransactionType == TransactionType.SaleBack
-                        ? Operation.Put
-                        : Operation.Take;
-                foreach (var item in transaction.Details)
-                {
-                    await _stockService.UpdateStock(new Domain.Entities.Stock { Amount = item.Amount, ProductId = item.ProductId, PointId = transaction.PointId }, operation);
-                }
-                var result = await _transactionsServices.AddTransaction(transaction);
-                if (result == false)
-                    return BadRequest(Common.Duplicated);
-                return Ok(transaction);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
-        }
+
 
         // DELETE: api/Transactions/5
         //[ResponseType(typeof(Transaction))]
@@ -108,14 +119,6 @@ namespace POS.Portal.Controllers.API
         //    }
         //}
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _transactionsServices.Dispose();
-            }
-            base.Dispose(disposing);
-        }
 
 
     }

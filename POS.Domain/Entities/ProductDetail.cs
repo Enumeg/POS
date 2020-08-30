@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace POS.Domain.Entities
 {
-   public class ProductDetail
+   public class ProductDetail : EntityBase
     {
-        public int Id { get; set; }
         public decimal Amount { get; set; }
         public int ProductId { get; set; }
         public Product Product { get; set; }

@@ -1,5 +1,6 @@
 
 using System.Web.Http;
+using POS.Domain.Infrastructure;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(POS.Portal.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(POS.Portal.App_Start.NinjectWebCommon), "Stop")]
@@ -78,6 +79,7 @@ namespace POS.Portal.App_Start
             kernel.Bind<IBanksService>().To<BanksService>();
             kernel.Bind<IBankAccountsService>().To<BankAccountsService>();
             kernel.Bind<IStockService>().To<StockService>();
+            kernel.Bind<IIncomesService>().To<IncomesService>();
         }
     }
 }

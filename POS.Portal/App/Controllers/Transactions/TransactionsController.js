@@ -10,14 +10,14 @@ define(["app"], function (app) {
                 $scope.resource = data;
             });
             $scope.suppliers = [];
-            $scope.customers = [];
+            $scope.people = [];
             $scope.points = [];
             $scope.products = [];
             $scope.selectedProducts = [];
             $scope.bankAccounts = [];
             $scope.transaction = {
-                Total: 0, Discount: 0, Paid: 0, Rest: 0, PaymentMethod: 1, Installments: [], Cheques: [], Details: [] , TransactionType :
-                    page.slice(0, -1)
+                Total: 0, Discount: 0, Paid: 0, Rest: 0, PaymentMethod: 1, Installments: [], Cheques: [], Details: [], TransactionType:
+                    page.slice(0, -1), PersonId: 0
             };
             $scope.product = {};
             $scope.selectedIndex = -1;
@@ -182,9 +182,10 @@ define(["app"], function (app) {
                 this.personForm.$submitted = true;
                 if (!this.personForm.$valid)
                     return;
-                dataSource.insert(person, null, "api/people" ).success(function (data) {                   
-                        $scope.people.push(data);
-                        $scope.transaction.PersonId = data.Id;                   
+                dataSource.insert(person, null, "api/people").success(function (data) {
+                    dataSource.success();
+                    $scope.people.push(data);
+                    $scope.transaction.PersonId = data.Id;
                     $("#Modal").modal("hide");
                 }).error(dataSource.error);
 
@@ -194,11 +195,14 @@ define(["app"], function (app) {
             }
             //Initialize
             function initialize() {
-                dataSource.initialize("/api/" + page);
+                dataSource.initialize("/api/Transactions");
                 dataSource.loadList($scope.products, "api/products");
                 dataSource.loadList($scope.bankAccounts, "api/BankAccounts");
                 dataSource.loadList($scope.people, "api/people", { isCustomer: isSale });
                 dataSource.loadList($scope.points, "api/points?type=" + (isSale ? 2 : 1));
+                if (isSale) {
+                    dataSource.getUrl("api/Transactions/NewSales").success(function (result) { $scope.transaction.Number = result })
+                }
                 $("#Modal").modal({ show: false });
             };
 

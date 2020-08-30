@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="input-group">
-                        <select class="form-control" ng-model="transaction.CustomerId" ng-options="customer.Id as customer.Name for customer in customers" name="Customer" required></select>                        
+                        <select class="form-control" ng-model="transaction.PersonId" ng-options="customer.Id as customer.Name for customer in people" name="Customer" required></select>                        
                         <a class="input-group-addon btn" ng-click="add('Person');"><i class="glyphicon glyphicon-plus"></i></a>
                     </div>
                     <span class="ng-invalid" ng-show="(transactionForm.Customer.$dirty || transactionForm.$submitted ) &&  transactionForm.Customer.$error.required">

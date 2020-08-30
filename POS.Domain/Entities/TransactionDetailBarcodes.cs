@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace POS.Domain.Entities
 {
-    public class TransactionDetailBarcode
+    public class TransactionDetailBarcode : EntityBase
     {
-        public int Id { get; set; }
         public int BarCodeId { get; set; }
         public int TransactionDetailId { get; set; }
         public virtual BarCode BarCode { get; set; }    

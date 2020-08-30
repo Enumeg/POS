@@ -3,9 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace POS.Domain.Entities
 {
-    public class Shift
+    public class Shift : EntityBase
     {
-        public int Id { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public decimal Balance { get; set; }

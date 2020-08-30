@@ -1,5 +1,51 @@
 ﻿
-@{
-    Layout = null;
-}
 
+
+<h3>{{title.split("-")[1]}}</h3>
+<hr />
+<a class="btn btn-primary" ng-click="new()">@Common.New &nbsp; <b class="glyphicon glyphicon-plus"></b></a>
+<br />
+<br />
+<table class="table table-bordered table-condensed">
+    <tr>
+        <th>@Common.Date</th>
+        <th>@Common.Value</th>
+        <th>@Pages.Person</th>
+        <th>@Common.AccountType</th>
+        <th>@Common.Description</th>
+        <th></th>
+    </tr>
+    <tbody>
+        <tr ng-animate="'animate'" ng-repeat="income in incomes" ng-init="editable=income.Id === 0" class="editable" ng-form="editForm">
+            <td ng-class="{ 'ng-invalid' : (editForm.Date.$dirty || editForm.$submitted ) &&  editForm.Date.$error.required}">
+                <input class="form-control" ng-disabled="!editable"  ng-model="income.Date" name="Date" uib-datepicker-popup="dd/MM/yyyy" is-open="dt1.opened"
+                       ng-focus="dt1.opened = true" ng-click="dt1.opened = true" show-weeks="false" show-button-bar="false" required />
+            </td>
+            <td ng-class="{ 'ng-invalid' : (editForm.Value.$dirty || editForm.$submitted ) &&  editForm.Value.$error.required}">
+                <input type="number" class="form-control" name="Value" ng-readonly="!editable" ng-model="income.Value" required>
+            </td>
+            <td ng-class="{ 'ng-invalid' : (editForm.Person.$dirty || editForm.$submitted ) &&  editForm.Person.$error.required}">
+                <select class="form-control" ng-disabled="!editable" ng-model="income.PersonId" ng-options="person.Id as person.Name for person in people" name="Person" required></select>
+            </td>
+            <td ng-class="{ 'ng-invalid' : (editForm.AccountType.$dirty || editForm.$submitted ) &&  editForm.AccountType.$error.required}">
+                <Select class="form-control" name="AccountType" ng-disabled="!editable" ng-model="income.AccountType" required convert-to-number>
+                    <option value="@((int)POS.Domain.Enums.IncomeAccountType.Installment)">@Transaction.Installments</option>
+                    <option value="@((int)POS.Domain.Enums.IncomeAccountType.PartnerSeed)">@Common.PartnerSeed</option>
+                    <option value="@((int)POS.Domain.Enums.IncomeAccountType.Sales)">@Common.PartnerSeed</option>
+                </Select>
+            </td>
+
+            <td><input type="text" class="form-control" ng-readonly="!editable" ng-model="income.Description"></td>
+            <td>
+                <div class="btn-group" ng-hide="editable">
+                    <a class="btn btn-xs btn-info" ng-click="edit()">@Common.Edit &nbsp;<b class="glyphicon glyphicon-edit"></b></a>
+                    <a class="btn btn-xs btn-danger" ng-click="delete()">@Common.Delete &nbsp;<b class="glyphicon glyphicon-remove"></b></a>
+                </div>
+                <div class="btn-group" ng-show="editable">
+                    <a class="btn btn-xs btn-success" ng-click="save()">@Common.Save &nbsp;<b class="glyphicon glyphicon-ok"></b></a>
+                    <a class="btn btn-xs btn-warning" ng-click="cancel()">@Common.Cancel &nbsp;<b class="glyphicon glyphicon-remove"></b></a>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

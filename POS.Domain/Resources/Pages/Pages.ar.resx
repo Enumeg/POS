@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Application" xml:space="preserve">
-    <value>POS</value>
+    <value>نقاط البيع</value>
   </data>
   <data name="BankAccounts" xml:space="preserve">
     <value>الحسابات البنكية</value>
@@ -152,5 +152,17 @@
   </data>
   <data name="Units" xml:space="preserve">
     <value>الوحدات</value>
+  </data>
+  <data name="Sales" xml:space="preserve">
+    <value>المبيعات</value>
+  </data>
+  <data name="Coding" xml:space="preserve">
+    <value>التهيئة</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>الحركات</value>
+  </data>
+  <data name="Income" xml:space="preserve">
+    <value>مقبوضات</value>
   </data>
 </root>

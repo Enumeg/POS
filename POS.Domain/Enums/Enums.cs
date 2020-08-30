@@ -18,7 +18,7 @@
     public enum TransactionType
     {
         Purchase = 1,
-        Sale = 2 ,
+        Sale = 2,
         PurchaseBack = 3,
         SaleBack = 4
     }
@@ -39,15 +39,22 @@
         Store = 1,
         Market = 2
     }
-    public enum BankTransactionTypes :byte
+    public enum BankTransactionTypes : byte
     {
         Deposit = 1,
-        WithDrawal =2
+        WithDrawal = 2
     }
     public enum Operation
     {
         Put = 1,
         Take = 2
+    }
+    public enum IncomeAccountType
+    {
+        Sales = 1,
+        Installment = 2,
+        PartnerSeed = 3,
+        PurchaesBack = 4
     }
 }
 

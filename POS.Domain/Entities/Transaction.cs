@@ -6,16 +6,8 @@ using POS.Domain.Enums;
 
 namespace POS.Domain.Entities
 {
-    public class Transaction
+    public class Transaction : EntityBase
     {
-        public Transaction()
-        {
-            Details = new List<TransactionDetail>();
-            TransactionBacks = new List<Transaction>();
-            Installments = new List<Installment>();
-            Cheques = new List<Cheque>();
-        }
-        public int Id { get; set; }
         public string Number { get; set; }
         public DateTime Date { get; set; }
         public decimal Paid { get; set; }
@@ -29,10 +21,10 @@ namespace POS.Domain.Entities
         public virtual Point Point { get; set; }
         public virtual Shift Shift { get; set; }    
         public virtual BankTransaction BankTransaction { get; set; }
-        public virtual ICollection<TransactionDetail> Details { get; set; }
-        public virtual ICollection<Transaction> TransactionBacks { get; set; }
-        public virtual ICollection<Installment> Installments { get; set; }
-        public virtual ICollection<Cheque> Cheques { get; set; }
+        public virtual ICollection<TransactionDetail> Details { get; set; }= new List<TransactionDetail>();
+        public virtual ICollection<Transaction> TransactionBacks { get; set; }= new List<Transaction>();
+        public virtual ICollection<Installment> Installments { get; set; } = new List<Installment>();
+        public virtual ICollection<Cheque> Cheques { get; set; } = new List<Cheque>();
         [NotMapped]
         public decimal Total => Details.Sum(s => s.Total);
     }

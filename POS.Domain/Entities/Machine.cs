@@ -2,15 +2,10 @@
 
 namespace POS.Domain.Entities
 {
-    public class Machine
+    public class Machine : EntityBase
     {
-        public Machine()
-        {
-            Shifts = new List<Shift>();
-        }
-        public int Id { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<Shift> Shifts { get; set; }
+        public virtual ICollection<Shift> Shifts { get; set; }= new List<Shift>();
         
     }
 }

@@ -72,6 +72,7 @@
     <Compile Include="Entities\Property.cs" />
     <Compile Include="Entities\Damaged.cs" />
     <Compile Include="Entities\Stock.cs" />
+    <Compile Include="Entities\TenantBase.cs" />
     <Compile Include="Entities\TransactionDetailBarcodes.cs" />
     <Compile Include="Entities\Transfer.cs" />
     <Compile Include="Entities\Machine.cs" />

@@ -4,26 +4,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace POS.Domain.Entities
 {
-    public class Bank
+    public class Bank: EntityBase
     {
         public Bank()
         {
             BankAccounts = new HashSet<BankAccount>();
         }
-        public int Id { get; set; }
         public string Name { get; set; }
 
         public virtual ICollection<BankAccount> BankAccounts { get; set; }
 
     }
-    public class BankAccount
+    public class BankAccount : EntityBase
     {
         public BankAccount()
         {
             Cheques = new List<Cheque>();
             BankTransactions = new List<BankTransaction>();
         }
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Number { get; set; }
         public int BankId { get; set; }
@@ -35,9 +33,8 @@ namespace POS.Domain.Entities
         public string Label => Name + " - " + Number; 
     }
 
-    public class BankTransaction
+    public class BankTransaction : EntityBase
     {
-        public int Id { get; set; }
         public DateTime Date { get; set; }
         public decimal Value { get; set; }
         public string Number { get; set; }

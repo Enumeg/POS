@@ -41,6 +41,7 @@ define(["Services/routeResolver"], function () {
                 .when("/BankAccounts", route.resolve("Coding", "BankAccounts"))
                 .when("/Purchases", route.resolve("Transactions", "Purchases"))
                 .when("/Sales", route.resolve("Transactions", "Sales"))
+                .when("/Income", route.resolve("Income"))
                 .otherwise({ redirectTo: "/Products" });
 
         }]);

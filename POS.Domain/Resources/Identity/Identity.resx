@@ -162,4 +162,7 @@
   <data name="LogOff" xml:space="preserve">
     <value>Log off</value>
   </data>
+  <data name="InvalidUserName" xml:space="preserve">
+    <value>Invalid user name</value>
+  </data>
 </root>

@@ -14,6 +14,7 @@ namespace POS.Domain.Entities
         public int ProductId { get; set; }
         [Key, Column(Order = 2)]
         public int PointId { get; set; }
+        public int TenantId { get; set; }
         public decimal Amount { get; set; }
         public virtual Product Product { get; set; }
         public virtual Point Point { get; set; }

@@ -18,7 +18,7 @@ namespace POS.Portal
         {
 
             // Configure the db context, user manager and signin manager to use a single instance per request            
-            app.CreatePerOwinContext(() => PosContext.CreateContext(0));//CookieHelper.TenantId
+            app.CreatePerOwinContext(() => PosContext.CreateContext(0));//
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 

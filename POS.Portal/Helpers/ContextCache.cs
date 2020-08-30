@@ -11,7 +11,13 @@ namespace POS.Portal.Helpers
     {
         public static PosContext GetPosContext()
         {
-            return HttpContext.Current.GetOwinContext().Get<PosContext>();
+            var context =  HttpContext.Current.GetOwinContext().Get<PosContext>();
+            if (context != null && context.TenantId != 0) return context;
+
+            context = PosContext.CreateContext(CookieHelper.TenantId);
+            HttpContext.Current.GetOwinContext().Set(context);
+
+            return context;
         }
     }
 }

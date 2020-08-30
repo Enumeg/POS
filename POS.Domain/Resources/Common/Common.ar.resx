@@ -189,4 +189,13 @@
   <data name="Value" xml:space="preserve">
     <value>القيمة</value>
   </data>
+  <data name="AccountType" xml:space="preserve">
+    <value>نوع الحساب</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>الوصف</value>
+  </data>
+  <data name="PartnerSeed" xml:space="preserve">
+    <value>جاري شركاء</value>
+  </data>
 </root>

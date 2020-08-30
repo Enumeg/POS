@@ -2,17 +2,11 @@
 
 namespace POS.Domain.Entities
 {
-   public class Unit
+    public class Unit : EntityBase
     {
-        public Unit()
-        {
-            Categories = new List<Category>();
-            Products = new List<Product>();
-        }
-        public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<Category> Categories { get; set; }
-        public ICollection<Product> Products { get; set; }
+        public ICollection<Category> Categories { get; set; } = new List<Category>();
+        public ICollection<Product> Products { get; set; } = new List<Product>();
 
     }
 }
