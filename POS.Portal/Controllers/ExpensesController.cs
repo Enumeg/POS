@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace POS.Portal.Controllers
 {
-    public class ExpensesController : Controller
+    public class IncomeController : Controller
     {
         // GET: IIncomesService
         public ActionResult Index()

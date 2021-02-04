@@ -79,5 +79,10 @@ namespace POS.Domain.Services
             await CrudService.Add(shift);
             return shift.Id;
         }
+
+        bool IShiftsService.IsShiftClosed(int shiftId)
+        {
+            return CrudService.Find<Shift>(shiftId)?.EndDate.HasValue ?? false;
+        }
     }
 }

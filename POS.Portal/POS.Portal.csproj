@@ -202,6 +202,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\BankAccountsController.cs" />
+    <Compile Include="Controllers\API\ExpensesController.cs" />
     <Compile Include="Controllers\API\IncomesController.cs" />
     <Compile Include="Controllers\API\InstallmentsController.cs" />
     <Compile Include="Controllers\API\CategoriesController.cs" />
@@ -216,12 +217,14 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CodingController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ExpensesController.cs" />
     <Compile Include="Controllers\IncomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\PropertiesController.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Controllers\UnitsController.cs" />
+    <Compile Include="Filters\ShiftFilter.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -235,6 +238,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\App.js" />
+    <Content Include="App\Controllers\Expenses\ExpensesController.js" />
     <Content Include="App\Controllers\Income\IncomeController.js" />
     <Content Include="App\Controllers\Transactions\TransactionsController.js" />
     <Content Include="App\Controllers\Coding\CodingController.js" />
@@ -372,6 +376,7 @@
     <Content Include="Views\Transactions\Sales.cshtml" />
     <Content Include="Views\Coding\Installment.cshtml" />
     <Content Include="Views\Income\Index.cshtml" />
+    <Content Include="Views\Expenses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

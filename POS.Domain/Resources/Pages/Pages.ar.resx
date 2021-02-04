@@ -165,4 +165,7 @@
   <data name="Income" xml:space="preserve">
     <value>مقبوضات</value>
   </data>
+  <data name="Expenses" xml:space="preserve">
+    <value>مصروفات</value>
+  </data>
 </root>

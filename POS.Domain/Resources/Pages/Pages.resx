@@ -165,4 +165,7 @@
   <data name="Income" xml:space="preserve">
     <value>Income</value>
   </data>
+  <data name="Expenses" xml:space="preserve">
+    <value>Expenses</value>
+  </data>
 </root>

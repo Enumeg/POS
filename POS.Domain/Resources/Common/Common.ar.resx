@@ -198,4 +198,7 @@
   <data name="PartnerSeed" xml:space="preserve">
     <value>جاري شركاء</value>
   </data>
+  <data name="ShiftClosed" xml:space="preserve">
+    <value>لا يمكن التعديل لأنه تم اغلاق الوردية</value>
+  </data>
 </root>

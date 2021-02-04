@@ -7,7 +7,7 @@ namespace POS.Domain.Infrastructure
         protected PosContext Context;
         protected CrudService CrudService;
         #region Implementation of IInitializer
-        public void Initialize(PosContext context)
+        public virtual void Initialize(PosContext context)
         {
             Context = context;
             CrudService = new CrudService(Context);

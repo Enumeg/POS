@@ -10,7 +10,7 @@ namespace POS.Domain.Services
     {
         Task<bool> AddIncome(Income income, bool saveChanges = true);
         Task<bool?> UpdateIncome(Income income);
-        Task<bool?> DeleteIncome(int incomeId, bool removeRelatedEntities = false);
+        Task<bool?> DeleteIncome(int incomeId);
         Task<Income> FindIncome(int incomeId);
         Task<List<Income>> GetAllIncomes();
     }
@@ -26,17 +26,15 @@ namespace POS.Domain.Services
             return await CrudService.Update(income, income.Id);
         }
 
-        async Task<bool?> IIncomesService.DeleteIncome(int incomeId, bool removeRelatedEntities)
+        async Task<bool?> IIncomesService.DeleteIncome(int incomeId)
         {
-            //var income = Context.Incomes.Include(p => p.IncomeAccounts).FirstOrDefault(c => c.Id == incomeId);
-            //if (income == null) return false;
-            //if (income.IncomeAccounts.Count > 0)
-            //    if (removeRelatedEntities)
-            //        Context.IncomeAccounts.RemoveRange(income.IncomeAccounts);
-            //    else
-            //        return null;
-            //Context.Incomes.Remove(income);
-            //await Context.SaveChangesAsync();
+            var income = Context.Incomes.Find(incomeId);
+            if (income == null) return false;
+            if (income.AccountType == Enums.AccountType.Sales ||
+                income.AccountType == Enums.AccountType.PurchaesBack)
+                return null;
+            Context.Incomes.Remove(income);
+            await Context.SaveChangesAsync();
             return true;
         }
 

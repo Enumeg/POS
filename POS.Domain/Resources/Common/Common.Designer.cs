@@ -295,6 +295,15 @@ namespace POS.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The shift has been closed.
+        /// </summary>
+        public static string ShiftClosed {
+            get {
+                return ResourceManager.GetString("ShiftClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Value.
         /// </summary>
         public static string Value {

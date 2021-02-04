@@ -11,6 +11,11 @@ namespace POS.Domain.Entities
         public string Address { get; set; }
         public decimal Balance { get; set; }
         public PersonType PersonType { get; set; }
+
+        public virtual ICollection<Income> Incomes { get; set; } = new HashSet<Income>();
+
+        public virtual ICollection<Expense> Expenses { get; set; } = new HashSet<Expense>();
+
         public virtual ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
     }
 }

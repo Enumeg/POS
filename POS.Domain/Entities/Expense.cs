@@ -4,7 +4,7 @@ using POS.Domain.Enums;
 
 namespace POS.Domain.Entities
 {
-    public class Income : EntityBase
+    public class Expense : EntityBase
     {
         public DateTime Date { get; set; }
         public decimal Value { get; set; }

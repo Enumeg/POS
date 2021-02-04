@@ -7,34 +7,31 @@ using POS.Portal.Helpers;
 using POS.Resources;
 using POS.Domain.Services;
 using POS.Portal.Filters;
-using income = POS.Domain.Entities.Income;
-using POS.Domain.Interfaces;
+using expense = POS.Domain.Entities.Expense;
 
 namespace POS.Portal.Controllers.API
 {
-    public class IncomeController : ApiController
+    public class ExpensesController : ApiController
     {
-        private readonly IIncomesService _incomeService;
-        private readonly IShiftsService _shiftsService;
-        public IncomeController(IIncomesService incomeService, IShiftsService shiftsService)
+        private readonly IExpensesService _expenseService;
+        public ExpensesController(IExpensesService expenseService)
         {
             var context = ContextCache.GetPosContext();
-            _incomeService = incomeService;
-            _shiftsService = shiftsService;
-            _incomeService.Initialize(context);
+            _expenseService = expenseService;
+            _expenseService.Initialize(context);
         }
 
-        // GET: api/Income
-        public async Task<List<Income>> GetIncome()
+        // GET: api/Expense
+        public async Task<List<Expense>> GetExpense()
         {
-            return await _incomeService.GetAllIncomes();
+            return await _expenseService.GetAllExpenses();
         }
 
 
-        // PUT: api/Income/5
+        // PUT: api/Expense/5
         [ResponseType(typeof(void))]
         [ShiftFilter]
-        public async Task<IHttpActionResult> Putincome(income income)
+        public async Task<IHttpActionResult> Putexpense(expense expense)
         {
             if (!ModelState.IsValid)
             {
@@ -43,7 +40,7 @@ namespace POS.Portal.Controllers.API
 
             try
             {
-                var result = await _incomeService.UpdateIncome(income);
+                var result = await _expenseService.UpdateExpense(expense);
                 if (result == null)
                     return NotFound();
                 if (result == false)
@@ -56,10 +53,10 @@ namespace POS.Portal.Controllers.API
             }
         }
 
-        // POST: api/Income
-        [ResponseType(typeof(income))]
+        // POST: api/Expense
+        [ResponseType(typeof(expense))]
         [ShiftFilter]
-        public async Task<IHttpActionResult> Postincome(income income)
+        public async Task<IHttpActionResult> Postexpense(expense expense)
         {
             if (!ModelState.IsValid)
             {
@@ -67,11 +64,11 @@ namespace POS.Portal.Controllers.API
             }
             try
             {
-                income.ShiftId = CookieHelper.ShiftId;
-                var result = await _incomeService.AddIncome(income);
+                expense.ShiftId = CookieHelper.ShiftId;
+                var result = await _expenseService.AddExpense(expense);
                 if (result == false)
                     return BadRequest(Common.Duplicated);
-                return Ok(income);
+                return Ok(expense);
             }
             catch
             {
@@ -79,14 +76,14 @@ namespace POS.Portal.Controllers.API
             }
         }
 
-        // DELETE: api/Income/5
-        [ResponseType(typeof(income))]
+        // DELETE: api/Expense/5
+        [ResponseType(typeof(expense))]
         [ShiftFilter]
-        public async Task<IHttpActionResult> Deleteincome(int id, bool removeRelatedEntities = false)
+        public async Task<IHttpActionResult> Deleteexpense(int id, bool removeRelatedEntities = false)
         {
             try
             {
-                var result = await _incomeService.DeleteIncome(id);
+                var result = await _expenseService.DeleteExpense(id);
                 switch (result)
                 {
                     case false:
@@ -107,7 +104,7 @@ namespace POS.Portal.Controllers.API
         {
             if (disposing)
             {
-                _incomeService.Dispose();
+                _expenseService.Dispose();
             }
             base.Dispose(disposing);
         }

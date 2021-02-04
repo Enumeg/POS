@@ -59,5 +59,6 @@ namespace POS.Domain.Infrastructure
         public virtual DbSet<Income> Incomes { get; set; }
         public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<Cheque> Cheques { get; set; }
+        public virtual DbSet<Expense> Expenses { get; set; }
     }
 }

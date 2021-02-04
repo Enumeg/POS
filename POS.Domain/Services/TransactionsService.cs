@@ -48,7 +48,7 @@ namespace POS.Domain.Services
             {
                 await _incomesService.AddIncome(new Income
                 {
-                    AccountType = transaction.TransactionType == TransactionType.Sale ? IncomeAccountType.Sales : IncomeAccountType.PurchaesBack,
+                    AccountType = transaction.TransactionType == TransactionType.Sale ? AccountType.Sales : AccountType.PurchaesBack,
                     PersonId = transaction.PersonId,
                     Date = transaction.Date,
                     Value = transaction.Paid,

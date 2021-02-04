@@ -11,9 +11,12 @@ namespace POS.Domain.Entities
 
         public DateTime? PaymentDate { get; set; }
 
-        public int IncomeId { get; set; }
+        public int? IncomeId { get; set; }
 
         public Income Income { get; set; }
+        public int? ExpenseId { get; set; }
+
+        public Expense Expense { get; set; }
 
         public int? ShiftId { get; set; }
 

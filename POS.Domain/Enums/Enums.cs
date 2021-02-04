@@ -49,12 +49,15 @@
         Put = 1,
         Take = 2
     }
-    public enum IncomeAccountType
+    public enum AccountType
     {
-        Sales = 1,
-        Installment = 2,
-        PartnerSeed = 3,
-        PurchaesBack = 4
+        Purchases = 1,
+        Sales = 2,
+        Installment = 3,
+        PartnerSeed = 4,
+        PurchaesBack = 5,
+        SalesBack = 6,
+        Expenses = 7
     }
 }
 
