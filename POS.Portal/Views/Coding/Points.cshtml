@@ -1,8 +1,13 @@
 ﻿
-<h3>{{title.split("-")[0]}}</h3>
+@{
+    ViewBag.Title = Pages.Points;
+}
+<input type="hidden" ng-init="$parent.$root.title ='@ViewBag.Title';" />
+<h3>@ViewBag.Title</h3>
 <hr />
 <a class="btn btn-primary" ng-click="new({Id:0 ,Name: '',Address: '' ,PointType :''})">@Common.New &nbsp; <b class="glyphicon glyphicon-plus"></b></a>
-<br /><br />
+<br />
+<br />
 <table class="table table-bordered table-condensed">
     <tbody>
         <tr>

@@ -1,7 +1,11 @@
 ﻿
 
 
-<h3>{{title.split("-")[1]}}</h3>
+@{
+    ViewBag.Title = Pages.Income;
+}
+<input type="hidden" ng-init="$parent.$root.title ='@ViewBag.Title';" />
+<h3>@ViewBag.Title</h3>
 <hr />
 <a class="btn btn-primary" ng-click="new()">@Common.New &nbsp; <b class="glyphicon glyphicon-plus"></b></a>
 <br />
@@ -18,7 +22,7 @@
     <tbody>
         <tr ng-animate="'animate'" ng-repeat="income in incomes" ng-init="editable=income.Id === 0" class="editable" ng-form="editForm">
             <td ng-class="{ 'ng-invalid' : (editForm.Date.$dirty || editForm.$submitted ) &&  editForm.Date.$error.required}">
-                <input class="form-control" ng-disabled="!editable"  ng-model="income.Date" name="Date" uib-datepicker-popup="dd/MM/yyyy" is-open="dt1.opened"
+                <input class="form-control" ng-disabled="!editable" ng-model="income.Date" name="Date" uib-datepicker-popup="dd/MM/yyyy" is-open="dt1.opened"
                        ng-focus="dt1.opened = true" ng-click="dt1.opened = true" show-weeks="false" show-button-bar="false" required />
             </td>
             <td ng-class="{ 'ng-invalid' : (editForm.Value.$dirty || editForm.$submitted ) &&  editForm.Value.$error.required}">

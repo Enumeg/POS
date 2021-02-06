@@ -2,8 +2,9 @@
 /* Controller that manage a list of list of certain type */
 
 define(["app"], function (app) {
-    app.register.controller("CodingController", ["$scope", "dataSource", "$location",
-        function ($scope, dataSource, $location) {        
+    app.register.controller("CodingController", ["$scope", "dataSource", "$location", "resource",
+        function ($scope, dataSource, $location, resource) {        
+
             $scope.list = [];
             $scope.entity = {};
             //Create
@@ -58,7 +59,13 @@ define(["app"], function (app) {
             };
             //Initialize
             function initialize() {
+             
                 $scope.page = $location.url().split("/")[1];
+                resource.loadDictionary(function (data) {
+                    $scope.resource = data;
+                    $scope.title = resource.getValue($scope.page);
+                    $scope.$parent.$root.title = $scope.title;
+                });
                 dataSource.initialize("/api/" + $scope.page);
                 if ($scope.page === "BankAccounts") {
                     $scope.banks = [];

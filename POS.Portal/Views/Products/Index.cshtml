@@ -1,6 +1,8 @@
-﻿<input type="hidden" ng-init="$parent.$root.title ='@POS.Resources.Pages.Products';" />
-
-<h3>@POS.Resources.Pages.Products</h3>
+﻿@{
+    ViewBag.Title = Pages.Products;
+}
+<input type="hidden" ng-init="$parent.$root.title ='@ViewBag.Title';" />
+<h3>@ViewBag.Title</h3>
 <hr />
 <a class="btn btn-primary" ng-click="new(false)">@Common.New &nbsp; <b class="glyphicon glyphicon-plus"></b></a>
 <a class="btn btn-primary" ng-click="new(true)">@Common.AddMany &nbsp; <b class="glyphicon glyphicon-plus"></b></a>

@@ -1,8 +1,13 @@
 ﻿
-<h3>{{title.split("-")[1]}}</h3>
+@{
+    ViewBag.Title = Pages.BankAccounts;
+}
+<input type="hidden" ng-init="$parent.$root.title ='@ViewBag.Title';" />
+<h3>@ViewBag.Title</h3>
 <hr />
 <a class="btn btn-primary" ng-click="new({Id:0 ,Name: '',Number: '' ,BankId : 0})">@Common.New &nbsp; <b class="glyphicon glyphicon-plus"></b></a>
-<br /><br />
+<br />
+<br />
 <table class="table table-bordered table-condensed">
     <tbody>
         <tr>
@@ -18,10 +23,10 @@
             </td>
             <td ng-class="{ 'ng-invalid' : (editForm.Number.$dirty || editForm.$submitted ) &&  editForm.Number.$error.required}">
                 <input type="text" class="form-control" name="Number" ng-readonly="!editable" ng-model="entity.Number" required>
-            </td>         
+            </td>
             <td ng-class="{ 'ng-invalid' : (editForm.Bank.$dirty || editForm.$submitted ) &&  editForm.PointType.$error.required}">
                 <Select class="form-control" name="Bank" ng-disabled="!editable" ng-model="entity.BankId" ng-options="bank.Id as bank.Name for bank in banks"
-                required ></Select>
+                        required></Select>
             </td>
 
             <td>

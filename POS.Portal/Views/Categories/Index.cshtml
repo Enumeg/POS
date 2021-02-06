@@ -2,10 +2,12 @@
 @{
     ViewBag.Title = Pages.Categories;
 }
+<input type="hidden" ng-init="$parent.$root.title ='@ViewBag.Title';" />
 <h3>@ViewBag.Title</h3>
 <hr />
 <a class="btn btn-primary" ng-click="new()">@Common.New &nbsp; <b class="glyphicon glyphicon-plus"></b></a>
-<br /><br />
+<br />
+<br />
 
 <table class="table table-striped table-bordered table-condensed">
     <tr>
