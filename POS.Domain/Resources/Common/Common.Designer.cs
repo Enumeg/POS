@@ -133,7 +133,7 @@ namespace POS.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you want to delete .
+        ///   Looks up a localized string similar to Do you want to delete? .
         /// </summary>
         public static string ConfirmDelete {
             get {

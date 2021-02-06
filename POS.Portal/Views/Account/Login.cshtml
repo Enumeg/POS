@@ -7,12 +7,14 @@
 <body style="background:url(/Images/background.jpg) no-repeat ;">
     <div class="login">
         <div style="text-align:center;min-height:50px;">
-            
+
         </div>
         @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary()
+            <img width="80%" src="~/Images/pos.png" />
+            <br /><br />
             <div class="form-group">
                 @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @PlaceHolder = "User name" })
             </div>
@@ -20,15 +22,17 @@
                 @Html.PasswordFor(m => m.Password, new { @class = "form-control", @PlaceHolder = "Password" })
             </div>
             <div class="form-group">
-                <div class="checkbox">
+                <label>
                     @Html.CheckBoxFor(m => m.RememberMe)
-                    @Html.LabelFor(m => m.RememberMe)
-                </div>
+                    <span>
+                        @Html.DisplayNameFor(m => m.RememberMe)
+                    </span>
+                </label>
             </div>
             <div class="form-group">
                 <input type="submit" value="Log in" class="btn btn-block btn-default" />
             </div>
-            <div class="form-group">&copy; @DateTime.Now.Year - Enum</div>
+            @*<div class="form-group">&copy; @DateTime.Now.Year - Enum</div>*@
 
         }
     </div>
