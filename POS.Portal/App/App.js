@@ -3,16 +3,11 @@
 define(["Services/routeResolver"], function () {
 
     var app = angular.module("POS", ["ngRoute", "ngCookies", "routeResolverServices", "ui.bootstrap", "angular-loading-bar", "angucomplete-alt", "isteven-multi-select", "toastr"]);
-    app.run(function ($location, $rootScope, resource) {
-        resource.fillAsync(function () {
-            $rootScope.$on("$routeChangeSuccess", function (event, current) {
-                var application = resource.getValue("Application");
-                var page = resource.getValue(current.$$route.originalPath.split("/")[1]);
-                if (application)
-                    $rootScope.title = application ;
-                if (page)
-                    $rootScope.title += " - " + page;
-            });
+    app.run(function ($location, $rootScope, $document) {
+        $rootScope.$on("$routeChangeStart", function (event, nextRoute , prevRoute) {
+            if (!prevRoute)
+                $document.loggedIn = false;
+            $document.referrer = prevRoute ? nextRoute.$$route.originalPath : "login";
         });
     });
 

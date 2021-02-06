@@ -139,7 +139,7 @@
     <value>إغلاق</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>هل أنت متأكد من الحذف؟</value>
+    <value>هل أنت متأكد من الحذف؟ </value>
   </data>
   <data name="Count" xml:space="preserve">
     <value>العدد</value>

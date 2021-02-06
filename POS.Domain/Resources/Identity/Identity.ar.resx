@@ -136,7 +136,7 @@
     <value>تأكيد كلمة السر</value>
   </data>
   <data name="PasswordConfirmation" xml:space="preserve">
-    <value>كلمة السر وتأكيدها غير متطبقتان</value>
+    <value>كلمة السر وتأكيدها غير متطبقتان.</value>
   </data>
   <data name="NewPassword" xml:space="preserve">
     <value>كلمة السر الجديدة</value>
