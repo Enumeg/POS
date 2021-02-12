@@ -133,7 +133,7 @@ namespace POS.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Person.
+        ///   Looks up a localized string similar to People.
         /// </summary>
         public static string Person {
             get {
@@ -183,6 +183,15 @@ namespace POS.Resources {
         public static string Sales {
             get {
                 return ResourceManager.GetString("Sales", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stock.
+        /// </summary>
+        public static string Stock {
+            get {
+                return ResourceManager.GetString("Stock", resourceCulture);
             }
         }
         

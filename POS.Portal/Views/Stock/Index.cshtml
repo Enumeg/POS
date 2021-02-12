@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = Pages.Stock;
+}
+<input type="hidden" ng-init="$parent.$root.title ='@ViewBag.Title';" />
+<h3>@ViewBag.Title</h3>
+<hr />
+
+<br />
+<br />
+<table class="table table-bordered table-condensed">
+    <thead>
+        <tr>
+            <th>@Models.Point</th>
+            <th>@Product.Category</th>
+            <th>@Product.Barcode</th>
+            <th>@Common.Name</th>
+            <th>@Product.SalePrice</th>
+            <th>@Transaction.Amount</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr ng-animate="'animate'" ng-repeat="stock in stocks">
+        <td>{{stock.Point}}</td>
+        <td>{{stock.Product.Category}}</td>
+        <td>{{stock.Product.Barcode}}</td>
+        <td>{{stock.Product.Name}}</td>
+        <td>{{stock.Product.SalePrice}}</td>
+        <td>{{stock.Amount}} {{stock.Product.Unit}}</td>
+    </tr>
+       
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="5">
+            @Transaction.Total
+        </td>
+        <td>{{total}}</td>
+    </tr>
+    </tfoot>
+</table>

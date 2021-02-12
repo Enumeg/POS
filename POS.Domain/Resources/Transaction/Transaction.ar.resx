@@ -136,7 +136,7 @@
     <value>آجل</value>
   </data>
   <data name="Number" xml:space="preserve">
-    <value>عدد</value>
+    <value>رقم الفاتورة</value>
   </data>
   <data name="Paid" xml:space="preserve">
     <value>المدفوع</value>

@@ -133,7 +133,7 @@
     <value>Customers</value>
   </data>
   <data name="Person" xml:space="preserve">
-    <value>Person</value>
+    <value>People</value>
   </data>
   <data name="Points" xml:space="preserve">
     <value>Points</value>
@@ -167,5 +167,8 @@
   </data>
   <data name="Expenses" xml:space="preserve">
     <value>Expenses</value>
+  </data>
+  <data name="Stock" xml:space="preserve">
+    <value>Stock</value>
   </data>
 </root>

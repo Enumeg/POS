@@ -206,6 +206,7 @@
     <Compile Include="Controllers\API\IncomesController.cs" />
     <Compile Include="Controllers\API\InstallmentsController.cs" />
     <Compile Include="Controllers\API\CategoriesController.cs" />
+    <Compile Include="Controllers\API\StockController.cs" />
     <Compile Include="Controllers\API\TransactionsController.cs" />
     <Compile Include="Controllers\API\PeopleController.cs" />
     <Compile Include="Controllers\API\ProductsController.cs" />
@@ -222,6 +223,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\PropertiesController.cs" />
+    <Compile Include="Controllers\StockController.cs" />
     <Compile Include="Controllers\TransactionsController.cs" />
     <Compile Include="Controllers\UnitsController.cs" />
     <Compile Include="Filters\ShiftFilter.cs" />
@@ -240,6 +242,7 @@
     <Content Include="App\App.js" />
     <Content Include="App\Controllers\Expenses\ExpensesController.js" />
     <Content Include="App\Controllers\Income\IncomeController.js" />
+    <Content Include="App\Controllers\Stock\StockController.js" />
     <Content Include="App\Controllers\Transactions\TransactionsController.js" />
     <Content Include="App\Controllers\Coding\CodingController.js" />
     <Content Include="App\Controllers\Products\ProductsController.js" />
@@ -377,6 +380,7 @@
     <Content Include="Views\Coding\Installment.cshtml" />
     <Content Include="Views\Income\Index.cshtml" />
     <Content Include="Views\Expenses\Index.cshtml" />
+    <Content Include="Views\Stock\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -133,7 +133,7 @@
     <value>العملاء</value>
   </data>
   <data name="Person" xml:space="preserve">
-    <value>أشخاص</value>
+    <value>الأشخاص</value>
   </data>
   <data name="Points" xml:space="preserve">
     <value>نقاط البيع</value>
@@ -167,5 +167,8 @@
   </data>
   <data name="Expenses" xml:space="preserve">
     <value>مصروفات</value>
+  </data>
+  <data name="Stock" xml:space="preserve">
+    <value>المخزون</value>
   </data>
 </root>
