@@ -1,6 +1,16 @@
-﻿html, body {
+﻿@font-face {
+    font-family: 'DroidNaskh';
+    src: url('../fonts/DroidNaskh-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'DroidNaskhBold';
+    src: url('../fonts/DroidNaskh-Bold.ttf');
+}
+html, body {
     height: 100%;
     position: relative;
+    font-family: DroidNaskh;
 }
 
 .container {
@@ -132,6 +142,7 @@ tr.editable > td {
 
 select {
     min-width: 200px;
+    padding: 4px 12px !important;
 }
 
 .form-control[disabled] {
@@ -145,10 +156,11 @@ select:disabled {
     text-overflow: '';
 }
 
-.form-inline > div, .form-inline > .form-control {
+.form-inline > div, .form-inline > .form-control, .form-inline .angucomplete-holder {
     display: inline-block;
     margin: 0 8px 0 5px;
 }
+
 /*end bootstrap*/
 .logo img {
     height: 50px;

@@ -305,6 +305,8 @@
     <Content Include="Scripts\angular-touch.min.js.map" />
     <Content Include="bower.json" />
     <Content Include="Content\bootstrap-rtl.css.map" />
+    <Content Include="fonts\DroidNaskh-Bold.ttf" />
+    <Content Include="fonts\DroidNaskh-Regular.ttf" />
     <None Include="Properties\PublishProfiles\ipos - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\ipos - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />

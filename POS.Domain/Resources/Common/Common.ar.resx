@@ -139,7 +139,7 @@
     <value>إغلاق</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>هل أنت متأكد من الحذف؟ </value>
+    <value>هل أنت متأكد من الحذف؟</value>
   </data>
   <data name="Count" xml:space="preserve">
     <value>العدد</value>
@@ -200,5 +200,8 @@
   </data>
   <data name="ShiftClosed" xml:space="preserve">
     <value>لا يمكن التعديل لأنه تم اغلاق الوردية</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>إعرض</value>
   </data>
 </root>

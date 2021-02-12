@@ -1,6 +1,6 @@
 ﻿require.config({
     baseUrl: "/App",
-    urlArgs: "v=1.0"
+    urlArgs: "v=1.0.0.1"
 });
 
 require(

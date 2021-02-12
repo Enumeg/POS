@@ -148,7 +148,7 @@
     <value>All</value>
   </data>
   <data name="ConfirmDelete" xml:space="preserve">
-    <value>Do you want to delete? </value>
+    <value>Do you want to delete?</value>
   </data>
   <data name="DeletedSuccessfully" xml:space="preserve">
     <value>Deleted Successfully</value>
@@ -200,5 +200,8 @@
   </data>
   <data name="ShiftClosed" xml:space="preserve">
     <value>The shift has been closed</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Show</value>
   </data>
 </root>

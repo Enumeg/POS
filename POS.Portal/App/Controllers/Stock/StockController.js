@@ -6,9 +6,18 @@ define(["app"], function (app) {
 
             $scope.stocks = [];
             $scope.products = [];
-            $scope.points = {};
+            $scope.points = [];
             $scope.total = 0;
-          //Initialize
+            var product = {};
+            $scope.pointId = null;
+            $scope.show = () => list();
+            $scope.setValue = (selected) => {
+                if (selected)
+                    product = selected.originalObject;
+                else
+                    product = {};
+            };
+            //Initialize
             function initialize() {
                 dataSource.initialize("/api/Stock");
                 list();
@@ -22,7 +31,7 @@ define(["app"], function (app) {
             }
             //List
             function list() {
-                dataSource.getList().success(function (data) {
+                dataSource.getList({ productId: product.Id, pointId: $scope.pointId }).success(function (data) {
                     $scope.total = 0;
                     data.forEach(function (item) {
                         $scope.total += item.Amount;

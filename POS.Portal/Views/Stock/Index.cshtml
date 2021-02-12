@@ -4,8 +4,14 @@
 <input type="hidden" ng-init="$parent.$root.title ='@ViewBag.Title';" />
 <h3>@ViewBag.Title</h3>
 <hr />
-
-<br />
+<div class="form-inline">
+    <label>@Models.Point</label>
+    <select class="form-control" ng-model="pointId" ng-options="point.Id as point.Name for point in points" name="Point" ><option value="">@Common.Choose</option></select>
+    <label>@Models.Product</label>
+    <angucomplete-alt pause="200" selected-object="setValue" local-data="products" search-fields="Name" title-field="Name" minlength="1" id="productName"
+                      input-class="form-control" text-searching="false" text-no-results="false" initial-value="product.Name" />
+    <a class="btn btn-default" ng-click="show()">@Common.Show</a>
+</div>
 <br />
 <table class="table table-bordered table-condensed">
     <thead>
@@ -16,7 +22,6 @@
             <th>@Common.Name</th>
             <th>@Product.SalePrice</th>
             <th>@Transaction.Amount</th>
-            <th></th>
         </tr>
     </thead>
     <tbody>

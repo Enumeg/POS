@@ -133,7 +133,7 @@ namespace POS.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you want to delete? .
+        ///   Looks up a localized string similar to Do you want to delete?.
         /// </summary>
         public static string ConfirmDelete {
             get {
@@ -300,6 +300,15 @@ namespace POS.Resources {
         public static string ShiftClosed {
             get {
                 return ResourceManager.GetString("ShiftClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show.
+        /// </summary>
+        public static string Show {
+            get {
+                return ResourceManager.GetString("Show", resourceCulture);
             }
         }
         
