@@ -7,7 +7,7 @@ using POS.Domain.Infrastructure;
 
 namespace POS.Domain.Services
 {
-    public interface IInstallmentsService : IInitializer
+    public interface IInstallmentsService : System.IDisposable
     {
         Task<bool> AddInstallment(Installment installment);
         Task<bool?> UpdateInstallment(Installment installment);
@@ -17,6 +17,10 @@ namespace POS.Domain.Services
     }
     public class InstallmentsService : ServicesBase, IInstallmentsService
     {
+        public InstallmentsService(PosContext context) : base(context)
+        {
+
+        }
         async Task<bool> IInstallmentsService.AddInstallment(Installment installment)
         {
             return await CrudService.Add(installment, c => c.TransactionId == installment.TransactionId && c.PaymentDate == installment.PaymentDate);

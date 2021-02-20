@@ -2,20 +2,14 @@
 
 namespace POS.Domain.Infrastructure
 {
-    public class ServicesBase : IDisposable 
+    public class ServicesBase : IDisposable
     {
         protected PosContext Context;
         protected CrudService CrudService;
-        #region Implementation of IInitializer
-        public virtual void Initialize(PosContext context)
+        public ServicesBase(PosContext context)
         {
             Context = context;
-            CrudService = new CrudService(Context);
-        }
-        #endregion
-        public void SaveChanges()
-        {
-            Context.SaveChanges();
+            CrudService = new CrudService(context);
         }
         // Public implementation of Dispose pattern callable by consumers. 
         public void Dispose()

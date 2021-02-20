@@ -8,29 +8,24 @@ using POS.Domain.Infrastructure;
 
 namespace POS.Domain.Services
 {
-    public interface ITransactionsService : IInitializer
+    public interface ITransactionsService : System.IDisposable
     {
         Task<bool> AddTransaction(Transaction transaction);
         Task<string> GetNewSales(int salesPerYear);
     }
     public class TransactionsService : ServicesBase, ITransactionsService
     {
+
         private readonly IStockService _stockService;
         private readonly IIncomesService _incomesService;
-
-        public TransactionsService(IIncomesService incomesService, IStockService stockService)
+       
+        public TransactionsService(PosContext context, IIncomesService incomesService, IStockService stockService): base(context)
         {
             _incomesService = incomesService;
             _stockService = stockService;
         }
 
-        public new void Initialize(PosContext context)
-        {
-            Context = context;
-            CrudService = new CrudService(Context);
-            _stockService.Initialize(context);
-            _incomesService.Initialize(context);
-        }
+       
         async Task<bool> ITransactionsService.AddTransaction(Transaction transaction)
         {
             var operation =

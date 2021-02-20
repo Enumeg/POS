@@ -13,9 +13,7 @@ namespace POS.Portal.Controllers.API
 
         public StockController(IStockService stockService)
         {
-            var context = ContextCache.GetPosContext();
             _stockService = stockService;
-            _stockService.Initialize(context);
         }
         // api/get
         [HttpGet]

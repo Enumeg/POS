@@ -14,9 +14,7 @@ namespace POS.Portal.Controllers.API
 
         public BanksController(IBanksService banksService)
         {
-            var context = ContextCache.GetPosContext();
             _banksService = banksService;
-            _banksService.Initialize(context);
         }
 
         // GET: api/Banks

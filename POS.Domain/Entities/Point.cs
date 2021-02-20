@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace POS.Domain.Entities
 {
-    public class Point : EntityBase
+    public class Point : BiLanguageNameEntity
     {
-        public string Name { get; set; }
         public string Address { get; set; }
         public PointType PointType { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();

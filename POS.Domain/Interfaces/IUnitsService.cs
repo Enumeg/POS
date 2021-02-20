@@ -5,7 +5,7 @@ using POS.Domain.Infrastructure;
 
 namespace POS.Domain.Interfaces
 {
-    public interface IUnitsService: IInitializer
+    public interface IUnitsService : System.IDisposable
     {
         Task<bool> AddUnit(Unit unit);
         Task<bool?> UpdateUnit(Unit unit);

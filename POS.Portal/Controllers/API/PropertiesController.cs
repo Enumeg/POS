@@ -15,9 +15,7 @@ namespace POS.Portal.Controllers.API
 
         public PropertiesController(IPropertiesService propertiesService)
         {
-            var context = ContextCache.GetPosContext();
             _propertiesService = propertiesService;
-            _propertiesService.Initialize(context);
         }
 
         // GET: api/Properties

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace POS.Domain.Services
 {
-    public interface IBanksService : IInitializer
+    public interface IBanksService : System.IDisposable
     {
         Task<bool> AddBank(Bank bank);
         Task<bool?> UpdateBank(Bank bank);
@@ -18,6 +18,10 @@ namespace POS.Domain.Services
     }
     public class BanksService : ServicesBase, IBanksService
     {
+        public BanksService(PosContext context) : base(context)
+        {
+
+        }
         async Task<bool> IBanksService.AddBank(Bank bank)
         {
             return await CrudService.Add(bank, c => c.Name == bank.Name);

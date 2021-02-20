@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace POS.Domain.Services
 {
-    public interface IExpensesService : IInitializer
+    public interface IExpensesService : System.IDisposable
     {
         Task<bool> AddExpense(Expense expense, bool saveChanges = true);
         Task<bool?> UpdateExpense(Expense expense);
@@ -16,6 +16,10 @@ namespace POS.Domain.Services
     }
     public class ExpensesService : ServicesBase, IExpensesService
     {
+        public ExpensesService(PosContext context) : base(context)
+        {
+
+        }
         async Task<bool> IExpensesService.AddExpense(Expense expense, bool saveChanges )
         {
             return await CrudService.Add(expense, saveChanges: saveChanges);

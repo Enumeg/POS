@@ -18,10 +18,8 @@ namespace POS.Portal.Controllers.API
         private readonly IShiftsService _shiftsService;
         public IncomeController(IIncomesService incomeService, IShiftsService shiftsService)
         {
-            var context = ContextCache.GetPosContext();
             _incomeService = incomeService;
             _shiftsService = shiftsService;
-            _incomeService.Initialize(context);
         }
 
         // GET: api/Income

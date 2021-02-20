@@ -3,7 +3,7 @@ using POS.Domain.Infrastructure;
 
 namespace POS.Domain.Interfaces
 {
-    public interface IMachinesService : IInitializer
+    public interface IMachinesService : System.IDisposable
     {
         Machine GetMachineByName(string name);
     }

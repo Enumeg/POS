@@ -7,7 +7,7 @@ using POS.Domain.Infrastructure;
 
 namespace POS.Domain.Services
 {
-    public interface IPeopleService : IInitializer
+    public interface IPeopleService : System.IDisposable
     {
         Task<bool> AddPerson(Person person);
         Task<bool?> UpdatePerson(Person person);
@@ -18,6 +18,10 @@ namespace POS.Domain.Services
     }
     public class PeopleService : ServicesBase, IPeopleService
     {
+        public PeopleService(PosContext context) : base(context)
+        {
+
+        }
         async Task<bool> IPeopleService.AddPerson(Person person)
         {
             return await CrudService.Add(person, c => c.Name == person.Name);

@@ -10,6 +10,10 @@ namespace POS.Domain.Services
 {
     public class UnitsService : ServicesBase, IUnitsService
     {
+        public UnitsService(PosContext context) : base(context)
+        {
+
+        }
         async Task<bool> IUnitsService.AddUnit(Unit unit)
         {
             return await CrudService.Add(unit, c => c.Name == unit.Name);

@@ -3,9 +3,8 @@ using POS.Domain.Enums;
 
 namespace POS.Domain.Entities
 {
-    public class Person : EntityBase
+    public class Person : BiLanguageNameEntity
     {
-        public string Name { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }

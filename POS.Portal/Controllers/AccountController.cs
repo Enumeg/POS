@@ -88,10 +88,7 @@ namespace POS.Portal.Controllers
             }
             var context = PosContext.CreateContext(user.TenantId);
             CookieHelper.TenantId = user.TenantId;
-            //HttpContext.GetOwinContext().Set(context);
-            _settingsService.Initialize(context);
-            _machinesService.Initialize(context);
-            _shiftsService.Initialize(context);
+            HttpContext.GetOwinContext().Set(context);                    
             var machineName = "";
             int? machineId = null;
             var settings = _settingsService.GetSettings();
@@ -538,7 +535,6 @@ namespace POS.Portal.Controllers
 
         private async Task CheckShift(string userId, int machineId)
         {
-            _shiftsService.Initialize(ContextCache.GetPosContext());
 
             var shiftResult = await _shiftsService.GetUserCurrentShift(userId, machineId);
             if (shiftResult.Id == 0)

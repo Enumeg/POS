@@ -16,11 +16,8 @@ namespace POS.Portal.Controllers.API
 
         public PointsController(IPointsService pointsService)
         {
-            var context = ContextCache.GetPosContext();
             _pointsService = pointsService;
-            _pointsService.Initialize(context);
         }
-
         // GET: api/Points
         public async Task<List<Point>> GetPoints()
         {

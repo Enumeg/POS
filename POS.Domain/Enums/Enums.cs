@@ -49,6 +49,11 @@
         Put = 1,
         Take = 2
     }
+    public enum SafeType
+    {
+        Main = 1,
+        Cashier = 2
+    }
     public enum AccountType
     {
         Purchases = 1,

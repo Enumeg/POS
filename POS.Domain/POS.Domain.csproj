@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\CommonHelper.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\Bank.cs" />
     <Compile Include="Entities\BarCode.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Entities\ProductProperty.cs" />
     <Compile Include="Entities\Property.cs" />
     <Compile Include="Entities\Damaged.cs" />
+    <Compile Include="Entities\Safe.cs" />
     <Compile Include="Entities\Stock.cs" />
     <Compile Include="Entities\TenantBase.cs" />
     <Compile Include="Entities\TransactionDetailBarcodes.cs" />
@@ -163,6 +165,7 @@
     <Compile Include="Services\IncomeService.cs" />
     <Compile Include="Services\BanksService.cs" />
     <Compile Include="Services\InstallmentsService.cs" />
+    <Compile Include="Services\SafesService.cs" />
     <Compile Include="Services\StocksService.cs" />
     <Compile Include="Services\CategoriesService.cs" />
     <Compile Include="Services\PeopleService.cs" />

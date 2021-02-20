@@ -17,9 +17,7 @@ namespace POS.Portal.Controllers.API
 
         public PeopleController(IPeopleService peopleService)
         {
-            var context = ContextCache.GetPosContext();
             _peopleService = peopleService;
-            _peopleService.Initialize(context);
         }
 
         // GET: api/People

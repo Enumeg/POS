@@ -7,6 +7,10 @@ namespace POS.Domain.Services
 {
     public class SettingsService : ServicesBase, ISettingsService
     {
+        public SettingsService(PosContext context) : base(context)
+        {
+
+        }
         Setting ISettingsService.GetSettings()
         {
             return Context.Settings.FirstOrDefault();

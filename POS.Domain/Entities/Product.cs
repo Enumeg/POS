@@ -2,9 +2,8 @@
 
 namespace POS.Domain.Entities
 {
-    public class Product : EntityBase
+    public class Product : BiLanguageNameEntity
     { 
-        public string Name { get; set; }
         public string Barcode { get; set; }
         public decimal SalePrice { get; set; }
         public int CategoryId { get; set; }

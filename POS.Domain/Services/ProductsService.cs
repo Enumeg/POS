@@ -10,6 +10,10 @@ namespace POS.Domain.Services
 {
     public class ProductsService : ServicesBase, IProductsService
     {
+        public ProductsService(PosContext context) : base(context)
+        {
+
+        }
         async Task<bool> IProductsService.AddProduct(Product product)
         {
             return await CrudService.Add(product, c => c.Name == product.Name || (c.Barcode != "" && c.Barcode == product.Barcode));
@@ -35,7 +39,7 @@ namespace POS.Domain.Services
             oldProduct.UnitId = product.UnitId;
             oldProduct.Barcode = product.Barcode;
             oldProduct.SalePrice = product.SalePrice;
-            oldProduct.Name = product.Name;
+            oldProduct.ArabicName = product.Name;
             await Context.SaveChangesAsync();
             return true;
         }

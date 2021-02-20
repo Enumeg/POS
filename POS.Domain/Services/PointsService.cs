@@ -11,6 +11,10 @@ namespace POS.Domain.Services
 {
     public class PointsService : ServicesBase, IPointsService
     {
+        public PointsService(PosContext context) : base(context)
+        {
+
+        }
         async Task<bool> IPointsService.AddPoint(Point point)
         {
             return await CrudService.Add(point, c => c.Name == point.Name);

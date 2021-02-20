@@ -15,9 +15,7 @@ namespace POS.Portal.Controllers.API
 
         public UnitsController(IUnitsService unitsService)
         {
-            var context = ContextCache.GetPosContext();
             _unitsService = unitsService;
-            _unitsService.Initialize(context);
         }
 
         // GET: api/Units

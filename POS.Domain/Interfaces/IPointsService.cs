@@ -6,7 +6,7 @@ using POS.Domain.Infrastructure;
 
 namespace POS.Domain.Interfaces
 {
-    public interface IPointsService : IInitializer
+    public interface IPointsService : System.IDisposable
     {
         Task<bool> AddPoint(Point point);
         Task<bool?> UpdatePoint(Point point);

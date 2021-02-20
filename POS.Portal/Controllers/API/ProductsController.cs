@@ -20,11 +20,8 @@ namespace POS.Portal.Controllers.API
       
         public ProductsController(IProductsService productsService ,IStockService stockService)
         {
-            var context = ContextCache.GetPosContext();
             _productsService = productsService;
             _stockService = stockService;        
-            _productsService.Initialize(context);
-            _stockService.Initialize(context);
         }
 
         // GET: api/Products

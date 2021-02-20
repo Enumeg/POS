@@ -16,9 +16,7 @@ namespace POS.Portal.Controllers.API
         private readonly IExpensesService _expenseService;
         public ExpensesController(IExpensesService expenseService)
         {
-            var context = ContextCache.GetPosContext();
             _expenseService = expenseService;
-            _expenseService.Initialize(context);
         }
 
         // GET: api/Expense

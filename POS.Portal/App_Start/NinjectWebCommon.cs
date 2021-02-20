@@ -1,34 +1,32 @@
-
-using System.Web.Http;
+using System;
+using System.Web;
+using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+using POS.Domain.Interfaces;
+using POS.Domain.Services;
+using Ninject;
+using Ninject.Web.Common;
+using Ninject.Web.Common.WebHost;
 using POS.Domain.Infrastructure;
-
+using System.Web.Http;
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(POS.Portal.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(POS.Portal.App_Start.NinjectWebCommon), "Stop")]
 
 namespace POS.Portal.App_Start
 {
-    using System;
-    using System.Web;
-    using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-    using Domain.Interfaces;
-    using Domain.Services;
-    using Ninject;
-    using Ninject.Web.Common;
-
-    public static class NinjectWebCommon 
+    public static class NinjectWebCommon
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
 
         /// <summary>
-        /// Starts the application
+        /// Starts the application.
         /// </summary>
-        public static void Start() 
+        public static void Start()
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
         }
-        
+
         /// <summary>
         /// Stops the application.
         /// </summary>
@@ -36,7 +34,7 @@ namespace POS.Portal.App_Start
         {
             bootstrapper.ShutDown();
         }
-        
+
         /// <summary>
         /// Creates the kernel that will manage your application.
         /// </summary>
@@ -66,6 +64,7 @@ namespace POS.Portal.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind<PosContext>().ToProvider(new Helpers.PosContextWebProvider());
             kernel.Bind<IShiftsService>().To<ShiftsService>();
             kernel.Bind<IMachinesService>().To<MachinesService>();
             kernel.Bind<ISettingsService>().To<SettingsService>();
@@ -81,6 +80,7 @@ namespace POS.Portal.App_Start
             kernel.Bind<IStockService>().To<StockService>();
             kernel.Bind<IIncomesService>().To<IncomesService>();
             kernel.Bind<IExpensesService>().To<ExpensesService>();
+            kernel.Bind<ISafeService>().To<SafeService>();
         }
     }
 }

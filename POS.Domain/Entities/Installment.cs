@@ -1,5 +1,4 @@
 ﻿using System;
-using POS.Domain.Enums;
 
 namespace POS.Domain.Entities
 {

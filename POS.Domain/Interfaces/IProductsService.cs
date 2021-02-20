@@ -5,7 +5,7 @@ using POS.Domain.Infrastructure;
 
 namespace POS.Domain.Interfaces
 {
-    public interface IProductsService : IInitializer
+    public interface IProductsService : System.IDisposable
     {
         Task<bool> AddProduct(Product product);
         Task<bool?> UpdateProduct(Product product);

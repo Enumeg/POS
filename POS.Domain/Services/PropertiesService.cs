@@ -12,6 +12,10 @@ namespace POS.Domain.Services
 {
     public class PropertiesService : ServicesBase, IPropertiesService
     {
+        public PropertiesService(PosContext context) : base(context)
+        {
+
+        }
         async Task<bool> IPropertiesService.AddProperty(Property property)
         {
             return await CrudService.Add(property, p => p.Name == property.Name);

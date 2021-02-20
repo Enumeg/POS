@@ -16,9 +16,7 @@ namespace POS.Portal.Controllers.API
 
         public CategoriesController(ICategoriesService categoriesService)
         {
-            var context = ContextCache.GetPosContext();
             _categoriesService = categoriesService;
-            _categoriesService.Initialize(context);
         }
 
         // GET: api/Categories

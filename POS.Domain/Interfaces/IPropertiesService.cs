@@ -5,7 +5,7 @@ using POS.Domain.Infrastructure;
 
 namespace POS.Domain.Interfaces
 {
-    public interface IPropertiesService : IInitializer
+    public interface IPropertiesService : System.IDisposable
     {
         Task<bool> AddProperty(Property property);
         Task<bool?> UpdateProperty(Property property);

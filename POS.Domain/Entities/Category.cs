@@ -2,7 +2,7 @@
 
 namespace POS.Domain.Entities
 {
-    public class Category : EntityBase
+    public class Category : BiLanguageNameEntity
     {
         public Category()
         {
@@ -10,7 +10,6 @@ namespace POS.Domain.Entities
             Units = new List<Unit>();
             Properties = new List<Property>();
         }
-        public string Name { get; set; }
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<Unit> Units { get; set; }
         public virtual ICollection<Property> Properties { get; set; }

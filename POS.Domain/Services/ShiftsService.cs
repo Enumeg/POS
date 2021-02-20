@@ -11,6 +11,10 @@ namespace POS.Domain.Services
 {
     public class ShiftsService : ServicesBase, IShiftsService
     {
+        public ShiftsService(PosContext context) : base(context)
+        {
+
+        }
         public async Task<Result> GetUserCurrentShift(string userId, int machineId = 0)
         {
             var result = new Result() { Id = 0, Message = "" };

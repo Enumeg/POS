@@ -4,7 +4,7 @@ using POS.Domain.Models;
 
 namespace POS.Domain.Interfaces
 {
-    public interface IShiftsService: IInitializer
+    public interface IShiftsService : System.IDisposable
     {
         void CancelCloseShift(int shiftId);
         decimal CloseShift(int shiftId);

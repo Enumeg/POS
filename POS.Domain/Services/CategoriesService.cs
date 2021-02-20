@@ -10,9 +10,13 @@ namespace POS.Domain.Services
 {
     public class CategoriesService : ServicesBase, ICategoriesService
     {
+        public CategoriesService(PosContext context) : base(context)
+        {
+
+        }
         async Task<bool> ICategoriesService.AddCategory(Category category)
         {
-            if (await Context.Categories.AnyAsync(c => c.Name == category.Name))
+            if (await Context.Categories.AnyAsync(c => c.ArabicName == category.ArabicName || c.Name == category.Name))
                 return false;
 
             Context.Categories.Add(category);
@@ -27,7 +31,7 @@ namespace POS.Domain.Services
             if (oldCategory == null) return null;
             if (await Context.Categories.AnyAsync(c => c.Name == category.Name && c.Id != category.Id))
                 return false;
-            oldCategory.Name = category.Name;
+            oldCategory.ArabicName = category.Name;
             var products = await Context.Products.Where(p => p.CategoryId == category.Id).Select(p => p.Id).ToListAsync();
 
             oldCategory.Properties.Where(e => category.Properties.All(p => p.Id != e.Id)).ToList().ForEach(p =>

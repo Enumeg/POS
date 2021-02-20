@@ -3,7 +3,7 @@ using POS.Domain.Infrastructure;
 
 namespace POS.Domain.Interfaces
 {
-    public interface ISettingsService : IInitializer
+    public interface ISettingsService : System.IDisposable
     {
         Setting GetSettings();
 

@@ -5,7 +5,7 @@ using POS.Domain.Infrastructure;
 
 namespace POS.Domain.Interfaces
 {
-    public interface ICategoriesService : IInitializer
+    public interface ICategoriesService : System.IDisposable
     {
         Task<bool> AddCategory(Category category);
         Task<bool?> UpdateCategory(Category category);

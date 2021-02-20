@@ -20,14 +20,10 @@ namespace POS.Portal.Controllers.API
 
         public TransactionsController(ITransactionsService transactionsService, IStockService stockService, ISettingsService settingsService, IIncomesService incomesService)
         {
-            var context = ContextCache.GetPosContext();
             _transactionsServices = transactionsService;
             _stockService = stockService;
             _settingsService = settingsService;
             _incomesService = incomesService;
-            _transactionsServices.Initialize(context);
-            _stockService.Initialize(context);
-            _settingsService.Initialize(context);
         }
         [HttpGet]
         [Route("api/Transactions/NewSales")]

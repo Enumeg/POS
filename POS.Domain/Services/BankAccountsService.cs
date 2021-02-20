@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace POS.Domain.Services
 {
-    public interface IBankAccountsService : IInitializer
+    public interface IBankAccountsService : System.IDisposable
     {
         Task<bool> AddBankAccount(BankAccount bankAccount);
         Task<bool?> UpdateBankAccount(BankAccount bankAccount);
@@ -17,6 +17,10 @@ namespace POS.Domain.Services
     }
     public class BankAccountsService : ServicesBase, IBankAccountsService
     {
+        public BankAccountsService(PosContext context) : base(context)
+        {
+
+        }
         async Task<bool> IBankAccountsService.AddBankAccount(BankAccount bankAccount)
         {
             return await CrudService.Add(bankAccount, c => c.Name == bankAccount.Name);

@@ -9,7 +9,7 @@ using POS.Domain.Models;
 
 namespace POS.Domain.Services
 {
-    public interface IStockService : IInitializer
+    public interface IStockService : System.IDisposable
     {
         Task<bool> UpdateStock(Stock stock, Operation operation, bool saveChanges = false);
         Task<decimal> GetStock(int productId, int pointId);
@@ -20,6 +20,11 @@ namespace POS.Domain.Services
 
     public class StockService : ServicesBase, IStockService
     {
+        public StockService(PosContext context) : base(context)
+        {
+
+        }
+
         async Task<decimal> IStockService.GetStock(int productId, int pointId)
         {
             var stock = await Context.Stocks.SingleOrDefaultAsync(s => s.PointId == pointId && s.ProductId == productId);

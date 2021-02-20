@@ -17,8 +17,10 @@ namespace POS.Domain.Entities
         public int PersonId { get; set; }
         public int PointId { get; set; }
         public int ShiftId { get; set; }
+        public int? SafeId { get; set; }
         public virtual Person Person { get; set; }
         public virtual Point Point { get; set; }
+        public virtual Safe Safe { get; set; }
         public virtual Shift Shift { get; set; }    
         public virtual BankTransaction BankTransaction { get; set; }
         public virtual ICollection<TransactionDetail> Details { get; set; }= new List<TransactionDetail>();

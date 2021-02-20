@@ -11,7 +11,7 @@ namespace POS.Domain.Infrastructure
             : base("pos", throwIfV1Schema: false)
         {
             Configuration.LazyLoadingEnabled = false;
-        }
+        }      
         public static PosContext CreateContext(int tenantId)
         {
             var context = new PosContext { TenantId = tenantId };
@@ -60,5 +60,6 @@ namespace POS.Domain.Infrastructure
         public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<Cheque> Cheques { get; set; }
         public virtual DbSet<Expense> Expenses { get; set; }
+        public virtual DbSet<Safe> Safes { get; set; }
     }
 }

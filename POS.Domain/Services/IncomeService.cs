@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace POS.Domain.Services
 {
-    public interface IIncomesService : IInitializer
+    public interface IIncomesService : System.IDisposable
     {
         Task<bool> AddIncome(Income income, bool saveChanges = true);
         Task<bool?> UpdateIncome(Income income);
@@ -16,6 +16,10 @@ namespace POS.Domain.Services
     }
     public class IncomesService : ServicesBase, IIncomesService
     {
+        public IncomesService(PosContext context) : base(context)
+        {
+
+        }
         async Task<bool> IIncomesService.AddIncome(Income income, bool saveChanges )
         {
             return await CrudService.Add(income, saveChanges: saveChanges);
