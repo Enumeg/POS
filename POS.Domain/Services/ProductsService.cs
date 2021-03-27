@@ -16,13 +16,13 @@ namespace POS.Domain.Services
         }
         async Task<bool> IProductsService.AddProduct(Product product)
         {
-            return await CrudService.Add(product, c => c.Name == product.Name || (c.Barcode != "" && c.Barcode == product.Barcode));
+            return await CrudService.Add(product, c => (c.ArabicName == product.ArabicName || c.EnglishName == product.EnglishName) || (c.Barcode != "" && c.Barcode == product.Barcode));
         }
         async Task<bool> IProductsService.AddProducts(List<Product> products)
         {
             foreach (var product in products)
             {
-                await CrudService.Add(product, c => c.Name == product.Name || (c.Barcode != "" && c.Barcode == product.Barcode), false);
+                await CrudService.Add(product, c => (c.ArabicName == product.ArabicName || c.EnglishName == product.EnglishName) || (c.Barcode != "" && c.Barcode == product.Barcode), false);
             }
             return await Context.SaveChangesAsync() > 0;
         }
@@ -31,7 +31,7 @@ namespace POS.Domain.Services
             var oldProduct = await Context.Products.FindAsync(product.Id);
             if (oldProduct == null)
                 return null;
-            if (await Context.Products.AnyAsync(c => c.Name == product.Name && c.Id != product.Id))
+            if (await Context.Products.AnyAsync(c => (c.ArabicName == product.ArabicName || c.EnglishName == product.EnglishName) && c.Id != product.Id))
                 return false;
 
             Context.ProductProperties.RemoveRange(Context.ProductProperties.Where(p => p.ProductId == product.Id));
@@ -39,7 +39,8 @@ namespace POS.Domain.Services
             oldProduct.UnitId = product.UnitId;
             oldProduct.Barcode = product.Barcode;
             oldProduct.SalePrice = product.SalePrice;
-            oldProduct.ArabicName = product.Name;
+            oldProduct.ArabicName = product.ArabicName;
+            oldProduct.EnglishName = product.EnglishName;
             await Context.SaveChangesAsync();
             return true;
         }

@@ -43,6 +43,13 @@ namespace POS.Portal.Controllers
             ViewBag.Safe = new SelectList(safes, "Id", "Name");
             return View();
         }
+        [HttpPost]
+        public ActionResult SelectSafe(int safe, string returnUrl)
+        {
+            CookieHelper.SafeId = safe;
+            CookieHelper.Safe = safe;
+            return Redirect(returnUrl ?? "/");
+        }
         [AllowAnonymous]
         public void ToggleLanguage()
         {

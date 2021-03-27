@@ -8,24 +8,25 @@ using POS.Domain.Infrastructure;
 
 namespace POS.Domain.Services
 {
-    public interface ITransactionsService : System.IDisposable
+    public interface ITransactionsService : IDisposable
     {
         Task<bool> AddTransaction(Transaction transaction);
-        Task<string> GetNewSales(int salesPerYear);
+        Task<string> GetNewSales(int salesPerYear, TransactionType transactionType);
     }
     public class TransactionsService : ServicesBase, ITransactionsService
     {
 
         private readonly IStockService _stockService;
         private readonly IIncomesService _incomesService;
-       
-        public TransactionsService(PosContext context, IIncomesService incomesService, IStockService stockService): base(context)
+        private readonly ISafeService _safeService;
+        public TransactionsService(PosContext context, IIncomesService incomesService, IStockService stockService, ISafeService safeService) : base(context)
         {
             _incomesService = incomesService;
             _stockService = stockService;
+            _safeService = safeService;
         }
 
-       
+
         async Task<bool> ITransactionsService.AddTransaction(Transaction transaction)
         {
             var operation =
@@ -49,14 +50,17 @@ namespace POS.Domain.Services
                     Value = transaction.Paid,
                     Description = transaction.Number,
                 }, false);
+                await _safeService.UpdateSafe(
+                    new Safe { Id = transaction.SafeId ?? 0, CurrentBalance = (double)transaction.Paid },
+                    operation == Operation.Put ? Operation.Take : Operation.Put);
             }
             return await CrudService.Add(transaction, p => p.Number == transaction.Number && p.PersonId == transaction.PersonId && p.TransactionType != transaction.TransactionType);
         }
 
-        async Task<string> ITransactionsService.GetNewSales(int salesPerYear)
+        async Task<string> ITransactionsService.GetNewSales(int salesPerYear, TransactionType transactionType)
         {
             var year = DateTime.Now.Year;
-            var sales = CrudService.Get<Transaction>(s => s.TransactionType == TransactionType.Sale && s.Date.Year == year);
+            var sales = CrudService.Get<Transaction>(s => s.TransactionType == transactionType && s.Date.Year == year);
             if (await sales.AnyAsync())
                 return (int.Parse(sales.Max(s => s.Number)) + 1).ToString();
             return year.ToString().PadRight(salesPerYear + 4, '0') + "1";

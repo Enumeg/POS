@@ -16,7 +16,7 @@ namespace POS.Domain.Services
         }
         async Task<bool> ICategoriesService.AddCategory(Category category)
         {
-            if (await Context.Categories.AnyAsync(c => c.ArabicName == category.ArabicName || c.Name == category.Name))
+            if (await Context.Categories.AnyAsync(c => c.ArabicName == category.ArabicName || c.EnglishName == category.EnglishName))
                 return false;
 
             Context.Categories.Add(category);
@@ -29,9 +29,10 @@ namespace POS.Domain.Services
         {
             var oldCategory = await Context.Categories.Include(c => c.Properties).Include(c => c.Units).FirstOrDefaultAsync(c => c.Id == category.Id);
             if (oldCategory == null) return null;
-            if (await Context.Categories.AnyAsync(c => c.Name == category.Name && c.Id != category.Id))
+            if (await Context.Categories.AnyAsync(c => (c.ArabicName == category.ArabicName || c.EnglishName == category.EnglishName) && c.Id != category.Id))
                 return false;
-            oldCategory.ArabicName = category.Name;
+            oldCategory.ArabicName = category.ArabicName;
+            oldCategory.EnglishName = category.EnglishName;
             var products = await Context.Products.Where(p => p.CategoryId == category.Id).Select(p => p.Id).ToListAsync();
 
             oldCategory.Properties.Where(e => category.Properties.All(p => p.Id != e.Id)).ToList().ForEach(p =>

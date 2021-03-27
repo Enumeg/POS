@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using POS.Domain.Entities;
 using POS.Domain.Interfaces;
-using POS.Portal.Helpers;
 using POS.Resources;
 
 namespace POS.Portal.Controllers.API
@@ -64,9 +64,9 @@ namespace POS.Portal.Controllers.API
                     return BadRequest(Common.Duplicated);
                 return Ok(unit);
             }
-            catch
+            catch (Exception ex)
             {
-                return InternalServerError();
+                return InternalServerError(ex);
             }
         }
 

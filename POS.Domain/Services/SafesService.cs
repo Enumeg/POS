@@ -1,18 +1,16 @@
-﻿using System.Collections.Generic;
-using POS.Domain.Entities;
-using POS.Domain.Infrastructure;
-using System.Data.Entity;
-using System.Threading.Tasks;
+﻿using POS.Domain.Entities;
 using POS.Domain.Enums;
+using POS.Domain.Infrastructure;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using POS.Domain.Models;
-using System;
+using System.Threading.Tasks;
 
 namespace POS.Domain.Services
 {
     public interface ISafeService
     {
-        Task<bool> UpdateSafe(Safe Safe, Operation operation, bool saveChanges = false);
+        Task<bool> UpdateSafe(Safe safe, Operation operation, bool saveChanges = false);
         Task<List<Safe>> GetSafes(SafeType? safeType = null);
     }
 

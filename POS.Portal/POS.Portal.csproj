@@ -196,6 +196,8 @@
     <Compile Include="Controllers\API\IncomesController.cs" />
     <Compile Include="Controllers\API\InstallmentsController.cs" />
     <Compile Include="Controllers\API\CategoriesController.cs" />
+    <Compile Include="Controllers\API\RolesController.cs" />
+    <Compile Include="Controllers\API\SafeController.cs" />
     <Compile Include="Controllers\API\StockController.cs" />
     <Compile Include="Controllers\API\TransactionsController.cs" />
     <Compile Include="Controllers\API\PeopleController.cs" />

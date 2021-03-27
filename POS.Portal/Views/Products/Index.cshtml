@@ -13,7 +13,8 @@
     <tr>
         <th>@Product.Category</th>
         <th>@Product.Barcode</th>
-        <th>@Common.Name</th>
+        <th>@Common.ArabicName</th>
+        <th>@Common.EnglishName</th>
         <th>@Product.SalePrice</th>
         <th>@Product.Unit</th>
         <th></th>
@@ -22,7 +23,8 @@
         <tr ng-animate="'animate'" ng-repeat="product in products">
             <td>{{product.Category.Name}}</td>
             <td>{{product.Barcode}}</td>
-            <td>{{product.Name}}</td>
+            <td>{{product.ArabicName}}</td>
+            <td>{{product.EnglishName}}</td>
             <td>{{product.SalePrice}}</td>
             <td>{{product.Unit.Name}}</td>
             <td>
@@ -59,13 +61,25 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-2">
-                                    <label class="control-label">@Common.Name</label>
+                                    <label class="control-label">@Common.ArabicName</label>
                                 </div>
                                 <div class="col-sm-8">
-                                    <input class="form-control" ng-model="product.Name" name="Name" required />
+                                    <input class="form-control" ng-model="product.ArabicName" name="ArabicName" required />
 
-                                    <span class="ng-invalid" ng-show="(productForm.Name.$dirty || productForm.$submitted ) &&  productForm.Name.$error.required">
-                                        @string.Format(Common.Required, Common.Name)
+                                    <span class="ng-invalid" ng-show="(productForm.ArabicName.$dirty || productForm.$submitted ) &&  productForm.ArabicName.$error.required">
+                                        @string.Format(Common.Required, Common.ArabicName)
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2">
+                                    <label class="control-label">@Common.EnglishName</label>
+                                </div>
+                                <div class="col-sm-8">
+                                    <input class="form-control" ng-model="product.EnglishName" name="EnglishName" required />
+
+                                    <span class="ng-invalid" ng-show="(productForm.EnglishName.$dirty || productForm.$submitted ) &&  productForm.EnglishName.$error.required">
+                                        @string.Format(Common.Required, Common.EnglishName)
                                     </span>
                                 </div>
                             </div>

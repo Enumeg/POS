@@ -88,7 +88,7 @@ namespace POS.Portal.Controllers
             }
             var context = PosContext.CreateContext(user.TenantId);
             CookieHelper.TenantId = user.TenantId;
-            HttpContext.GetOwinContext().Set(context);                    
+            HttpContext.GetOwinContext().Set(context);
             var machineName = "";
             int? machineId = null;
             var settings = _settingsService.GetSettings();
@@ -128,7 +128,8 @@ namespace POS.Portal.Controllers
                         }
                         else
                             CookieHelper.ShiftId = shiftResult.Id;
-                        return RedirectToLocal(returnUrl);
+
+                        return User.IsInRole("ChoseSafe") || CookieHelper.SafeId != 0 ? RedirectToLocal(returnUrl) : RedirectToAction("SelectSafe", "Home", new { returnUrl });
                     }
                     else
                         return RedirectToLocal(returnUrl);

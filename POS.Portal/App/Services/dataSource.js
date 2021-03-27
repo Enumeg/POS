@@ -19,7 +19,7 @@ define(["app"], function (app) {
                 return $http.get(baseUrl);
             }
         };
-        dataSource.loadList = function (list,url, param) {
+        dataSource.loadList = function (list,url, param, callback) {
             var result;
             if (param)
                 result = $http.get(url, { params: param });
@@ -27,6 +27,8 @@ define(["app"], function (app) {
                 result = $http.get(url);
             result.success(function(data) {
                 angular.copy(data, list);
+                if (callback)
+                    callback();
             }).error(this.error);
         };
         dataSource.get = function (id) {

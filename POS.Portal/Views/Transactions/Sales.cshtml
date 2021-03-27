@@ -100,12 +100,18 @@
         <div class="col-sm-3 bordered">
             <table class="table table-condensed">
                 <tr>
+                    <td><label>@Models.Safe: </label></td>
+                    <td>
+                        <select class="form-control" ng-model="transaction.SafeId" ng-options="safe.Id as safe.Name for safe in safes" name="Safe" required></select>
+                    </td>
+                </tr>
+                <tr>
                     <td><label>@Transaction.Discount: </label></td>
                     <td><input class="form-control" ng-model="transaction.Discount" /></td>
                 </tr>
                 <tr>
                     <td><label>@Transaction.Total: </label></td>
-                    <td><input class="form-control" value="{{getTotal()}}" readonly="" /></td>
+                    <td><input class="form-control" value="{{getTotal()}}" readonly="readonly" /></td>
                 </tr>
                 <tr>
                     <td><label>@Transaction.Paid: </label></td>
@@ -113,7 +119,7 @@
                 </tr>
                 <tr>
                     <td><label>@Transaction.Rest: </label></td>
-                    <td><input class="form-control" value="{{getRest()}}" readonly="" /></td>
+                    <td><input class="form-control" value="{{getRest()}}" readonly="readonly" /></td>
                 </tr>
                 <tr>
                     <td><label>@Transaction.PaymentMethod: </label></td>

@@ -2,8 +2,8 @@
 /* Controller that manage a list of list of certain type */
 
 define(["app"], function (app) {
-    app.register.controller("TransactionsController", ["$scope", "dataSource", "$location", "toastr", "resource", '$route',
-        function ($scope, dataSource, $location, toastr, resource, $route) {
+    app.register.controller("TransactionsController", ["$scope", "dataSource", "$location", "toastr", "resource", '$route', "$cookies",
+        function ($scope, dataSource, $location, toastr, resource, $route, $cookies) {
             var page = $location.url().split("/")[1];
             var isSale = page.indexOf("Sale") !== -1;
             resource.loadDictionary(function (data) {
@@ -11,6 +11,7 @@ define(["app"], function (app) {
             });
             $scope.suppliers = [];
             $scope.people = [];
+            $scope.safes = [];
             $scope.points = [];
             $scope.products = [];
             $scope.selectedProducts = [];
@@ -197,11 +198,15 @@ define(["app"], function (app) {
             function initialize() {
                 dataSource.initialize("/api/Transactions");
                 dataSource.loadList($scope.products, "api/products");
+                dataSource.loadList($scope.safes, "api/safe");
                 dataSource.loadList($scope.bankAccounts, "api/BankAccounts");
                 dataSource.loadList($scope.people, "api/people", { isCustomer: isSale });
                 dataSource.loadList($scope.points, "api/points?type=" + (isSale ? 2 : 1));
+                $scope.transaction.SafeId = parseInt($cookies.get("Safe"));
                 if (isSale) {
-                    dataSource.getUrl("api/Transactions/NewSales").success(function (result) { $scope.transaction.Number = result })
+                    dataSource.getUrl("api/Transactions/NewSales").success(function(result) {
+                        $scope.transaction.Number = result;
+                    });
                 }
                 $("#Modal").modal({ show: false });
             };

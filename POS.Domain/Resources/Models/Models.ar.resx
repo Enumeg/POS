@@ -150,4 +150,7 @@
   <data name="Supplier" xml:space="preserve">
     <value>مورد</value>
   </data>
+  <data name="Safe" xml:space="preserve">
+    <value>الخزنة</value>
+  </data>
 </root>

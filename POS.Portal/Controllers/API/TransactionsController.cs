@@ -1,4 +1,5 @@
 ﻿using POS.Domain.Enums;
+using POS.Domain.Helpers;
 using POS.Domain.Interfaces;
 using POS.Domain.Services;
 using POS.Portal.Helpers;
@@ -15,23 +16,23 @@ namespace POS.Portal.Controllers.API
     {
         private readonly ITransactionsService _transactionsServices;
         private readonly ISettingsService _settingsService;
-        private readonly IStockService _stockService;
-        private readonly IIncomesService _incomesService;
 
-        public TransactionsController(ITransactionsService transactionsService, IStockService stockService, ISettingsService settingsService, IIncomesService incomesService)
+        public TransactionsController(ITransactionsService transactionsService, ISettingsService settingsService)
         {
             _transactionsServices = transactionsService;
-            _stockService = stockService;
             _settingsService = settingsService;
-            _incomesService = incomesService;
         }
         [HttpGet]
         [Route("api/Transactions/NewSales")]
         public async Task<IHttpActionResult> GetNewSales()
         {
-            var setting = _settingsService.GetSettings();
-            var count = setting == null || setting.SalesPerYear == 0 ? 5 : setting.SalesPerYear;
-            return Ok(await _transactionsServices.GetNewSales(count));
+            return Ok(await GetNewNumber(TransactionType.Sale));
+        }
+        [HttpGet]
+        [Route("api/Transactions/NewPurchase")]
+        public async Task<IHttpActionResult> GetNewPurchase()
+        {
+            return Ok(await GetNewNumber(TransactionType.Purchase));
         }
         [ResponseType(typeof(Transaction))]
         public async Task<IHttpActionResult> PostTransaction(Transaction transaction)
@@ -42,6 +43,9 @@ namespace POS.Portal.Controllers.API
             }
             try
             {
+                if (!User.IsInRole(Roles.CanChangeSafe) && transaction.SafeId != CookieHelper.SafeId)
+                    return BadRequest(Messages.SafeChanged);
+
                 transaction.ShiftId = CookieHelper.ShiftId;
                 var result = await _transactionsServices.AddTransaction(transaction);
                 if (result == false)
@@ -52,6 +56,13 @@ namespace POS.Portal.Controllers.API
             {
                 return InternalServerError(ex);
             }
+        }
+
+        private async Task<string> GetNewNumber(TransactionType transactionType)
+        {
+            var setting = _settingsService.GetSettings();
+            var count = setting == null || setting.SalesPerYear == 0 ? 5 : setting.SalesPerYear;
+            return await _transactionsServices.GetNewSales(count, transactionType);
         }
         protected override void Dispose(bool disposing)
         {

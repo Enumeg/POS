@@ -5,14 +5,21 @@
 <br />
 <table class="table table-bordered table-condensed">
     <tr>
-        <th>@Common.Name</th>
+        <th>@Common.ArabicName</th>
+        <th>@Common.EnglishName</th>
         <th></th>
     </tr>
     <tbody>
         <tr ng-animate="'animate'" ng-repeat="entity in list" ng-init="editable=entity.Id === 0" class="editable" ng-form="editForm">
             <td ng-class="{ 'ng-invalid' : (editForm.Name.$dirty || editForm.$submitted ) &&  editForm.Name.$error.required}">
-                <input type="text" class="form-control" name="Name" ng-readonly="!editable" ng-model="entity.Name" required>
+                <input type="text" class="form-control" name="ArabicName" ng-readonly="!editable" ng-model="entity.ArabicName" required>
+
             </td>
+            <td ng-class="{ 'ng-invalid' : (editForm.Name.$dirty || editForm.$submitted ) &&  editForm.Name.$error.required}">
+                <input type="text" class="form-control" name="EnglishName" ng-readonly="!editable" ng-model="entity.EnglishName" required>
+
+            </td>
+
             <td>
                 <div class="btn-group" ng-hide="editable">
                     <a class="btn btn-xs btn-info" ng-click="edit()">@Common.Edit &nbsp;<b class="glyphicon glyphicon-edit"></b></a>

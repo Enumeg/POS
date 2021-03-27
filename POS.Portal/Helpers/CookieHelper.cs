@@ -13,16 +13,20 @@ namespace POS.Portal.Helpers
         }
         private static string Unprotect(string text, string purpose)
         {
-            return string.IsNullOrEmpty(text) ? null : Encoding.UTF8.GetString(MachineKey.Unprotect(HttpServerUtility.UrlTokenDecode(text), purpose));
+            var value = HttpServerUtility.UrlTokenDecode(text);
+            return !string.IsNullOrEmpty(text) && value != null ? Encoding.UTF8.GetString(MachineKey.Unprotect( value, purpose) ?? Array.Empty<byte>()) : null;
         }
-        private static object Get(string property)
+        private static object Get(string property, bool protect = true)
         {
-            return HttpContext.Current.Request.Cookies[property] != null ? Unprotect(HttpContext.Current.Request.Cookies[property].Value, property) : null;
+            var value = HttpContext.Current.Request.Cookies[property]?.Value;
+            return HttpContext.Current.Request.Cookies[property] != null ? protect?  Unprotect(value, property) : value : null;
         }
-        private static void Set(string property, object value)
+        private static void Set(string property, object value, bool protect = true)
         {
+            if (protect)
+                value = Protect(value.ToString(), property);
             HttpContext.Current.Response.Cookies.Remove(property);
-            HttpContext.Current.Response.Cookies.Add(new HttpCookie(property, Protect(value.ToString(), property))
+            HttpContext.Current.Response.Cookies.Add(new HttpCookie(property, value.ToString())
             {
                 Expires = DateTime.Now.AddDays(360)
             });
@@ -34,10 +38,7 @@ namespace POS.Portal.Helpers
                 var value = Get("TenantId");
                 return value != null ? int.Parse(value.ToString()) : 0;
             }
-            set
-            {
-                Set("TenantId", value);
-            }
+            set => Set("TenantId", value);
         }
         public static int ShiftId
         {
@@ -46,10 +47,7 @@ namespace POS.Portal.Helpers
                 var value = Get("ShiftId");
                 return value != null ? int.Parse(value.ToString()) : 0;
             }
-            set
-            {
-                Set("ShiftId", value);
-            }
+            set => Set("ShiftId", value);
         }
         public static int MachineId
         {
@@ -58,10 +56,25 @@ namespace POS.Portal.Helpers
                 var value = Get("MachineId");
                 return value != null ? int.Parse(value.ToString()) : 0;
             }
-            set
+            set => Set("MachineId", value);
+        }
+        public static int SafeId
+        {
+            get
             {
-                Set("MachineId", value);
+                var value = Get("SafeId");
+                return value != null ? int.Parse(value.ToString()) : 0;
             }
+            set => Set("SafeId", value);
+        }
+        public static int Safe
+        {
+            get
+            {
+                var value = Get("Safe", false);
+                return value != null ? int.Parse(value.ToString()) : 0;
+            }
+            set => Set("Safe", value, false);
         }
     }
 }

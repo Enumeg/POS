@@ -8,18 +8,15 @@ using POS.Resources;
 using POS.Domain.Services;
 using POS.Portal.Filters;
 using income = POS.Domain.Entities.Income;
-using POS.Domain.Interfaces;
 
 namespace POS.Portal.Controllers.API
 {
     public class IncomeController : ApiController
     {
         private readonly IIncomesService _incomeService;
-        private readonly IShiftsService _shiftsService;
-        public IncomeController(IIncomesService incomeService, IShiftsService shiftsService)
+        public IncomeController(IIncomesService incomeService)
         {
             _incomeService = incomeService;
-            _shiftsService = shiftsService;
         }
 
         // GET: api/Income
@@ -32,7 +29,7 @@ namespace POS.Portal.Controllers.API
         // PUT: api/Income/5
         [ResponseType(typeof(void))]
         [ShiftFilter]
-        public async Task<IHttpActionResult> Putincome(income income)
+        public async Task<IHttpActionResult> PutIncome(income income)
         {
             if (!ModelState.IsValid)
             {
@@ -57,7 +54,7 @@ namespace POS.Portal.Controllers.API
         // POST: api/Income
         [ResponseType(typeof(income))]
         [ShiftFilter]
-        public async Task<IHttpActionResult> Postincome(income income)
+        public async Task<IHttpActionResult> PostIncome(income income)
         {
             if (!ModelState.IsValid)
             {
@@ -80,7 +77,7 @@ namespace POS.Portal.Controllers.API
         // DELETE: api/Income/5
         [ResponseType(typeof(income))]
         [ShiftFilter]
-        public async Task<IHttpActionResult> Deleteincome(int id, bool removeRelatedEntities = false)
+        public async Task<IHttpActionResult> DeleteIncome(int id, bool removeRelatedEntities = false)
         {
             try
             {

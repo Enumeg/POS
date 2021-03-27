@@ -16,12 +16,12 @@ namespace POS.Domain.Services
         }
         async Task<bool> IUnitsService.AddUnit(Unit unit)
         {
-            return await CrudService.Add(unit, c => c.Name == unit.Name);
+            return await CrudService.Add(unit, c => c.ArabicName == unit.ArabicName || c.EnglishName == unit.EnglishName);
         }
 
         async Task<bool?> IUnitsService.UpdateUnit(Unit unit)
         {
-            return await CrudService.Update(unit, unit.Id, c => c.Name == unit.Name && c.Id != unit.Id);
+            return await CrudService.Update(unit, unit.Id, c => c.ArabicName == unit.ArabicName || c.EnglishName == unit.EnglishName && c.Id != unit.Id);
         }
 
         async Task<bool?> IUnitsService.DeleteUnit(int unitId, bool removeRelatedEntities)

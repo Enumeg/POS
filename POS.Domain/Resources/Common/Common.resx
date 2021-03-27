@@ -204,4 +204,10 @@
   <data name="Show" xml:space="preserve">
     <value>Show</value>
   </data>
+  <data name="ArabicName" xml:space="preserve">
+    <value>Arabic name</value>
+  </data>
+  <data name="EnglishName" xml:space="preserve">
+    <value>English name</value>
+  </data>
 </root>

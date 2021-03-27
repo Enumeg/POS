@@ -10,7 +10,7 @@ define(["app"], function (app) {
             $scope.category = {};
             //Create
             $scope.new = function () {
-                $scope.categories.splice(0, 0, { Id: 0, Name: "", Units: [], Properties: [], allUnits: $scope.units, allProperties: $scope.properties });
+                $scope.categories.splice(0, 0, { Id: 0, ArabicName: "", EnglishName: "", Units: [], Properties: [], allUnits: $scope.units, allProperties: $scope.properties });
             }
             //Edit
             $scope.edit = function () {

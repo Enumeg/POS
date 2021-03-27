@@ -24,12 +24,12 @@ namespace POS.Domain.Services
         }
         async Task<bool> IPeopleService.AddPerson(Person person)
         {
-            return await CrudService.Add(person, c => c.Name == person.Name);
+            return await CrudService.Add(person, c => c.ArabicName == person.ArabicName || c.EnglishName == person.EnglishName);
         }
 
         async Task<bool?> IPeopleService.UpdatePerson(Person person)
         {
-            return await CrudService.Update(person, person.Id, c => c.Name == person.Name && c.Id != person.Id);
+            return await CrudService.Update(person, person.Id, c => (c.ArabicName == person.ArabicName || c.EnglishName == person.EnglishName) && c.Id != person.Id);
         }
 
         async Task<bool?> IPeopleService.DeletePerson(int personId, bool removeRelatedEntities)

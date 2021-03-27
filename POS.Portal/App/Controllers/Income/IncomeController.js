@@ -1,15 +1,17 @@
 ﻿"use strict";
 
 define(["app"], function (app) {
-    app.register.controller("IncomeController", ["$scope", "dataSource",
-        function ($scope, dataSource) {
+    app.register.controller("IncomeController", ["$scope", "dataSource", "$cookies",
+        function ($scope, dataSource, $cookies) {
 
             $scope.incomes = [];
             $scope.people = [];
+            $scope.safes = [];
             $scope.income = {};
+
             //Create
             $scope.new = function () {
-                $scope.incomes.splice(0, 0, { Id: 0, Date: new Date(), Value :0, AccountType :0, Description :'' });
+                $scope.incomes.splice(0, 0, { Id: 0, Date: new Date(), Value: 0, AccountType: 0, Description: '', SafeId: parseInt($cookies.get("Safe")) });
             }
             //Edit
             $scope.edit = function () {
@@ -61,6 +63,7 @@ define(["app"], function (app) {
             //PrepareLookups
             function prepareLookups() {
                 dataSource.loadList($scope.people, "api/people");
+                dataSource.loadList($scope.safes, "api/safe");
             }
             //List
             function list() {

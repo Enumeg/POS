@@ -97,6 +97,15 @@ namespace POS.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Arabic name.
+        /// </summary>
+        public static string ArabicName {
+            get {
+                return ResourceManager.GetString("ArabicName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Barcodes count doesn&apos;t equal amount.
         /// </summary>
         public static string Barcodes {
@@ -210,6 +219,15 @@ namespace POS.Resources {
         public static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to English name.
+        /// </summary>
+        public static string EnglishName {
+            get {
+                return ResourceManager.GetString("EnglishName", resourceCulture);
             }
         }
         

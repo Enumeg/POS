@@ -16,6 +16,7 @@
         <th>@Common.Value</th>
         <th>@Pages.Person</th>
         <th>@Common.AccountType</th>
+        <th>@Models.Safe</th>
         <th>@Common.Description</th>
         <th></th>
     </tr>
@@ -37,7 +38,9 @@
                     <option value="@((int)POS.Domain.Enums.AccountType.PartnerSeed)">@Common.PartnerSeed</option>
                 </Select>
             </td>
-
+            <td ng-class="{ 'ng-invalid' : (editForm.Safe.$dirty || editForm.$submitted ) &&  editForm.Safe.$error.required}">
+                <select class="form-control" ng-disabled="!editable" ng-model="income.SafeId" ng-options="safe.Id as safe.Name for safe in safes" name="Safe" required></select>
+            </td>
             <td><input type="text" class="form-control" ng-readonly="!editable" ng-model="income.Description"></td>
             <td>
                 <div class="btn-group" ng-hide="editable">

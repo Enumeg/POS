@@ -11,14 +11,16 @@
 
 <table class="table table-striped table-bordered table-condensed">
     <tr>
-        <th>@Common.Name </th>
+        <th>@Common.ArabicName </th>
+        <th>@Common.EnglishName </th>
         <th>@Pages.Units </th>
         <th>@Pages.Properties </th>
         <th></th>
     </tr>
     <tbody>
         <tr ng-animate="'animate'" ng-repeat="category in categories" ng-init="editable=category.Name == ''">
-            <td contenteditable="{{editable}}" ng-model="category.Name">{{category.Name}}</td>
+            <td contenteditable="{{editable}}" ng-model="category.ArabicName">{{category.ArabicName}}</td>
+            <td contenteditable="{{editable}}" ng-model="category.EnglishName">{{category.EnglishName}}</td>
             <td class="dropdownlist">
                 @*<span ng-repeat="unit in category.Units" ng-hide="editable">{{unit.Name}}{{$last ? '' : ', '}} </span>*@
                 <div isteven-multi-select is-disabled="!editable" input-model="category.allUnits" output-model="category.Units" button-label="Name" item-label="Name" tick-property="selected"></div>

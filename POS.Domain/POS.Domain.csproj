@@ -88,6 +88,7 @@
     <Compile Include="Entities\Unit.cs" />
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Enums\LocalizationEnumAttribute.cs" />
+    <Compile Include="Helpers\Global.cs" />
     <Compile Include="Infrastructure\CRUDService.cs" />
     <Compile Include="Infrastructure\ServicesBase.cs" />
     <Compile Include="Infrastructure\IInitializer.cs" />
@@ -119,6 +120,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Installment.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Messages\Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\Pages\Pages.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -217,6 +223,12 @@
     <EmbeddedResource Include="Resources\Installment\Installment.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Installment.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>POS.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Messages\Messages.ar.resx" />
+    <EmbeddedResource Include="Resources\Messages\Messages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
       <CustomToolNamespace>POS.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Models\Models.ar.resx" />

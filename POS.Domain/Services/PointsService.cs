@@ -17,17 +17,17 @@ namespace POS.Domain.Services
         }
         async Task<bool> IPointsService.AddPoint(Point point)
         {
-            return await CrudService.Add(point, c => c.Name == point.Name);
+            return await CrudService.Add(point, c => c.ArabicName == point.ArabicName || c.EnglishName == point.EnglishName);
         }
 
         async Task<bool?> IPointsService.UpdatePoint(Point point)
         {
-            return await CrudService.Update(point, point.Id, c => c.Name == point.Name && c.Id != point.Id);
+            return await CrudService.Update(point, point.Id, c => (c.ArabicName == point.ArabicName || c.EnglishName == point.EnglishName) && c.Id != point.Id);
         }
 
         async Task<bool?> IPointsService.DeletePoint(int pointId, bool removeRelatedEntities)
         {
-            var point = Context.Points.Include(p=>p.Damageds).FirstOrDefault(c => c.Id == pointId);
+            var point = Context.Points.Include(p => p.Damageds).FirstOrDefault(c => c.Id == pointId);
             if (point == null) return false;
             if (point.Damageds.Count > 0)
                 if (removeRelatedEntities)
@@ -45,7 +45,7 @@ namespace POS.Domain.Services
         }
         async Task<List<Point>> IPointsService.GetAllPoints(PointType type)
         {
-            return await Context.Points.Where(p=> p.PointType == type).ToListAsync();
+            return await Context.Points.Where(p => p.PointType == type).ToListAsync();
         }
         async Task<List<Point>> IPointsService.GetAllPoints()
         {

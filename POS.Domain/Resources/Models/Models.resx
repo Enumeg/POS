@@ -150,4 +150,7 @@
   <data name="Supplier" xml:space="preserve">
     <value>Supplier</value>
   </data>
+  <data name="Safe" xml:space="preserve">
+    <value>Safe</value>
+  </data>
 </root>

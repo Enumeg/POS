@@ -6,8 +6,6 @@ using Microsoft.Owin.Security.Cookies;
 using Owin;
 using POS.Domain.Entities;
 using POS.Domain.Infrastructure;
-using POS.Portal.Helpers;
-using POS.Portal.Models;
 
 namespace POS.Portal
 {
@@ -21,6 +19,7 @@ namespace POS.Portal
             app.CreatePerOwinContext(() => PosContext.CreateContext(0));//
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
+            app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
 
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider

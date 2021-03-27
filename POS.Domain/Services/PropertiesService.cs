@@ -18,12 +18,12 @@ namespace POS.Domain.Services
         }
         async Task<bool> IPropertiesService.AddProperty(Property property)
         {
-            return await CrudService.Add(property, p => p.Name == property.Name);
+            return await CrudService.Add(property, c => (c.ArabicName == property.ArabicName || c.EnglishName == property.EnglishName));
         }
 
         async Task<bool?> IPropertiesService.UpdateProperty(Property property)
         {
-            return await CrudService.Update(property, property.Id, p => p.Name == property.Name && p.Id != property.Id);
+            return await CrudService.Update(property, property.Id, p => (p.ArabicName == property.ArabicName || p.EnglishName == property.EnglishName) && p.Id != property.Id);
         }
 
         async Task<bool?> IPropertiesService.DeleteProperty(int propertyId, bool removeRelatedEntities)

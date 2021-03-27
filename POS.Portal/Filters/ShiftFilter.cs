@@ -29,4 +29,16 @@ namespace POS.Portal.Filters
         }
 
     }
+    public class SafeFilter : ActionFilterAttribute
+    {
+        public override void OnActionExecuting(HttpActionContext actionContext)
+        {
+            if (CookieHelper.TenantId != 0)
+            {
+                actionContext.Response = actionContext.Request.CreateResponse( HttpStatusCode.InternalServerError, new { Message = Common.ShiftClosed },
+                    actionContext.ControllerContext.Configuration.Formatters.JsonFormatter );
+            }
+        }
+
+    }
 }
