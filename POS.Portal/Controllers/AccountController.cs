@@ -445,6 +445,7 @@ namespace POS.Portal.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            CookieHelper.ClearAll();
             return RedirectToAction("Index", "Home");
         }
 

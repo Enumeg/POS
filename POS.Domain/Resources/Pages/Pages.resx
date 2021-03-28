@@ -171,4 +171,7 @@
   <data name="Stock" xml:space="preserve">
     <value>Stock</value>
   </data>
+  <data name="SaFes" xml:space="preserve">
+    <value>SaFes</value>
+  </data>
 </root>

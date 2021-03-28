@@ -171,4 +171,7 @@
   <data name="Stock" xml:space="preserve">
     <value>المخزون</value>
   </data>
+  <data name="SaFes" xml:space="preserve">
+    <value>الخزن</value>
+  </data>
 </root>

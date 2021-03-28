@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Text;
 using System.Web;
 using System.Web.Security;
@@ -75,6 +76,22 @@ namespace POS.Portal.Helpers
                 return value != null ? int.Parse(value.ToString()) : 0;
             }
             set => Set("Safe", value, false);
+        }
+
+        public static void ClearAll()
+        {
+            Remove("TenantId");
+            Remove("ShiftId");
+            Remove("MachineId");
+            Remove("SafeId");
+            Remove("Safe");
+        }
+        private static void Remove(string name)
+        {
+            if (HttpContext.Current.Response.Cookies[name] != null)
+            {
+                HttpContext.Current.Response.Cookies[name].Expires = DateTime.Now.AddDays(-1);
+            }
         }
     }
 }

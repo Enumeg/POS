@@ -198,7 +198,7 @@ define(["app"], function (app) {
             function initialize() {
                 dataSource.initialize("/api/Transactions");
                 dataSource.loadList($scope.products, "api/products");
-                dataSource.loadList($scope.safes, "api/safe");
+                dataSource.loadList($scope.safes, "api/safes/Select");
                 dataSource.loadList($scope.bankAccounts, "api/BankAccounts");
                 dataSource.loadList($scope.people, "api/people", { isCustomer: isSale });
                 dataSource.loadList($scope.points, "api/points?type=" + (isSale ? 2 : 1));

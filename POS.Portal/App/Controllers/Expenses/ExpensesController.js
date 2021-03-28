@@ -62,7 +62,7 @@ define(["app"], function (app) {
             //PrepareLookups
             function prepareLookups() {
                 dataSource.loadList($scope.people, "api/people");
-                dataSource.loadList($scope.safes, "api/safe");
+                dataSource.loadList($scope.safes, "api/safes/Select");
 
             }
             //List

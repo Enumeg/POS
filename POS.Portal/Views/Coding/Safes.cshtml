@@ -1,0 +1,52 @@
+﻿@using POS.Domain.Enums
+
+@{
+    ViewBag.Title = Pages.SaFes;
+}
+<input type="hidden" ng-init="$parent.$root.title ='@ViewBag.Title';" />
+<h3>@ViewBag.Title</h3>
+<hr />
+<a class="btn btn-primary" ng-click="new({Id:0 , ArabicName: '',EnglishName: '', Type : '',CurrentBalance : 0 })">@Common.New &nbsp; <b class="glyphicon glyphicon-plus"></b></a>
+<br />
+<br />
+<table class="table table-bordered table-condensed">
+    <tbody>
+        <tr>
+            <th>@Common.ArabicName</th>
+            <th>@Common.EnglishName</th>
+            <th>@Point.Type</th>
+            <th>@Person.Balance</th>
+            <th></th>
+        </tr>
+
+        <tr ng-animate="'animate'" ng-repeat="entity in list" ng-init="editable=entity.Id === 0" class="editable" ng-form="editForm">
+            <td ng-class="{ 'ng-invalid' : (editForm.Name.$dirty || editForm.$submitted ) &&  editForm.Name.$error.required}">
+                <input type="text" class="form-control" name="ArabicName" ng-readonly="!editable" ng-model="entity.ArabicName" required>
+            </td>
+            <td ng-class="{ 'ng-invalid' : (editForm.Name.$dirty || editForm.$submitted ) &&  editForm.Name.$error.required}">
+                <input type="text" class="form-control" name="EnglishName" ng-readonly="!editable" ng-model="entity.EnglishName" required>
+            </td>
+         
+            <td ng-class="{ 'ng-invalid' : (editForm.Type.$dirty || editForm.$submitted ) &&  editForm.Type.$error.required}">
+                <Select class="form-control" name="Type" ng-disabled="!editable" ng-model="entity.Type" required convert-to-number>
+                    <option value="">@Common.Choose</option>
+                    <option value="1">@SafeType.Main</option>
+                    <option value="2">@SafeType.Cashier</option>
+                </Select>
+            </td>
+            <td ng-class="{ 'ng-invalid' : (editForm.CurrentBalance.$dirty || editForm.$submitted ) &&  editForm.CurrentBalance.$error.required}">
+                <input type="number" class="form-control" name="CurrentBalance" ng-readonly="!editable" ng-model="entity.CurrentBalance" required>
+            </td>
+            <td>
+                <div class="btn-group" ng-hide="editable">
+                    <a class="btn btn-xs btn-info" ng-click="edit()">@Common.Edit &nbsp;<b class="glyphicon glyphicon-edit"></b></a>
+                    <a class="btn btn-xs btn-danger" ng-click="delete()">@Common.Delete &nbsp;<b class="glyphicon glyphicon-remove"></b></a>
+                </div>
+                <div class="btn-group" ng-show="editable">
+                    <a class="btn btn-xs btn-success" ng-click="save()">@Common.Save &nbsp;<b class="glyphicon glyphicon-ok"></b></a>
+                    <a class="btn btn-xs btn-warning" ng-click="cancel()">@Common.Cancel &nbsp;<b class="glyphicon glyphicon-remove"></b></a>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

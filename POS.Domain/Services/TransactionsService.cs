@@ -50,7 +50,7 @@ namespace POS.Domain.Services
                     Value = transaction.Paid,
                     Description = transaction.Number,
                 }, false);
-                await _safeService.UpdateSafe(
+                await _safeService.UpdateSafeAmount(
                     new Safe { Id = transaction.SafeId ?? 0, CurrentBalance = (double)transaction.Paid },
                     operation == Operation.Put ? Operation.Take : Operation.Put);
             }

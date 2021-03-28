@@ -178,6 +178,15 @@ namespace POS.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SaFes.
+        /// </summary>
+        public static string SaFes {
+            get {
+                return ResourceManager.GetString("SaFes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sales.
         /// </summary>
         public static string Sales {

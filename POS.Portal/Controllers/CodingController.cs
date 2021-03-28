@@ -30,5 +30,9 @@ namespace POS.Portal.Controllers
         {
             return View();
         }
+        public ActionResult Safes()
+        {
+            return View();
+        }
     }
 }
