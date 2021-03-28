@@ -22,6 +22,7 @@ namespace POS.Portal.Controllers
         private readonly IShiftsService _shiftsService;
         private readonly IMachinesService _machinesService;
         private readonly ISettingsService _settingsService;
+
         public AccountController(IShiftsService shiftsService, IMachinesService machinesService, ISettingsService settingsService)
         {
             _shiftsService = shiftsService;
@@ -59,6 +60,7 @@ namespace POS.Portal.Controllers
                 _userManager = value;
             }
         }
+
 
         //
         // GET: /Account/Login
@@ -128,8 +130,8 @@ namespace POS.Portal.Controllers
                         }
                         else
                             CookieHelper.ShiftId = shiftResult.Id;
-
-                        return User.IsInRole("ChoseSafe") || CookieHelper.SafeId != 0 ? RedirectToLocal(returnUrl) : RedirectToAction("SelectSafe", "Home", new { returnUrl });
+                        
+                        return UserManager.IsInRole(user.Id, "ChoseSafe") || CookieHelper.SafeId != 0 ? RedirectToLocal(returnUrl) : RedirectToAction("SelectSafe", "Home", new { returnUrl });
                     }
                     else
                         return RedirectToLocal(returnUrl);
